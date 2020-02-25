@@ -23,10 +23,10 @@ public class Payment {
     @Column(name = "payment_id", nullable = false)
     private Long paymentId;
 
-    @Column(name = "payment_date", nullable = false, length = 20)
+    @Column(name = "payment_date", nullable = false)
     private LocalDateTime paymentDate;
     
-    @Column(name = "amount", nullable = false, length = 20)
+    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
     @Column(name = "payment_status", nullable = false, length = 25)
