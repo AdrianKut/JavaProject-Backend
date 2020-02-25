@@ -28,7 +28,7 @@ public class Order{
     @Column(name = "shipment_date", nullable = false, length = 20)
     private LocalDateTime shipmentDate;
 
-    @Column(name = "order_status", nullable = true, length = 100)
+    @Column(name = "order_status", nullable = true, length = 20)
     private String orderStatus;
 
     public Order(){}
