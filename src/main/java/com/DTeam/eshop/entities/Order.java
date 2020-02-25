@@ -22,10 +22,10 @@ public class Order{
     @Column(name = "order_id", nullable = false)
     private Long orderId;
 
-    @Column(name = "purchase_date", nullable = false, length = 20)
+    @Column(name = "purchase_date", nullable = false)
     private LocalDateTime purchaseDate;
 
-    @Column(name = "shipment_date", nullable = false, length = 20)
+    @Column(name = "shipment_date", nullable = false)
     private LocalDateTime shipmentDate;
 
     @Column(name = "order_status", nullable = true, length = 20)
