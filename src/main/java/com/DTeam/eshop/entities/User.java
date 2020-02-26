@@ -31,6 +31,9 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Employee employee;
 
+    @OneToOne(mappedBy = "user")
+    private Customer customer;
+
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = {
         @JoinColumn(name = "user_email", referencedColumnName = "email")},

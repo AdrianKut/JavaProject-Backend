@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -28,5 +30,9 @@ public class Customer {
     @Column(name = "phone_number", nullable = false, length = 9)
     private String phoneNumber;
 
+    @OneToOne
+    @JoinColumn(name = "user_email", nullable = true, unique = true)
+    private User user;
+      
     public Customer(){}
 }
