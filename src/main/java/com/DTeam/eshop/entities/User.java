@@ -1,8 +1,13 @@
 package com.DTeam.eshop.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -21,6 +26,14 @@ public class User {
 
     @Column(name = "enabled", nullable = false)
     private Boolean enabled = true;
+
+    @ManyToMany
+    @JoinTable(name = "users_roles", joinColumns = {
+        @JoinColumn(name = "user_email", referencedColumnName = "email")},
+        inverseJoinColumns = {
+            @JoinColumn(name = "role_name", referencedColumnName = "name")
+        })
+    private List<Role> roles;
 
     public User(){}
 }
