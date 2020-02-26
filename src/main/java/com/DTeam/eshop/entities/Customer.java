@@ -19,13 +19,13 @@ public class Customer {
     @Column(name = "customer_id", nullable = false)
     private Long customerId;
     
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 25)
     private String name;
 
-    @Column(name = "surname", nullable = false)
+    @Column(name = "surname", nullable = false, length = 25)
     private String surname;
 
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phone_number", nullable = false, length = 9)
     private String phoneNumber;
 
     public Customer(){}
