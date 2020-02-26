@@ -13,7 +13,7 @@ import lombok.Data;
 public class Role {
 
     @Id
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 25)
     private String name;
 
     public Role(){}
