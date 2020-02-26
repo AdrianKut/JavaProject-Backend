@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -46,6 +47,10 @@ public class Employee {
     @OneToOne
     @JoinColumn(name = "user_email", nullable = true, unique = true)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id", nullable = true)
+    private Address address;
 
     public Employee(){}
 
