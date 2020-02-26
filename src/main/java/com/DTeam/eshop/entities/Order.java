@@ -56,6 +56,9 @@ public class Order{
         })
     private List<Product> products;
 
+    @OneToMany(mappedBy = "order")
+    private List<Complaint> complaints;
+
     public Order(){}
 
     public String getPurchaseDate() {      
