@@ -13,10 +13,10 @@ import lombok.Data;
 public class User {
 
     @Id
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, length = 35)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", nullable = false, length = 60)
     private String password;
 
     @Column(name = "enabled", nullable = false)
