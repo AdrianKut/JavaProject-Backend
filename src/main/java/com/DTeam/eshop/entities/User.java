@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -26,6 +27,9 @@ public class User {
 
     @Column(name = "enabled", nullable = false)
     private Boolean enabled = true;
+
+    @OneToOne(mappedBy = "user")
+    private Employee employee;
 
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = {
