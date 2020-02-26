@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -34,6 +36,10 @@ public class Payment {
 
     @Column(name = "payment_method", nullable = false, length = 25)
     private String paymentMethod;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = true)
+    private Order order;
 
     public Payment(){}
 
