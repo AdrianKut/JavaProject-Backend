@@ -37,6 +37,10 @@ public class Complaint {
     @JoinColumn(name = "order_id", nullable = true)
     private Order order;
 
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = true)
+    private Product product;
+
     public Complaint(){}
 
     public String getNotificationDate() {      
