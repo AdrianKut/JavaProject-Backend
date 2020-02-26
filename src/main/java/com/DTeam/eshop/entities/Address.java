@@ -19,7 +19,7 @@ public class Address {
     @Column(name = "address_id", nullable = false)
     private Long addressId;
 
-    @Column(name = "street", nullable = true)
+    @Column(name = "street", nullable = true, length = 35)
     private String street;
 
     @Column(name = "house_number", nullable = false)
@@ -28,10 +28,10 @@ public class Address {
     @Column(name = "flat_number", nullable = true)
     private Integer flatNumber;
 
-    @Column(name = "postcode", nullable = false)
+    @Column(name = "postcode", nullable = false, length = 6)
     private String postcode;
 
-    @Column(name = "city", nullable = false)
+    @Column(name = "city", nullable = false, length = 35)
     private String city;
 
     public Address(){}
