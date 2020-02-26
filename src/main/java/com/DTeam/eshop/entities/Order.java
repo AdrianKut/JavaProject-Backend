@@ -37,6 +37,10 @@ public class Order{
     @JoinColumn(name = "address_id", nullable = true)
     private Address address;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = true)
+    private Customer customer;
+
     public Order(){}
 
     public String getPurchaseDate() {      
