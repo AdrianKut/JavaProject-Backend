@@ -40,5 +40,8 @@ public class Address {
     @OneToMany(mappedBy = "address")
     private List<Employee> employees;
 
+    @OneToMany(mappedBy = "address")
+    private List<Customer> customers;
+
     public Address(){}
 }
