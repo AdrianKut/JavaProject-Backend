@@ -16,7 +16,7 @@ import lombok.Data;
 @Entity
 @Table(name = "employees")
 @Data
-public class Empoyee {
+public class Employee {
 
     @Id    
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,6 +40,8 @@ public class Empoyee {
 
     @Column(name = "position", nullable = false)
     private String position;
+
+    public Employee(){}
 
     public String getEmployemntDate() {
         if (employmentDate!= null) {
