@@ -23,10 +23,10 @@ public class Employee {
     @Column(name = "employee_id", nullable = false)
     private Long employeeId;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 25)
     private String name;
 
-    @Column(name = "surname", nullable = false)
+    @Column(name = "surname", nullable = false, length = 25)
     private String surname;
 
     @Column(name = "employment_date", nullable = false)
@@ -38,7 +38,7 @@ public class Employee {
     @Column(name = "extra_pay", nullable = false)
     private BigDecimal extraPay;
 
-    @Column(name = "position", nullable = false)
+    @Column(name = "position", nullable = false, length = 25)
     private String position;
 
     public Employee(){}
