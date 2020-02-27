@@ -62,21 +62,6 @@ public class RoleController {
 		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 	}
 
-    //Update a role
-    @PutMapping("/role/{name}")
-	public ResponseEntity<?> updateRole(@PathVariable("name") String name, @RequestBody Role role) {
-        if(roleService.isRoleExist(name)){
-            Role currentRole = roleService.get(name);
-            currentRole.setName(role.getName());
-            roleService.save(currentRole);
-
-            return new ResponseEntity<Role>(currentRole, HttpStatus.OK);    
-        }
-
-        return new ResponseEntity<>(new CustomErrorType("Unable to upate. Role with name " + name + " not found."),
-        HttpStatus.NOT_FOUND);
-    }
-
     //Delete a role
     @DeleteMapping("/role/{name}")
 	public ResponseEntity<?> deleteRole(@PathVariable("name") String name) {	     
@@ -87,11 +72,4 @@ public class RoleController {
         return new ResponseEntity<>(new CustomErrorType("Unable to delete. Role with name " + name + " not found."),
 					HttpStatus.NOT_FOUND);
     }
-    
-    //Delete all roles
-    @DeleteMapping("/role")
-	public ResponseEntity<Role> deleteAllRoles() {
-		roleService.deleteAll();
-		return new ResponseEntity<Role>(HttpStatus.NO_CONTENT);
-	}
 }
