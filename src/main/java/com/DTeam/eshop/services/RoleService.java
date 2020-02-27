@@ -21,8 +21,8 @@ public class RoleService {
         roleRepository.save(role);
     }
 
-    public void get(String name){
-        roleRepository.findById(name).get();
+    public Role get(String name){
+        return roleRepository.findById(name).get();
     }
 
     public void delete(String name){
