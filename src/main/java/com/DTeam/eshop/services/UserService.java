@@ -21,15 +21,15 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User get(String name){
-        return userRepository.findById(name).get();
+    public User get(String email){
+        return userRepository.findById(email).get();
     }
 
-    public void delete(String name){
-        userRepository.deleteById(name);
+    public void delete(String email){
+        userRepository.deleteById(email);
     }
 
-    public Boolean isUserExist(String name){
-        return userRepository.existsById(name);
+    public Boolean isUserExist(String email){
+        return userRepository.existsById(email);
     }
 }
