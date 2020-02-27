@@ -28,4 +28,8 @@ public class PaymentService {
     public void delete(Long id){
         paymentRepository.deleteById(id);
     }
+
+    public Boolean isPaymentExist(Long id){
+        return paymentRepository.existsById(id);
+    }
 }
