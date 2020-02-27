@@ -28,4 +28,8 @@ public class ComplaintService {
     public void delete(Long id){
         complaintRepository.deleteById(id);
     }
+
+    public Boolean isComplaintExist(Long id){
+        return complaintRepository.existsById(id);
+    }
 }
