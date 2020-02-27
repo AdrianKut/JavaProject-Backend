@@ -28,7 +28,7 @@ public class PaymentController {
 
     //Retrieve all payments
     @GetMapping(value="/payments")
-    public ResponseEntity<List<Payment>> getPaymenta() {
+    public ResponseEntity<List<Payment>> getPayments() {
         List<Payment> payments = paymentService.listAll();
         if(payments.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
