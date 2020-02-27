@@ -17,8 +17,8 @@ public class RoleService {
         return roleRepository.findAll();
     }
 
-    public Role save(Role role){
-        return roleRepository.save(role);
+    public void save(Role role){
+        roleRepository.save(role);
     }
 
     public Role get(String name){
@@ -27,5 +27,9 @@ public class RoleService {
 
     public void delete(String name){
         roleRepository.deleteById(name);
+    }
+
+    public Boolean isRoleExist(String name){
+        return roleRepository.existsById(name);
     }
 }
