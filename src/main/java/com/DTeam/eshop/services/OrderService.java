@@ -28,4 +28,8 @@ public class OrderService {
     public void delete(Long id){
         orderRepository.deleteById(id);
     }
+
+    public Boolean isOrderExist(Long id){
+        return orderRepository.existsById(id);
+    }
 }
