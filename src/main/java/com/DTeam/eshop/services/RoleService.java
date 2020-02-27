@@ -29,6 +29,10 @@ public class RoleService {
         roleRepository.deleteById(name);
     }
 
+    public void deleteAll(){
+        roleRepository.deleteAll();
+    }
+
     public Boolean isRoleExist(String name){
         return roleRepository.existsById(name);
     }
