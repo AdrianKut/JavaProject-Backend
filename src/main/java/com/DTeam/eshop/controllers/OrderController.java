@@ -49,7 +49,7 @@ public class OrderController {
     @PostMapping(value="/orders")
     public ResponseEntity<?> createOrder(@RequestBody Order order, UriComponentsBuilder ucBuilder) {
         Long id = order.getOrderId();
-        if(orderService.isOrderExist(id)){
+        if(id != null){
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A order with id " + id + 
             " already exist."), HttpStatus.CONFLICT);
         }

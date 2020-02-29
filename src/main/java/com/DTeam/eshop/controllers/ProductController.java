@@ -49,7 +49,7 @@ public class ProductController {
      @PostMapping(value="/products")
      public ResponseEntity<?> createProduct(@RequestBody Product product, UriComponentsBuilder ucBuilder) {
          Long id = product.getProductId();
-         if(productService.isProductExist(id)){
+         if(id != null){
              return new ResponseEntity<>(new CustomErrorType("Unable to create. A product with id " + id + 
              " already exist."), HttpStatus.CONFLICT);
          }

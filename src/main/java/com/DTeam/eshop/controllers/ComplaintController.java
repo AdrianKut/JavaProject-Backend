@@ -49,7 +49,7 @@ public class ComplaintController {
     @PostMapping(value="/complaints")
     public ResponseEntity<?> createComplaint(@RequestBody Complaint complaint, UriComponentsBuilder ucBuilder) {
         Long id = complaint.getComplaintId();
-        if(complaintService.isComplaintExist(id)){
+        if(id != null){
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A complaint with id " + id + 
             " already exist."), HttpStatus.CONFLICT);
         }

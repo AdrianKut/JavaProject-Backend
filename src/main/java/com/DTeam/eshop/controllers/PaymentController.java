@@ -50,7 +50,7 @@ public class PaymentController {
       @PostMapping(value="/payments")
       public ResponseEntity<?> createPayment(@RequestBody Payment payment, UriComponentsBuilder ucBuilder) {
           Long id = payment.getPaymentId();
-          if(paymentService.isPaymentExist(id)){
+          if(id != null){
               return new ResponseEntity<>(new CustomErrorType("Unable to create. A payment with id " + id + 
               " already exist."), HttpStatus.CONFLICT);
           }
