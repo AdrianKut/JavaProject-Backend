@@ -36,7 +36,7 @@ public class OrderController {
     }
 
     //Retrieve single order
-    @GetMapping(value = "/order/{id}")
+    @GetMapping(value = "/orders/{id}")
     public ResponseEntity<?> getOrder(@PathVariable("id")Long id){
         if(orderService.isOrderExist(id)){
             Order order = orderService.get(id);
@@ -46,7 +46,7 @@ public class OrderController {
     }
 
     //Create a user
-    @PostMapping(value="/order")
+    @PostMapping(value="/orders")
     public ResponseEntity<?> createOrder(@RequestBody Order order, UriComponentsBuilder ucBuilder) {
         Long id = order.getOrderId();
         if(orderService.isOrderExist(id)){
@@ -61,7 +61,7 @@ public class OrderController {
     }
 
     //Update a order
-    @PutMapping("/order/{id}")
+    @PutMapping("/orders/{id}")
     public ResponseEntity<?> updateOrder(@PathVariable("id")Long orderId, @RequestBody Order order){
         if(orderService.isOrderExist(orderId)){
             Order currentOrder = orderService.get(orderId);
@@ -78,7 +78,7 @@ public class OrderController {
     }
 
     //Delete a order
-    @DeleteMapping("/order/{id}")
+    @DeleteMapping("/orders/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id")Long orderId){
         if(orderService.isOrderExist(orderId)){
             orderService.delete(orderId);
