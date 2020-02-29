@@ -37,7 +37,7 @@ public class PaymentController {
     }
 
     //Retrieve single payment
-    @GetMapping(value = "/payment/{id}")
+    @GetMapping(value = "/payments/{id}")
     public ResponseEntity<?> getPayment(@PathVariable("id")Long paymentId){
         if(paymentService.isPaymentExist(paymentId)){
             Payment payment = paymentService.get(paymentId);
@@ -47,7 +47,7 @@ public class PaymentController {
     }
 
       //Create a payment
-      @PostMapping(value="/payment")
+      @PostMapping(value="/payments")
       public ResponseEntity<?> createPayment(@RequestBody Payment payment, UriComponentsBuilder ucBuilder) {
           Long id = payment.getPaymentId();
           if(paymentService.isPaymentExist(id)){
@@ -62,7 +62,7 @@ public class PaymentController {
       }
 
       //Update a payment
-    @PutMapping("/payment/{id}")
+    @PutMapping("/payments/{id}")
     public ResponseEntity<?> updateOrder(@PathVariable("id")Long paymentId, @RequestBody Payment payment){
         if(paymentService.isPaymentExist(paymentId)){
             Payment currentPayment = paymentService.get(paymentId);
@@ -80,7 +80,7 @@ public class PaymentController {
     }
 
     //Delete a payment
-    @DeleteMapping("/payment/{id}")
+    @DeleteMapping("/payments/{id}")
     public ResponseEntity<?> deletePayment(@PathVariable("id")Long paymentId){
         if(paymentService.isPaymentExist(paymentId)){
             paymentService.delete(paymentId);
