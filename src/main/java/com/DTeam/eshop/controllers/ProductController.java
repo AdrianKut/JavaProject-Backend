@@ -36,7 +36,7 @@ public class ProductController {
     }
 
     //Retrieve single product
-    @GetMapping(value = "/product/{id}")
+    @GetMapping(value = "/products/{id}")
     public ResponseEntity<?> getProduct(@PathVariable("id")Long productId){
         if(productService.isProductExist(productId)){
             Product product = productService.get(productId);
@@ -46,7 +46,7 @@ public class ProductController {
     }
 
      //Create a product
-     @PostMapping(value="/product")
+     @PostMapping(value="/products")
      public ResponseEntity<?> createProduct(@RequestBody Product product, UriComponentsBuilder ucBuilder) {
          Long id = product.getProductId();
          if(productService.isProductExist(id)){
@@ -61,7 +61,7 @@ public class ProductController {
      }
 
        //Update a product
-    @PutMapping("/product/{id}")
+    @PutMapping("/products/{id}")
     public ResponseEntity<?> updateOrder(@PathVariable("id")Long productId, @RequestBody Product product){
         if(productService.isProductExist(productId)){
             Product currentProduct = productService.get(productId);
@@ -79,7 +79,7 @@ public class ProductController {
     }
 
     //Delete a product
-    @DeleteMapping("/product/{id}")
+    @DeleteMapping("/products/{id}")
     public ResponseEntity<?> deletePayment(@PathVariable("id")Long productId){
         if(productService.isProductExist(productId)){
             productService.delete(productId);
