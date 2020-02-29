@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+
 import lombok.Data;
 
 @Entity
@@ -38,7 +41,7 @@ public class Employee {
     @Column(name = "base_pay", nullable = false)
     private BigDecimal basePay;
 
-    @Column(name = "extra_pay", nullable = false)
+    @Column(name = "extra_pay", nullable = true)
     private BigDecimal extraPay;
 
     @Column(name = "position", nullable = false, length = 25)
@@ -49,12 +52,13 @@ public class Employee {
     private User user;
 
     @ManyToOne
+    @JsonIdentityReference
     @JoinColumn(name = "address_id", nullable = true)
     private Address address;
 
     public Employee(){}
 
-    public String getEmployemntDate() {
+    public String getEmploymentDate() {
         if (employmentDate!= null) {
            return employmentDate.toString();
        } else {
