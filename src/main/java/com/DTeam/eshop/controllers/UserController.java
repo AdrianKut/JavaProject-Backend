@@ -38,7 +38,7 @@ public class UserController {
     }
 
     //Retrieve single user
-    @GetMapping(value = "/user/{email}")
+    @GetMapping(value = "/users/{email}")
     public ResponseEntity<?> getUser(@PathVariable("email")String email){
         if(userService.isUserExist(email)){
             User user = userService.get(email);
@@ -48,7 +48,7 @@ public class UserController {
     }
 
     //Create a user
-    @PostMapping(value="/user")
+    @PostMapping(value="/users")
     public ResponseEntity<?> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
         String email = user.getEmail();
         if(userService.isUserExist(email)){
@@ -63,7 +63,7 @@ public class UserController {
     }
     
     //Update a user
-    @PutMapping("/user/{email}")
+    @PutMapping("/users/{email}")
     public ResponseEntity<?> updateUser(@PathVariable("email")String email, @RequestBody User user){
         if(userService.isUserExist(email)){
             User currentUser = userService.get(email);
@@ -79,7 +79,7 @@ public class UserController {
     }
 
     //Delete a user
-    @DeleteMapping("/user/{email}")
+    @DeleteMapping("/users/{email}")
     public ResponseEntity<?> deleteUser(@PathVariable("email")String email){
         if(userService.isUserExist(email)){
             userService.delete(email);
