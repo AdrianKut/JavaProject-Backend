@@ -27,7 +27,7 @@ public class EmployeeController {
     @Autowired private EmployeeService employeeService;
 
     //Retrieve all employees
-    @GetMapping(value = "/employees")
+    @GetMapping("/employees")
     public ResponseEntity<List<Employee>> getEmployees(){
         List<Employee> employees = employeeService.listAll();
         if(employees.isEmpty()){
@@ -37,7 +37,7 @@ public class EmployeeController {
     }
     
     //Retrieve single employee
-    @GetMapping(value = "/employees/{id}")
+    @GetMapping("/employees/{id}")
     public ResponseEntity<?> getEmployee(@PathVariable("id")Long employeeId){
         if(employeeService.isEmployeeExist(employeeId)){
             Employee employee = employeeService.get(employeeId);
@@ -47,7 +47,7 @@ public class EmployeeController {
     }
 
     //Create a employee
-    @PostMapping(value = "/employees")
+    @PostMapping("/employees")
     public ResponseEntity<?> createEmployee(@RequestBody Employee employee, UriComponentsBuilder ucBuilder){
         Long id = employee.getEmployeeId();
         if(id != null){

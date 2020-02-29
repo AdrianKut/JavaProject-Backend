@@ -26,7 +26,7 @@ public class OrderController {
     @Autowired private OrderService orderService;
 
     //Retrieve all orders
-    @GetMapping(value="/orders")
+    @GetMapping("/orders")
     public ResponseEntity<List<Order>> getOrders() {
         List<Order> orders = orderService.listAll();
         if(orders.isEmpty()){
@@ -36,7 +36,7 @@ public class OrderController {
     }
 
     //Retrieve single order
-    @GetMapping(value = "/orders/{id}")
+    @GetMapping("/orders/{id}")
     public ResponseEntity<?> getOrder(@PathVariable("id")Long id){
         if(orderService.isOrderExist(id)){
             Order order = orderService.get(id);
@@ -46,7 +46,7 @@ public class OrderController {
     }
 
     //Create a user
-    @PostMapping(value="/orders")
+    @PostMapping("/orders")
     public ResponseEntity<?> createOrder(@RequestBody Order order, UriComponentsBuilder ucBuilder) {
         Long id = order.getOrderId();
         if(id != null){

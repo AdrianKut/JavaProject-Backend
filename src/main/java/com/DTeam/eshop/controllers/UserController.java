@@ -28,7 +28,7 @@ public class UserController {
     @Autowired private UserService userService;
 
     //Retrieve all users
-    @GetMapping(value="/users")
+    @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = userService.listAll();
         if(users.isEmpty()){
@@ -38,7 +38,7 @@ public class UserController {
     }
 
     //Retrieve single user
-    @GetMapping(value = "/users/{email}")
+    @GetMapping("/users/{email}")
     public ResponseEntity<?> getUser(@PathVariable("email")String email){
         if(userService.isUserExist(email)){
             User user = userService.get(email);
@@ -48,7 +48,7 @@ public class UserController {
     }
 
     //Create a user
-    @PostMapping(value="/users")
+    @PostMapping("/users")
     public ResponseEntity<?> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
         String email = user.getEmail();
         if(userService.isUserExist(email)){

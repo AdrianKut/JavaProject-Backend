@@ -26,7 +26,7 @@ public class ComplaintController {
     @Autowired private ComplaintService complaintService;
 
     //Retrieve all complaints
-    @GetMapping(value="/complaints")
+    @GetMapping("/complaints")
     public ResponseEntity<List<Complaint>> getComplaints() {
         List<Complaint> complaints = complaintService.listAll();
         if(complaints.isEmpty()){
@@ -36,7 +36,7 @@ public class ComplaintController {
     }
 
     //Retrieve single complaint
-    @GetMapping(value = "/complaints/{id}")
+    @GetMapping("/complaints/{id}")
     public ResponseEntity<?> getComplaint(@PathVariable("id")Long complaintId){
         if(complaintService.isComplaintExist(complaintId)){
             Complaint complaint = complaintService.get(complaintId);
@@ -46,7 +46,7 @@ public class ComplaintController {
     }
 
     //Create a complaint
-    @PostMapping(value="/complaints")
+    @PostMapping("/complaints")
     public ResponseEntity<?> createComplaint(@RequestBody Complaint complaint, UriComponentsBuilder ucBuilder) {
         Long id = complaint.getComplaintId();
         if(id != null){

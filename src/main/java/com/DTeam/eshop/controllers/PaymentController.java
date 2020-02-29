@@ -27,7 +27,7 @@ public class PaymentController {
     @Autowired private PaymentService paymentService;
 
     //Retrieve all payments
-    @GetMapping(value="/payments")
+    @GetMapping("/payments")
     public ResponseEntity<List<Payment>> getPayments() {
         List<Payment> payments = paymentService.listAll();
         if(payments.isEmpty()){
@@ -37,7 +37,7 @@ public class PaymentController {
     }
 
     //Retrieve single payment
-    @GetMapping(value = "/payments/{id}")
+    @GetMapping("/payments/{id}")
     public ResponseEntity<?> getPayment(@PathVariable("id")Long paymentId){
         if(paymentService.isPaymentExist(paymentId)){
             Payment payment = paymentService.get(paymentId);
@@ -47,7 +47,7 @@ public class PaymentController {
     }
 
       //Create a payment
-      @PostMapping(value="/payments")
+      @PostMapping("/payments")
       public ResponseEntity<?> createPayment(@RequestBody Payment payment, UriComponentsBuilder ucBuilder) {
           Long id = payment.getPaymentId();
           if(id != null){

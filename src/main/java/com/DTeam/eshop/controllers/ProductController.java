@@ -26,7 +26,7 @@ public class ProductController {
     @Autowired private ProductService productService;
 
     //Retrieve all products
-    @GetMapping(value="/products")
+    @GetMapping("/products")
     public ResponseEntity<List<Product>> getProducts() {
         List<Product> products = productService.listAll();
         if(products.isEmpty()){
@@ -36,7 +36,7 @@ public class ProductController {
     }
 
     //Retrieve single product
-    @GetMapping(value = "/products/{id}")
+    @GetMapping("/products/{id}")
     public ResponseEntity<?> getProduct(@PathVariable("id")Long productId){
         if(productService.isProductExist(productId)){
             Product product = productService.get(productId);
@@ -46,7 +46,7 @@ public class ProductController {
     }
 
      //Create a product
-     @PostMapping(value="/products")
+     @PostMapping("/products")
      public ResponseEntity<?> createProduct(@RequestBody Product product, UriComponentsBuilder ucBuilder) {
          Long id = product.getProductId();
          if(id != null){
