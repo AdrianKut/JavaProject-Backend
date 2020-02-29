@@ -44,7 +44,7 @@ public class UserController {
             User user = userService.get(email);
             return new ResponseEntity<User>(user, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new CustomErrorType("User with email " + email + " not found"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new CustomErrorType("User with email " + email + " not found."), HttpStatus.NOT_FOUND);
     }
 
     //Create a user
@@ -85,7 +85,7 @@ public class UserController {
             userService.delete(email);
             return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(new CustomErrorType("Unable to delete. User with email " + email + " not found"),
+        return new ResponseEntity<>(new CustomErrorType("Unable to delete. User with email " + email + " not found."),
         HttpStatus.NOT_FOUND);
     }
 }

@@ -42,7 +42,7 @@ public class ProductController {
             Product product = productService.get(productId);
             return new ResponseEntity<Product>(product, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new CustomErrorType("Product with id " + productId + " not found"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new CustomErrorType("Product with id " + productId + " not found."), HttpStatus.NOT_FOUND);
     }
 
      //Create a product
@@ -85,7 +85,7 @@ public class ProductController {
             productService.delete(productId);
             return new ResponseEntity<Product>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(new CustomErrorType("Unable to delete. Product with id " + productId + " not found"),
+        return new ResponseEntity<>(new CustomErrorType("Unable to delete. Product with id " + productId + " not found."),
         HttpStatus.NOT_FOUND);
     }
 

@@ -43,7 +43,7 @@ public class PaymentController {
             Payment payment = paymentService.get(paymentId);
             return new ResponseEntity<Payment>(payment, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new CustomErrorType("Payment with id " + paymentId + " not found"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new CustomErrorType("Payment with id " + paymentId + " not found."), HttpStatus.NOT_FOUND);
     }
 
       //Create a payment
@@ -86,7 +86,7 @@ public class PaymentController {
             paymentService.delete(paymentId);
             return new ResponseEntity<Payment>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(new CustomErrorType("Unable to delete. Payment with id " + paymentId + " not found"),
+        return new ResponseEntity<>(new CustomErrorType("Unable to delete. Payment with id " + paymentId + " not found."),
         HttpStatus.NOT_FOUND);
     }
 

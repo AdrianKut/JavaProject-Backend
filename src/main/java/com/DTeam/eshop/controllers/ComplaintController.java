@@ -42,7 +42,7 @@ public class ComplaintController {
             Complaint complaint = complaintService.get(complaintId);
             return new ResponseEntity<Complaint>(complaint, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new CustomErrorType("Complaint with id " + complaintId + " not found"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new CustomErrorType("Complaint with id " + complaintId + " not found."), HttpStatus.NOT_FOUND);
     }
 
     //Create a complaint
@@ -84,7 +84,7 @@ public class ComplaintController {
             complaintService.delete(complaintId);
             return new ResponseEntity<Complaint>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(new CustomErrorType("Unable to delete. Complaint with id " + complaintId + " not found"),
+        return new ResponseEntity<>(new CustomErrorType("Unable to delete. Complaint with id " + complaintId + " not found."),
         HttpStatus.NOT_FOUND);
     }
 }

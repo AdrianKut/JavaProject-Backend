@@ -42,7 +42,7 @@ public class OrderController {
             Order order = orderService.get(id);
             return new ResponseEntity<Order>(order, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new CustomErrorType("Order with id " + id + " not found"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new CustomErrorType("Order with id " + id + " not found."), HttpStatus.NOT_FOUND);
     }
 
     //Create a user
@@ -84,7 +84,7 @@ public class OrderController {
             orderService.delete(orderId);
             return new ResponseEntity<Order>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(new CustomErrorType("Unable to delete. Order with id " + orderId + " not found"),
+        return new ResponseEntity<>(new CustomErrorType("Unable to delete. Order with id " + orderId + " not found."),
         HttpStatus.NOT_FOUND);
     }
 

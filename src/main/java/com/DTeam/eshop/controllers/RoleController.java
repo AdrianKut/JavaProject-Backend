@@ -43,7 +43,7 @@ public class RoleController {
             return new ResponseEntity<Role>(role, HttpStatus.OK);
         }
 		return new ResponseEntity<>(new CustomErrorType("Role with name " + name 
-        + " not found"), HttpStatus.NOT_FOUND);	
+        + " not found."), HttpStatus.NOT_FOUND);	
     }
     
     //Create a role
