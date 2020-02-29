@@ -36,7 +36,7 @@ public class ComplaintController {
     }
 
     //Retrieve single complaint
-    @GetMapping(value = "/complaint/{id}")
+    @GetMapping(value = "/complaints/{id}")
     public ResponseEntity<?> getComplaint(@PathVariable("id")Long complaintId){
         if(complaintService.isComplaintExist(complaintId)){
             Complaint complaint = complaintService.get(complaintId);
@@ -46,7 +46,7 @@ public class ComplaintController {
     }
 
     //Create a complaint
-    @PostMapping(value="/complaint")
+    @PostMapping(value="/complaints")
     public ResponseEntity<?> createProduct(@RequestBody Complaint complaint, UriComponentsBuilder ucBuilder) {
         Long id = complaint.getComplaintId();
         if(complaintService.isComplaintExist(id)){
@@ -61,7 +61,7 @@ public class ComplaintController {
     }
 
        //Update a complaint
-       @PutMapping("/complaint/{id}")
+       @PutMapping("/complaints/{id}")
        public ResponseEntity<?> updateComplaint(@PathVariable("id")Long complaintId, @RequestBody Complaint complaint){
            if(complaintService.isComplaintExist(complaintId)){
             Complaint currentComplaint = complaintService.get(complaintId);
@@ -78,7 +78,7 @@ public class ComplaintController {
        }
 
        //Delete a complaint
-    @DeleteMapping("/complaint/{id}")
+    @DeleteMapping("/complaints/{id}")
     public ResponseEntity<?> deleteComplaint(@PathVariable("id")Long complaintId){
         if(complaintService.isComplaintExist(complaintId)){
             complaintService.delete(complaintId);
