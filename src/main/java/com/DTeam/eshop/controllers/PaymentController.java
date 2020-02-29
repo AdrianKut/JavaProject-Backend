@@ -63,7 +63,7 @@ public class PaymentController {
 
       //Update a payment
     @PutMapping("/payments/{id}")
-    public ResponseEntity<?> updateOrder(@PathVariable("id")Long paymentId, @RequestBody Payment payment){
+    public ResponseEntity<?> updatePayment(@PathVariable("id")Long paymentId, @RequestBody Payment payment){
         if(paymentService.isPaymentExist(paymentId)){
             Payment currentPayment = paymentService.get(paymentId);
             currentPayment.setPaymentDate(payment.getPaymentDate());

@@ -47,7 +47,7 @@ public class ComplaintController {
 
     //Create a complaint
     @PostMapping(value="/complaints")
-    public ResponseEntity<?> createProduct(@RequestBody Complaint complaint, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<?> createComplaint(@RequestBody Complaint complaint, UriComponentsBuilder ucBuilder) {
         Long id = complaint.getComplaintId();
         if(complaintService.isComplaintExist(id)){
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A complaint with id " + id + 

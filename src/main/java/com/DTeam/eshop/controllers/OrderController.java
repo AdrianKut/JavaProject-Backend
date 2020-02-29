@@ -79,7 +79,7 @@ public class OrderController {
 
     //Delete a order
     @DeleteMapping("/orders/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable("id")Long orderId){
+    public ResponseEntity<?> deleteOrder(@PathVariable("id")Long orderId){
         if(orderService.isOrderExist(orderId)){
             orderService.delete(orderId);
             return new ResponseEntity<Order>(HttpStatus.NO_CONTENT);

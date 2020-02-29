@@ -62,7 +62,7 @@ public class ProductController {
 
        //Update a product
     @PutMapping("/products/{id}")
-    public ResponseEntity<?> updateOrder(@PathVariable("id")Long productId, @RequestBody Product product){
+    public ResponseEntity<?> updateProduct(@PathVariable("id")Long productId, @RequestBody Product product){
         if(productService.isProductExist(productId)){
             Product currentProduct = productService.get(productId);
             currentProduct.setName(product.getName());
@@ -80,7 +80,7 @@ public class ProductController {
 
     //Delete a product
     @DeleteMapping("/products/{id}")
-    public ResponseEntity<?> deletePayment(@PathVariable("id")Long productId){
+    public ResponseEntity<?> deleteProduct(@PathVariable("id")Long productId){
         if(productService.isProductExist(productId)){
             productService.delete(productId);
             return new ResponseEntity<Product>(HttpStatus.NO_CONTENT);
