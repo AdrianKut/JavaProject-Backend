@@ -36,7 +36,7 @@ public class RoleController {
     }
 
     //Retrieve single role
-	@GetMapping("/role/{name}")
+	@GetMapping("/roles/{name}")
 	public ResponseEntity<?> getRole(@PathVariable("name") String name) {
         if(roleService.isRoleExist(name)){
             Role role = roleService.get(name);
@@ -47,7 +47,7 @@ public class RoleController {
     }
     
     //Create a role
-    @PostMapping("/role")
+    @PostMapping("/roles")
 	public ResponseEntity<?> createRole(@RequestBody Role role, UriComponentsBuilder ucBuilder) {
         String name = role.getName();
 		if (roleService.isRoleExist(name)) {
@@ -62,7 +62,7 @@ public class RoleController {
 	}
 
     //Delete a role
-    @DeleteMapping("/role/{name}")
+    @DeleteMapping("/roles/{name}")
 	public ResponseEntity<?> deleteRole(@PathVariable("name") String name) {	     
         if(roleService.isRoleExist(name)){
             roleService.delete(name);
