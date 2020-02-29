@@ -58,7 +58,7 @@ public class UserController {
         userService.save(user);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/api/user/{email}").buildAndExpand(user.getEmail()).toUri());
+        headers.setLocation(ucBuilder.path("/api/users/{email}").buildAndExpand(user.getEmail()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
     

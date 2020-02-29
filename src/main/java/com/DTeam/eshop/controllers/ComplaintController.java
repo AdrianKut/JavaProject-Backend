@@ -56,7 +56,7 @@ public class ComplaintController {
         complaintService.save(complaint);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/api/product/{id}").buildAndExpand(complaint.getComplaintId()).toUri());
+        headers.setLocation(ucBuilder.path("/api/complaints/{id}").buildAndExpand(complaint.getComplaintId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 

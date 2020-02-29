@@ -57,7 +57,7 @@ public class PaymentController {
           paymentService.save(payment);
   
           HttpHeaders headers = new HttpHeaders();
-          headers.setLocation(ucBuilder.path("/api/payment/{id}").buildAndExpand(payment.getPaymentId()).toUri());
+          headers.setLocation(ucBuilder.path("/api/payments/{id}").buildAndExpand(payment.getPaymentId()).toUri());
           return new ResponseEntity<String>(headers, HttpStatus.CREATED);
       }
 

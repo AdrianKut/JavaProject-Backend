@@ -56,7 +56,7 @@ public class OrderController {
         orderService.save(order);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/api/user/{id}").buildAndExpand(order.getOrderId()).toUri());
+        headers.setLocation(ucBuilder.path("/api/orders/{id}").buildAndExpand(order.getOrderId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 

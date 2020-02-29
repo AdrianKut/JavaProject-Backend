@@ -57,7 +57,7 @@ public class RoleController {
 		roleService.save(role);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/api/role/{name}").buildAndExpand(role.getName()).toUri());
+        headers.setLocation(ucBuilder.path("/api/roles/{name}").buildAndExpand(role.getName()).toUri());
 		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 	}
 
