@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.DTeam.eshop.entities.Address;
 import com.DTeam.eshop.entities.Customer;
+import com.DTeam.eshop.entities.User;
 import com.DTeam.eshop.services.AddressService;
 import com.DTeam.eshop.services.CustomerService;
+import com.DTeam.eshop.services.UserService;
 import com.DTeam.eshop.utilities.CustomErrorType;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,7 @@ public class CustomerController {
 
     @Autowired private CustomerService customerService;
     @Autowired private AddressService addressService;
+    @Autowired private UserService userService;
 
     //Retrieve all customers
     @GetMapping("/customers")
@@ -167,4 +170,81 @@ public class CustomerController {
           customerService.save(customer);
           return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
       }
+
+        //Retrieve a user
+        @GetMapping("/customers/{id}/users")
+        public ResponseEntity<?> getUsers(@PathVariable("id")Long customerId){
+            if(!customerService.isCustomerExist(customerId)){
+                return new ResponseEntity<>(new CustomErrorType("Customer with id " + customerId +  " not found."),
+                HttpStatus.NOT_FOUND);
+            }
+            Customer customer = customerService.get(customerId);
+            if(customer.getUser() == null){
+                return new ResponseEntity<>(new CustomErrorType("Customer with id " + customerId + " has no user assigned yet."),
+                HttpStatus.NOT_FOUND);
+            }
+            User user = customer.getUser();
+            return new ResponseEntity<User>(user, HttpStatus.OK);
+        }
+
+        //Create a user
+        @PostMapping("/customers/{id}/users")
+        public ResponseEntity<?> createUser(@PathVariable("id")Long customerId, @RequestBody User user, UriComponentsBuilder ucBuilder){
+            if(!customerService.isCustomerExist(customerId)){
+                return new ResponseEntity<>(new CustomErrorType("Unable to create. Customer with id " + customerId + " not found."),
+                HttpStatus.NOT_FOUND);
+            }
+            Customer customer = customerService.get(customerId);
+            if(customer.getUser() != null){
+                return new ResponseEntity<>(new CustomErrorType("Unable to create. Customer with id " + customerId + " has already user."),
+                HttpStatus.CONFLICT);
+            }
+            userService.save(user);
+            customer.setUser(user);
+            customerService.save(customer);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(ucBuilder.path("/api/users/{email}").buildAndExpand(user.getEmail()).toUri());
+            return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+        }
+
+        //Update a user
+        @PutMapping("customers/{customerid}/users/{email}")
+        public ResponseEntity<?> updateUser(@PathVariable("customerid")Long customerId,
+        @PathVariable("email")String email, @RequestBody User user){
+            if(!customerService.isCustomerExist(customerId)){
+                return new ResponseEntity<>(new CustomErrorType("Unable to update. Customer with id " + customerId + " not found."),
+                HttpStatus.NOT_FOUND);
+            }
+            if(!userService.isUserExist(email)){
+                return new ResponseEntity<>(new CustomErrorType("Unable to update. User with email " + email + " not found."),
+                HttpStatus.NOT_FOUND); 
+            }
+            User currentUser = userService.get(email);
+            currentUser.setPassword(user.getPassword());
+            currentUser.setEnabled(user.getEnabled());
+            userService.save(currentUser);
+            return new ResponseEntity<User>(currentUser, HttpStatus.OK);
+        }
+
+        //Create the association
+        @PostMapping("/customers/{customerId}/users/{email}")
+        public ResponseEntity<?> associateUser(@PathVariable("customerId")Long customerId,
+        @PathVariable("email")String email){
+            if(!customerService.isCustomerExist(customerId)){
+                return new ResponseEntity<>(new CustomErrorType("Unable to associate. Customer with id " + customerId + " not found."),
+                HttpStatus.NOT_FOUND);
+            }
+            if(!userService.isUserExist(email)){
+                return new ResponseEntity<>(new CustomErrorType("Unable to associate. User with email " + email + " not found."),
+                HttpStatus.NOT_FOUND); 
+            }
+            Customer customer = customerService.get(customerId);
+            if(customer.getUser() != null){
+                return new ResponseEntity<>(new CustomErrorType("Unable to associate. Customer with id " + customerId + " has already user."),
+                HttpStatus.CONFLICT);
+            }
+            customer.setUser(userService.get(email));
+            customerService.save(customer);
+            return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
+        }
 }
