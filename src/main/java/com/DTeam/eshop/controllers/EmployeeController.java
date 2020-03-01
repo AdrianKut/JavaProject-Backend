@@ -127,7 +127,7 @@ public class EmployeeController {
         employee.setAddress(address);
         employeeService.save(employee);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/api/addresses/{id}").buildAndExpand(employee.getEmployeeId()).toUri());
+        headers.setLocation(ucBuilder.path("/api/addresses/{id}").buildAndExpand(address.getAddressId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
     
@@ -207,7 +207,7 @@ public class EmployeeController {
         employee.setUser(user);
         employeeService.save(employee);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/api/users/{email}").buildAndExpand(employee.getEmployeeId()).toUri());
+        headers.setLocation(ucBuilder.path("/api/users/{email}").buildAndExpand(user.getEmail()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
