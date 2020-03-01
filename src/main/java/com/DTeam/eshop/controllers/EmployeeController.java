@@ -207,7 +207,7 @@ public class EmployeeController {
         employee.setUser(user);
         employeeService.save(employee);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/api/users/{id}").buildAndExpand(employee.getEmployeeId()).toUri());
+        headers.setLocation(ucBuilder.path("/api/users/{email}").buildAndExpand(employee.getEmployeeId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
