@@ -60,6 +60,7 @@ public class Order{
     private List<Product> products;
 
     @OneToMany(mappedBy = "order")
+    @JsonBackReference
     private List<Complaint> complaints;
 
     public Order(){}
