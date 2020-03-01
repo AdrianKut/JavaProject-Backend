@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+
 import lombok.Data;
 
 @Entity
@@ -38,6 +40,7 @@ public class Payment {
     private String paymentMethod;
 
     @ManyToOne
+    @JsonIdentityReference
     @JoinColumn(name = "order_id", nullable = true)
     private Order order;
 

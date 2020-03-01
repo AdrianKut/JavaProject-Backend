@@ -2,6 +2,7 @@ package com.DTeam.eshop.controllers;
 
 import java.util.List;
 
+import com.DTeam.eshop.entities.Order;
 import com.DTeam.eshop.entities.Payment;
 import com.DTeam.eshop.services.PaymentService;
 import com.DTeam.eshop.utilities.CustomErrorType;
@@ -88,6 +89,20 @@ public class PaymentController {
         }
         return new ResponseEntity<>(new CustomErrorType("Unable to delete. Payment with id " + paymentId + " not found."),
         HttpStatus.NOT_FOUND);
+    }
+
+    //Retrieve a orders
+    @GetMapping("/payments/{id}/orders")
+    public ResponseEntity<?> getOrders(@PathVariable("id")Long paymentId){
+        if(!paymentService.isPaymentExist(paymentId)){
+            return new ResponseEntity<>(new CustomErrorType("Payment with id " + paymentId + " not found."), HttpStatus.NOT_FOUND);
+        }
+        Payment payment = paymentService.get(paymentId);
+        if(payment.getOrder() == null){
+            return new ResponseEntity<>(new CustomErrorType("Payment with id " + paymentId + " has no order assigned yet."), HttpStatus.NOT_FOUND); 
+        }
+        Order order = payment.getOrder();
+        return new ResponseEntity<Order>(order, HttpStatus.OK);
     }
 
 }
