@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.DTeam.eshop.entities.Address;
 import com.DTeam.eshop.entities.Employee;
+import com.DTeam.eshop.entities.User;
 import com.DTeam.eshop.services.AddressService;
 import com.DTeam.eshop.services.EmployeeService;
+import com.DTeam.eshop.services.UserService;
 import com.DTeam.eshop.utilities.CustomErrorType;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,7 @@ public class EmployeeController {
 
     @Autowired private EmployeeService employeeService;
     @Autowired private AddressService addressService;
+    @Autowired private UserService userService;
 
     //Retrieve all employees
     @GetMapping("/employees")
@@ -168,6 +171,83 @@ public class EmployeeController {
             HttpStatus.CONFLICT);
         }
         employee.setAddress(addressService.get(addressId));
+        employeeService.save(employee);
+        return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
+    }
+
+    //Retrieve a user
+    @GetMapping("/employees/{id}/users")
+    public ResponseEntity<?> getUsers(@PathVariable("id")Long employeeId){
+        if(!employeeService.isEmployeeExist(employeeId)){
+            return new ResponseEntity<>(new CustomErrorType("Employee with id " + employeeId +  " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        Employee employee = employeeService.get(employeeId);
+        if(employee.getUser() == null){
+            return new ResponseEntity<>(new CustomErrorType("Employee with id " + employeeId + " has no user assigned yet."),
+            HttpStatus.NOT_FOUND);
+        }
+        User user = employee.getUser();
+        return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
+
+    //Create a user
+    @PostMapping("/employees/{id}/users")
+    public ResponseEntity<?> createUser(@PathVariable("id")Long employeeId, @RequestBody User user, UriComponentsBuilder ucBuilder){
+        if(!employeeService.isEmployeeExist(employeeId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. Employee with id " + employeeId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        Employee employee = employeeService.get(employeeId);
+        if(employee.getUser() != null){
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. Employee with id " + employeeId + " has already user."),
+            HttpStatus.CONFLICT);
+        }
+        userService.save(user);
+        employee.setUser(user);
+        employeeService.save(employee);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/api/users/{id}").buildAndExpand(employee.getEmployeeId()).toUri());
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }
+
+    //Update a user
+    @PutMapping("empolyees/{employeeid}/users/{email}")
+    public ResponseEntity<?> updateUser(@PathVariable("employeeid")Long employeeId,
+    @PathVariable("email")String email, @RequestBody User user){
+        if(!employeeService.isEmployeeExist(employeeId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to update. Employee with id " + employeeId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        if(!userService.isUserExist(email)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to update. User with email " + email + " not found."),
+            HttpStatus.NOT_FOUND); 
+        }
+        User currentUser = userService.get(email);
+        currentUser.setPassword(user.getPassword());
+        currentUser.setEnabled(user.getEnabled());
+        userService.save(currentUser);
+        return new ResponseEntity<User>(currentUser, HttpStatus.OK);
+    }
+
+    //Create the association
+    @PostMapping("/employees/{employeeId}/users/{email}")
+    public ResponseEntity<?> associateUser(@PathVariable("employeeId")Long employeeId,
+    @PathVariable("email")String email, @RequestBody User user){
+        if(!employeeService.isEmployeeExist(employeeId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to associate. Employee with id " + employeeId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        if(!userService.isUserExist(email)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to associate. User with email " + email + " not found."),
+            HttpStatus.NOT_FOUND); 
+        }
+        Employee employee = employeeService.get(employeeId);
+        if(employee.getUser() != null){
+            return new ResponseEntity<>(new CustomErrorType("Unable to associate. Employee with id " + employeeId + " has already user."),
+            HttpStatus.CONFLICT);
+        }
+        employee.setUser(user);
         employeeService.save(employee);
         return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
     }
