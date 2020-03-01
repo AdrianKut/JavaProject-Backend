@@ -28,4 +28,8 @@ public class CustomerService {
     public void delete(Long id){
         customerRepository.deleteById(id);
     }
+
+    public Boolean isCustomerExist(Long id){
+        return customerRepository.existsById(id);
+    }
 }
