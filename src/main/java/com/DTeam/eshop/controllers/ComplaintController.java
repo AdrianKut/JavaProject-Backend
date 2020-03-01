@@ -220,11 +220,33 @@ public class ComplaintController {
         }
         Product currentProduct = productService.get(productId);
         currentProduct.setName(product.getName());
-        currentProduct.setDescription(product.getDescription();
+        currentProduct.setDescription(product.getDescription());
         currentProduct.setPrice(product.getPrice());
         currentProduct.setQuantity(product.getQuantity());
         productService.save(currentProduct);
         return new ResponseEntity<Product>(currentProduct, HttpStatus.OK);
+    }
+
+    //Create the association
+    @PostMapping("/complaints/{complaintid}/products/{productid}")
+    public ResponseEntity<?> associateProduct(@PathVariable("complaintid")Long complaintId, 
+    @PathVariable("productid")Long productId){
+        if(!complaintService.isComplaintExist(complaintId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to associate. Complaint with id " + complaintId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        if(!productService.isProductExist(productId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to associate. Product with id " + productId + " not found."),
+            HttpStatus.NOT_FOUND); 
+        }
+        Complaint complaint = complaintService.get(complaintId);
+        if(complaint.getProduct() != null){
+            return new ResponseEntity<>(new CustomErrorType("Unable to associate. Complaint with id " + complaintId + " has already product."),
+            HttpStatus.CONFLICT);
+        }
+        complaint.setProduct(productService.get(productId));
+        complaintService.save(complaint);
+        return new ResponseEntity<Complaint>(complaint, HttpStatus.CREATED);
     }
 
 }
