@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
 
 @Entity
@@ -29,6 +31,7 @@ public class User {
     private Boolean enabled = true;
 
     @OneToOne(mappedBy = "user")
+    @JsonBackReference
     private Employee employee;
 
     @OneToOne(mappedBy = "user")

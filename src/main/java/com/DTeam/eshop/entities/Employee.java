@@ -47,6 +47,7 @@ public class Employee {
     private String position;
 
     @OneToOne
+    @JsonIdentityReference
     @JoinColumn(name = "user_email", nullable = true, unique = true)
     private User user;
 
