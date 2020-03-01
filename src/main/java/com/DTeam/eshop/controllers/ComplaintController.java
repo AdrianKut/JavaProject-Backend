@@ -126,4 +126,24 @@ public class ComplaintController {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
+    //Update a orders
+    @PutMapping("/complaints/{complaintid}/orders/{orderid}")
+    public ResponseEntity<?> updateOrders(@PathVariable("complaintid")Long complaintId, 
+    @PathVariable("orderid")Long orderId, @RequestBody Order order){
+        if(!complaintService.isComplaintExist(complaintId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to update. Complaint with id " + complaintId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        if(!orderService.isOrderExist(orderId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to update. Order with id " + orderId + " not found."),
+            HttpStatus.NOT_FOUND); 
+        }
+        Order currentOrder = orderService.get(orderId);
+        currentOrder.setPurchaseDate(order.getPurchaseDate());
+        currentOrder.setShipmentDate(order.getShipmentDate());
+        currentOrder.setOrderStatus(order.getOrderStatus());
+        orderService.save(currentOrder);
+        return new ResponseEntity<Order>(currentOrder, HttpStatus.OK);
+    }
+
 }
