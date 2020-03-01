@@ -5,6 +5,7 @@ import java.util.List;
 import com.DTeam.eshop.entities.Complaint;
 import com.DTeam.eshop.entities.Order;
 import com.DTeam.eshop.services.ComplaintService;
+import com.DTeam.eshop.services.OrderService;
 import com.DTeam.eshop.utilities.CustomErrorType;
 import org.springframework.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class ComplaintController {
 
     @Autowired private ComplaintService complaintService;
+
+    @Autowired private OrderService orderService;
 
     //Retrieve all complaints
     @GetMapping("/complaints")
@@ -101,6 +104,26 @@ public class ComplaintController {
         }
         Order order = complaint.getOrder();
         return new ResponseEntity<Order>(order, HttpStatus.OK);
+    }
+
+    //Create a orders
+    @PostMapping("/complaints/{id}/orders")
+    public ResponseEntity<?> createOrder(@PathVariable("id")Long complaintId, @RequestBody Order order, UriComponentsBuilder ucBuilder){
+        if(!complaintService.isComplaintExist(complaintId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. Complaint with id " + complaintId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        Complaint complaint = complaintService.get(complaintId);
+        if(complaint.getOrder() != null){
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. Complaint with id " + complaintId + " has already order."),
+            HttpStatus.CONFLICT);
+        }
+        orderService.save(order);
+        complaint.setOrder(order);
+        complaintService.save(complaint);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/api/orders/{id}").buildAndExpand(complaint.getComplaintId()).toUri());
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
 }
