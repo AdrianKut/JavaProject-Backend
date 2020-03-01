@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.DTeam.eshop.entities.Order;
 import com.DTeam.eshop.entities.Payment;
+import com.DTeam.eshop.services.OrderService;
 import com.DTeam.eshop.services.PaymentService;
 import com.DTeam.eshop.utilities.CustomErrorType;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +27,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class PaymentController {
 
     @Autowired private PaymentService paymentService;
+
+    @Autowired private OrderService orderService;
 
     //Retrieve all payments
     @GetMapping("/payments")
@@ -103,6 +106,26 @@ public class PaymentController {
         }
         Order order = payment.getOrder();
         return new ResponseEntity<Order>(order, HttpStatus.OK);
+    }
+
+    //Create a orders
+    @PostMapping("/payments/{id}/orders")
+    public ResponseEntity<?> createOrders(@PathVariable("id")Long paymentId, @RequestBody Order order, UriComponentsBuilder ucBuilder){
+        if(!paymentService.isPaymentExist(paymentId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. Paymnet with id " + paymentId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        Payment payment = paymentService.get(paymentId);
+        if(payment.getOrder() != null){
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. Payment with id " + paymentId + " has already orders."),
+            HttpStatus.CONFLICT);
+        }
+        orderService.save(order);
+        payment.setOrder(order);
+        paymentService.save(payment);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/api/orders/{id}").buildAndExpand(payment.getPaymentId()).toUri());
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
 }
