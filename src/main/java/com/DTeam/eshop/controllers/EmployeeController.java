@@ -134,7 +134,7 @@ public class EmployeeController {
     //Update a address
     @PutMapping("/employees/{employeeid}/addresses/{addressid}")
     public ResponseEntity<?> updateAdress(@PathVariable("employeeid")Long employeeId, 
-    @PathVariable("addressid")Long addressId, @RequestBody Address address, UriComponentsBuilder ucBuilder){
+    @PathVariable("addressid")Long addressId, @RequestBody Address address){
         if(!employeeService.isEmployeeExist(employeeId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Employee with id " + employeeId + " not found."),
             HttpStatus.NOT_FOUND);
@@ -156,7 +156,7 @@ public class EmployeeController {
     //Create the association
     @PostMapping("/employees/{employeeid}/addresses/{addressid}")
     public ResponseEntity<?> associateAdress(@PathVariable("employeeid")Long employeeId, 
-    @PathVariable("addressid")Long addressId, @RequestBody Address address, UriComponentsBuilder ucBuilder){
+    @PathVariable("addressid")Long addressId){
         if(!employeeService.isEmployeeExist(employeeId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Employee with id " + employeeId + " not found."),
             HttpStatus.NOT_FOUND);
@@ -212,7 +212,7 @@ public class EmployeeController {
     }
 
     //Update a user
-    @PutMapping("empolyees/{employeeid}/users/{email}")
+    @PutMapping("employees/{employeeid}/users/{email}")
     public ResponseEntity<?> updateUser(@PathVariable("employeeid")Long employeeId,
     @PathVariable("email")String email, @RequestBody User user){
         if(!employeeService.isEmployeeExist(employeeId)){
@@ -233,7 +233,7 @@ public class EmployeeController {
     //Create the association
     @PostMapping("/employees/{employeeId}/users/{email}")
     public ResponseEntity<?> associateUser(@PathVariable("employeeId")Long employeeId,
-    @PathVariable("email")String email, @RequestBody User user){
+    @PathVariable("email")String email){
         if(!employeeService.isEmployeeExist(employeeId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Employee with id " + employeeId + " not found."),
             HttpStatus.NOT_FOUND);
@@ -247,7 +247,7 @@ public class EmployeeController {
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Employee with id " + employeeId + " has already user."),
             HttpStatus.CONFLICT);
         }
-        employee.setUser(user);
+        employee.setUser(userService.get(email));
         employeeService.save(employee);
         return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
     }
