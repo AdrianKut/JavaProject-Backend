@@ -128,4 +128,24 @@ public class PaymentController {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
+    //Update a orders
+    @PutMapping("/payments/{paymentid}/orders/{orderid}")
+    public ResponseEntity<?> updateOrders(@PathVariable("paymentid")Long paymentId, 
+    @PathVariable("orderid")Long orderId, @RequestBody Order order){
+        if(!paymentService.isPaymentExist(paymentId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to update. Payment with id " + paymentId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        if(!orderService.isOrderExist(orderId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to update. Order with id " + orderId + " not found."),
+            HttpStatus.NOT_FOUND); 
+        }
+        Order currentOrder = orderService.get(orderId);
+        currentOrder.setPurchaseDate(order.getPurchaseDate());
+        currentOrder.setShipmentDate(order.getShipmentDate());
+        currentOrder.setOrderStatus(order.getOrderStatus());
+        orderService.save(currentOrder);
+        return new ResponseEntity<Order>(currentOrder, HttpStatus.OK);
+    }
+
 }
