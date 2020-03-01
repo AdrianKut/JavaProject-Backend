@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -31,9 +32,10 @@ public class User {
     private Boolean enabled = true;
 
     @OneToOne(mappedBy = "user")
-    @JsonBackReference
+    @JsonBackReference("employee-user")
     private Employee employee;
 
+    @JsonBackReference("customer-user")
     @OneToOne(mappedBy = "user")
     private Customer customer;
 

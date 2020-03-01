@@ -40,11 +40,11 @@ public class Address {
     private String city;
 
     @OneToMany(mappedBy = "address")
-    @JsonBackReference
+    @JsonBackReference("employees-address")
     private List<Employee> employees;
 
     @OneToMany(mappedBy = "address")
-    @JsonBackReference
+    @JsonBackReference("customers-address")
     private List<Customer> customers;
 
     @OneToMany(mappedBy = "address")
