@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+
 import lombok.Data;
 
 @Entity
@@ -39,6 +41,7 @@ public class Customer {
     private User user;
     
     @ManyToOne
+    @JsonIdentityReference
     @JoinColumn(name = "address_id", nullable = true)
     private Address address;
 

@@ -44,6 +44,7 @@ public class Address {
     private List<Employee> employees;
 
     @OneToMany(mappedBy = "address")
+    @JsonBackReference
     private List<Customer> customers;
 
     @OneToMany(mappedBy = "address")
