@@ -3,6 +3,7 @@ package com.DTeam.eshop.controllers;
 import java.util.List;
 
 import com.DTeam.eshop.entities.Complaint;
+import com.DTeam.eshop.entities.Order;
 import com.DTeam.eshop.services.ComplaintService;
 import com.DTeam.eshop.utilities.CustomErrorType;
 import org.springframework.http.HttpHeaders;
@@ -87,4 +88,19 @@ public class ComplaintController {
         return new ResponseEntity<>(new CustomErrorType("Unable to delete. Complaint with id " + complaintId + " not found."),
         HttpStatus.NOT_FOUND);
     }
+
+    //Retrieve a orders
+    @GetMapping("/complaints/{id}/orders")
+    public ResponseEntity<?> getOrder(@PathVariable("id")Long complaintId){
+        if(!complaintService.isComplaintExist(complaintId)){
+            return new ResponseEntity<>(new CustomErrorType("Complaint with id " + complaintId + " not found."), HttpStatus.NOT_FOUND);
+        }
+        Complaint complaint = complaintService.get(complaintId);
+        if(complaint.getOrder() == null){
+            return new ResponseEntity<>(new CustomErrorType("Complaint with id " + complaintId + " has no order assigned yet."), HttpStatus.NOT_FOUND); 
+        }
+        Order order = complaint.getOrder();
+        return new ResponseEntity<Order>(order, HttpStatus.OK);
+    }
+
 }
