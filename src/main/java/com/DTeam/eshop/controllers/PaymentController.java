@@ -148,4 +148,26 @@ public class PaymentController {
         return new ResponseEntity<Order>(currentOrder, HttpStatus.OK);
     }
 
+    //Create the association
+    @PostMapping("/payments/{paymentid}/orders/{orderid}")
+    public ResponseEntity<?> associateOrder(@PathVariable("paymentid")Long paymentId, 
+    @PathVariable("orderid")Long orderId){
+        if(!paymentService.isPaymentExist(paymentId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to associate. Payment with id " + paymentId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        if(!orderService.isOrderExist(orderId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to associate. Order with id " + orderId + " not found."),
+            HttpStatus.NOT_FOUND); 
+        }
+        Payment payment = paymentService.get(paymentId);
+        if(payment.getOrder() != null){
+            return new ResponseEntity<>(new CustomErrorType("Unable to associate. Payment with id " + paymentId + " has already order."),
+            HttpStatus.CONFLICT);
+        }
+        payment.setOrder(orderService.get(orderId));
+        paymentService.save(payment);
+        return new ResponseEntity<Payment>(payment, HttpStatus.CREATED);
+    }
+
 }
