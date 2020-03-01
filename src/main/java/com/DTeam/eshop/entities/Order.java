@@ -48,7 +48,7 @@ public class Order{
     private Customer customer;
 
     @OneToMany(mappedBy = "order")
-    @JsonBackReference
+    @JsonBackReference("payment-order")
     private List<Payment> payments;
 
     @ManyToMany
@@ -60,7 +60,7 @@ public class Order{
     private List<Product> products;
 
     @OneToMany(mappedBy = "order")
-    @JsonBackReference
+    @JsonBackReference("complaint-order")
     private List<Complaint> complaints;
 
     public Order(){}
