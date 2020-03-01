@@ -146,4 +146,26 @@ public class ComplaintController {
         return new ResponseEntity<Order>(currentOrder, HttpStatus.OK);
     }
 
+     //Create the association
+     @PostMapping("/complaints/{complaintid}/orders/{orderid}")
+     public ResponseEntity<?> associateOrder(@PathVariable("complaintid")Long complaintId, 
+     @PathVariable("orderid")Long orderId){
+         if(!complaintService.isComplaintExist(complaintId)){
+             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Complaint with id " + complaintId + " not found."),
+             HttpStatus.NOT_FOUND);
+         }
+         if(!orderService.isOrderExist(orderId)){
+             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Order with id " + orderId + " not found."),
+             HttpStatus.NOT_FOUND); 
+         }
+         Complaint complaint = complaintService.get(complaintId);
+         if(complaint.getOrder() != null){
+             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Complaint with id " + complaintId + " has already order."),
+             HttpStatus.CONFLICT);
+         }
+         complaint.setOrder(orderService.get(orderId));
+         complaintService.save(complaint);
+         return new ResponseEntity<Complaint>(complaint, HttpStatus.CREATED);
+     }
+
 }
