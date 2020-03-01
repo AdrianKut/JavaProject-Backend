@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.DTeam.eshop.entities.Complaint;
 import com.DTeam.eshop.entities.Order;
+import com.DTeam.eshop.entities.Product;
 import com.DTeam.eshop.services.ComplaintService;
 import com.DTeam.eshop.services.OrderService;
 import com.DTeam.eshop.utilities.CustomErrorType;
@@ -167,5 +168,19 @@ public class ComplaintController {
          complaintService.save(complaint);
          return new ResponseEntity<Complaint>(complaint, HttpStatus.CREATED);
      }
+
+     //Retrieve a products
+    @GetMapping("/complaints/{id}/products")
+    public ResponseEntity<?> getProduct(@PathVariable("id")Long complaintId){
+        if(!complaintService.isComplaintExist(complaintId)){
+            return new ResponseEntity<>(new CustomErrorType("Complaint with id " + complaintId + " not found."), HttpStatus.NOT_FOUND);
+        }
+        Complaint complaint = complaintService.get(complaintId);
+        if(complaint.getProduct() == null){
+            return new ResponseEntity<>(new CustomErrorType("Complaint with id " + complaintId + " has no product assigned yet."), HttpStatus.NOT_FOUND); 
+        }
+        Product product = complaint.getProduct();
+        return new ResponseEntity<Product>(product, HttpStatus.OK);
+    }
 
 }
