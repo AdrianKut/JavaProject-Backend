@@ -41,6 +41,7 @@ public class Complaint {
     private Order order;
 
     @ManyToOne
+    @JsonIdentityReference
     @JoinColumn(name = "product_id", nullable = true)
     private Product product;
 

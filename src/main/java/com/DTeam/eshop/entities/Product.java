@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
 
 @Entity
@@ -40,6 +42,7 @@ public class Product {
     private List<Order> orders;
 
     @OneToMany(mappedBy = "product")
+    @JsonBackReference
     private List<Complaint> complaints;
 
     public Product(){}
