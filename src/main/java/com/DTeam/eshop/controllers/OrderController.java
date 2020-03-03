@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.DTeam.eshop.entities.Address;
 import com.DTeam.eshop.entities.Order;
+import com.DTeam.eshop.services.AddressService;
 import com.DTeam.eshop.services.OrderService;
 import com.DTeam.eshop.utilities.CustomErrorType;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +26,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class OrderController {
 
     @Autowired private OrderService orderService;
+
+    @Autowired private AddressService addressService;
 
     //Retrieve all orders
     @GetMapping("/orders")
@@ -101,6 +104,26 @@ public class OrderController {
         }
         Address address = order.getAddress();
         return new ResponseEntity<Address>(address, HttpStatus.OK);
+    }
+
+    //Create a address
+    @PostMapping("/orders/{id}/addresses")
+    public ResponseEntity<?> createAdress(@PathVariable("id")Long orderId, @RequestBody Address address, UriComponentsBuilder ucBuilder){
+        if(!orderService.isOrderExist(orderId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. Order with id " + orderId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        Order order = orderService.get(orderId);
+        if(order.getAddress() != null){
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. Order with id " + orderId + " has already address."),
+            HttpStatus.CONFLICT);
+        }
+        addressService.save(address);
+        order.setAddress(address);
+        orderService.save(order);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/api/addresses/{id}").buildAndExpand(address.getAddressId()).toUri());
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
 
