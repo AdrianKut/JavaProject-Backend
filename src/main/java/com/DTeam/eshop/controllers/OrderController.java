@@ -5,9 +5,11 @@ import java.util.List;
 import com.DTeam.eshop.entities.Address;
 import com.DTeam.eshop.entities.Customer;
 import com.DTeam.eshop.entities.Order;
+import com.DTeam.eshop.entities.Product;
 import com.DTeam.eshop.services.AddressService;
 import com.DTeam.eshop.services.CustomerService;
 import com.DTeam.eshop.services.OrderService;
+import com.DTeam.eshop.services.ProductService;
 import com.DTeam.eshop.utilities.CustomErrorType;
 import org.springframework.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,7 @@ public class OrderController {
     @Autowired private AddressService addressService;
 
     @Autowired private CustomerService customerService;
+    @Autowired private ProductService productService;
 
     //Retrieve all orders
     @GetMapping("/orders")
@@ -250,5 +253,31 @@ public class OrderController {
         return new ResponseEntity<Order>(order, HttpStatus.CREATED);
     }
 
+    //Retieve all products
+    @GetMapping("/orders/{orderId}/products")
+    public ResponseEntity<?> getProducts(@PathVariable("orderId")Long orderId){
+        if(!orderService.isOrderExist(orderId)){
+            return new ResponseEntity<>(new CustomErrorType("Order with id " + orderId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        Order order = orderService.get(orderId);
+        if(order.getProducts().isEmpty()){
+            return new ResponseEntity<>(new CustomErrorType("Order with id " + orderId + " has no products assigned yet"), HttpStatus.NOT_FOUND);
+        }
+        List<Product> products = productService.getByOrderId(orderId);
+        return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
+    }
 
+    //Create the association
+    @PutMapping("/orders/{orderId}/products")
+    public ResponseEntity<?> associateProducts(@PathVariable("orderId")Long orderId, @RequestBody List<Product> products){
+        if(!orderService.isOrderExist(orderId)){
+            return new ResponseEntity<>(new CustomErrorType("Order with id " + orderId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        Order order = orderService.get(orderId);
+        order.setProducts(products);
+        orderService.save(order);
+        return new ResponseEntity<Order>(order, HttpStatus.OK);
+    }
 }
