@@ -32,4 +32,8 @@ public class ProductService {
     public Boolean isProductExist(Long id){
         return productRepository.existsById(id);
     }
+
+    public List<Product> getByOrderId(Long orderId){
+        return productRepository.findByOrdersOrderId(orderId);
+    }
 }
