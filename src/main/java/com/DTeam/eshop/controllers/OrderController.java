@@ -126,5 +126,27 @@ public class OrderController {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
+    //Update a address
+    @PutMapping("/orders/{orderid}/addresses/{addressid}")
+    public ResponseEntity<?> updateAdress(@PathVariable("orderid")Long orderId, 
+    @PathVariable("addressid")Long addressId, @RequestBody Address address){
+        if(!orderService.isOrderExist(orderId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to update. Order with id " + orderId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        if(!addressService.isAddressExist(addressId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to update. Address with id " + addressId + " not found."),
+            HttpStatus.NOT_FOUND); 
+        }
+        Address currentAddress = addressService.get(addressId);
+        currentAddress.setStreet(address.getStreet());
+        currentAddress.setHouseNumber(address.getHouseNumber());
+        currentAddress.setFlatNumber(address.getFlatNumber());
+        currentAddress.setPostcode(address.getPostcode());
+        currentAddress.setCity(address.getCity());
+        addressService.save(currentAddress);
+        return new ResponseEntity<Address>(currentAddress, HttpStatus.OK);
+    }
+
 
 }
