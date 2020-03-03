@@ -36,4 +36,8 @@ public class RoleService {
     public Boolean isRoleExist(String name){
         return roleRepository.existsById(name);
     }
+
+    public List<Role> getByUserEmail(String email){
+        return roleRepository.findByUsersEmail(email);
+    }
 }
