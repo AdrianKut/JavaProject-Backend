@@ -3,6 +3,7 @@ package com.DTeam.eshop.controllers;
 import java.util.List;
 
 import com.DTeam.eshop.entities.Address;
+import com.DTeam.eshop.entities.Customer;
 import com.DTeam.eshop.entities.Order;
 import com.DTeam.eshop.services.AddressService;
 import com.DTeam.eshop.services.OrderService;
@@ -168,6 +169,20 @@ public class OrderController {
         order.setAddress(addressService.get(addressId));
         orderService.save(order);
         return new ResponseEntity<Order>(order, HttpStatus.CREATED);
+    }
+
+    //Retrieve a customers
+    @GetMapping("/orders/{id}/customers")
+    public ResponseEntity<?> getCustomer(@PathVariable("id")Long orderId){
+        if(!orderService.isOrderExist(orderId)){
+            return new ResponseEntity<>(new CustomErrorType("Order with id " + orderId + " not found."), HttpStatus.NOT_FOUND);
+        }
+        Order order = orderService.get(orderId);
+        if(order.getCustomer() == null){
+            return new ResponseEntity<>(new CustomErrorType("Order with id " + orderId + " has no customer assigned yet."), HttpStatus.NOT_FOUND); 
+        }
+        Customer customer = order.getCustomer();
+        return new ResponseEntity<Customer>(customer, HttpStatus.OK);
     }
 
 
