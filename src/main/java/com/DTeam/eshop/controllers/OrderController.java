@@ -56,7 +56,7 @@ public class OrderController {
         return new ResponseEntity<>(new CustomErrorType("Order with id " + id + " not found."), HttpStatus.NOT_FOUND);
     }
 
-    //Create a user
+    //Create a order
     @PostMapping("/orders")
     public ResponseEntity<?> createOrder(@RequestBody Order order, UriComponentsBuilder ucBuilder) {
         Long id = order.getOrderId();
