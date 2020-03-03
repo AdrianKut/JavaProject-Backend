@@ -2,7 +2,9 @@ package com.DTeam.eshop.controllers;
 
 import java.util.List;
 
+import com.DTeam.eshop.entities.Role;
 import com.DTeam.eshop.entities.User;
+import com.DTeam.eshop.services.RoleService;
 import com.DTeam.eshop.services.UserService;
 import com.DTeam.eshop.utilities.CustomErrorType;
 
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class UserController {
 
     @Autowired private UserService userService;
+    @Autowired private RoleService roleService;
 
     //Retrieve all users
     @GetMapping("/users")
@@ -87,5 +90,31 @@ public class UserController {
         }
         return new ResponseEntity<>(new CustomErrorType("Unable to delete. User with email " + email + " not found."),
         HttpStatus.NOT_FOUND);
+    }
+
+    //Retieve all roles
+    @GetMapping("/users/{email}/roles")
+    public ResponseEntity<?> getRoles(@PathVariable("email")String email){
+        if(!userService.isUserExist(email)){
+            return new ResponseEntity<>(new CustomErrorType("User with email " + email + " not found."), HttpStatus.NOT_FOUND);
+        }
+        User user = userService.get(email);
+        if(user.getRoles().isEmpty()){
+            return new ResponseEntity<>(new CustomErrorType("User with email " + email + " has no roles assigned yet."), HttpStatus.NOT_FOUND); 
+        }
+        List<Role> roles = roleService.getByUserEmail(email);
+        return new ResponseEntity<List<Role>>(roles, HttpStatus.OK);
+    }
+
+    //Create the association
+    @PutMapping("/users/{email}/roles")
+    public ResponseEntity<?> createRoles(@PathVariable("email")String email, @RequestBody List<Role> roles){
+        if(!userService.isUserExist(email)){
+            return new ResponseEntity<>(new CustomErrorType("User with email " + email + " not found."), HttpStatus.NOT_FOUND);
+        }
+        User user = userService.get(email);
+        user.setRoles(roles);
+        userService.save(user);
+        return new ResponseEntity<User>(user, HttpStatus.OK); 
     }
 }
