@@ -6,6 +6,7 @@ import com.DTeam.eshop.entities.Address;
 import com.DTeam.eshop.entities.Customer;
 import com.DTeam.eshop.entities.Order;
 import com.DTeam.eshop.services.AddressService;
+import com.DTeam.eshop.services.CustomerService;
 import com.DTeam.eshop.services.OrderService;
 import com.DTeam.eshop.utilities.CustomErrorType;
 import org.springframework.http.HttpHeaders;
@@ -29,6 +30,8 @@ public class OrderController {
     @Autowired private OrderService orderService;
 
     @Autowired private AddressService addressService;
+
+    @Autowired private CustomerService customerService;
 
     //Retrieve all orders
     @GetMapping("/orders")
@@ -183,6 +186,26 @@ public class OrderController {
         }
         Customer customer = order.getCustomer();
         return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+    }
+
+    //Create a customer
+    @PostMapping("/orders/{id}/customers")
+    public ResponseEntity<?> createCustomer(@PathVariable("id")Long orderId, @RequestBody Customer customer, UriComponentsBuilder ucBuilder){
+        if(!orderService.isOrderExist(orderId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. Order with id " + orderId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        Order order = orderService.get(orderId);
+        if(order.getCustomer() != null){
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. Order with id " + orderId + " has already customer."),
+            HttpStatus.CONFLICT);
+        }
+        customerService.save(customer);
+        order.setCustomer(customer);
+        orderService.save(order);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/api/customers/{id}").buildAndExpand(customer.getCustomerId()).toUri());
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
 
