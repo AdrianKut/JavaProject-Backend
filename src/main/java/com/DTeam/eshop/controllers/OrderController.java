@@ -208,5 +208,25 @@ public class OrderController {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
+    //Update a customer
+    @PutMapping("/orders/{orderid}/customers/{customerid}")
+    public ResponseEntity<?> updateCustomer(@PathVariable("orderid")Long orderId, 
+    @PathVariable("customerid")Long customerId, @RequestBody Customer customer){
+        if(!orderService.isOrderExist(orderId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to update. Order with id " + orderId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        if(!customerService.isCustomerExist(customerId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to update. Customer with id " + customerId + " not found."),
+            HttpStatus.NOT_FOUND); 
+        }
+        Customer currentCustomer = customerService.get(customerId);
+        currentCustomer.setName(customer.getName());
+        currentCustomer.setSurname(customer.getSurname());
+        currentCustomer.setPhoneNumber(customer.getPhoneNumber());
+        customerService.save(currentCustomer);
+        return new ResponseEntity<Customer>(currentCustomer, HttpStatus.OK);
+    }
+
 
 }
