@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 import lombok.Data;
@@ -46,6 +47,7 @@ public class Customer {
     private Address address;
 
     @OneToMany(mappedBy = "customer")
+    @JsonBackReference("orders-customer")
     private List<Order> orders;
 
     public Customer(){}

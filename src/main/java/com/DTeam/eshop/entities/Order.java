@@ -46,6 +46,7 @@ public class Order{
     private Address address;
 
     @ManyToOne
+    @JsonIdentityReference
     @JoinColumn(name = "customer_id", nullable = true)
     private Customer customer;
 
