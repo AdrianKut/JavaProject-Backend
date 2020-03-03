@@ -2,6 +2,7 @@ package com.DTeam.eshop.controllers;
 
 import java.util.List;
 
+import com.DTeam.eshop.entities.Address;
 import com.DTeam.eshop.entities.Order;
 import com.DTeam.eshop.services.OrderService;
 import com.DTeam.eshop.utilities.CustomErrorType;
@@ -86,6 +87,20 @@ public class OrderController {
         }
         return new ResponseEntity<>(new CustomErrorType("Unable to delete. Order with id " + orderId + " not found."),
         HttpStatus.NOT_FOUND);
+    }
+
+    //Retrieve a address
+    @GetMapping("/orders/{id}/addresses")
+    public ResponseEntity<?> getAddress(@PathVariable("id")Long orderId){
+        if(!orderService.isOrderExist(orderId)){
+            return new ResponseEntity<>(new CustomErrorType("Order with id " + orderId + " not found."), HttpStatus.NOT_FOUND);
+        }
+        Order order = orderService.get(orderId);
+        if(order.getAddress() == null){
+            return new ResponseEntity<>(new CustomErrorType("Order with id " + orderId + " has no address assigned yet."), HttpStatus.NOT_FOUND); 
+        }
+        Address address = order.getAddress();
+        return new ResponseEntity<Address>(address, HttpStatus.OK);
     }
 
 
