@@ -148,5 +148,27 @@ public class OrderController {
         return new ResponseEntity<Address>(currentAddress, HttpStatus.OK);
     }
 
+    //Create the association
+    @PostMapping("/orders/{orderid}/addresses/{addressid}")
+    public ResponseEntity<?> associateAdress(@PathVariable("orderid")Long orderId, 
+    @PathVariable("addressid")Long addressId){
+        if(!orderService.isOrderExist(orderId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to associate. Order with id " + orderId + " not found."),
+            HttpStatus.NOT_FOUND);
+        }
+        if(!addressService.isAddressExist(addressId)){
+            return new ResponseEntity<>(new CustomErrorType("Unable to associate. Address with id " + addressId + " not found."),
+            HttpStatus.NOT_FOUND); 
+        }
+        Order order = orderService.get(orderId);
+        if(order.getAddress() != null){
+            return new ResponseEntity<>(new CustomErrorType("Unable to associate. Order with id " + orderId + " has already address."),
+            HttpStatus.CONFLICT);
+        }
+        order.setAddress(addressService.get(addressId));
+        orderService.save(order);
+        return new ResponseEntity<Order>(order, HttpStatus.CREATED);
+    }
+
 
 }
