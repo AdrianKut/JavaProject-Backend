@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 import lombok.Data;
 
@@ -40,6 +41,7 @@ public class Order{
     private String orderStatus;
 
     @ManyToOne
+    @JsonIdentityReference
     @JoinColumn(name = "address_id", nullable = true)
     private Address address;
 
