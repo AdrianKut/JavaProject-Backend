@@ -108,7 +108,7 @@ public class UserController {
 
     //Create the association
     @PutMapping("/users/{email}/roles")
-    public ResponseEntity<?> createRoles(@PathVariable("email")String email, @RequestBody List<Role> roles){
+    public ResponseEntity<?> associateRoles(@PathVariable("email")String email, @RequestBody List<Role> roles){
         if(!userService.isUserExist(email)){
             return new ResponseEntity<>(new CustomErrorType("User with email " + email + " not found."), HttpStatus.NOT_FOUND);
         }
