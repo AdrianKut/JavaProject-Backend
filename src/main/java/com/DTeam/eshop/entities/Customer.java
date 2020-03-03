@@ -38,6 +38,7 @@ public class Customer {
     private String phoneNumber;
 
     @OneToOne
+    @JsonIdentityReference
     @JoinColumn(name = "user_email", nullable = true, unique = true)
     private User user;
     

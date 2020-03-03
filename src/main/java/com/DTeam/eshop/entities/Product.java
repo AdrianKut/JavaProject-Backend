@@ -39,10 +39,11 @@ public class Product {
     private Integer quantity;
 
     @ManyToMany(mappedBy = "products")
+    @JsonBackReference("orders-products")
     private List<Order> orders;
 
     @OneToMany(mappedBy = "product")
-    @JsonBackReference
+    @JsonBackReference("complaints-product")
     private List<Complaint> complaints;
 
     public Product(){}

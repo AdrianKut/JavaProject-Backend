@@ -55,6 +55,7 @@ public class Order{
     private List<Payment> payments;
 
     @ManyToMany
+    @JsonIdentityReference
     @JoinTable(name = "orders_products", joinColumns = {
         @JoinColumn(name = "order_id", referencedColumnName = "order_id")},
         inverseJoinColumns = {
