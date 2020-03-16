@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins="http://localhost:3000")
 public class AddressController {
 
     @Autowired
@@ -52,7 +54,7 @@ public class AddressController {
     public ResponseEntity<?> createAddress(@RequestBody Address address, UriComponentsBuilder ucBuilder){
         Long id = address.getAddressId();
         if(id != null){
-            return new ResponseEntity<>(new CustomErrorType("Unable to create. A address with id " + id 
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. A address with id " + id
             + " already exist."), HttpStatus.CONFLICT);
         }
         addressService.save(address);

@@ -9,10 +9,12 @@ import com.DTeam.eshop.services.ComplaintService;
 import com.DTeam.eshop.services.OrderService;
 import com.DTeam.eshop.services.ProductService;
 import com.DTeam.eshop.utilities.CustomErrorType;
-import org.springframework.http.HttpHeaders;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins="http://localhost:3000")
 public class ComplaintController {
 
     @Autowired private ComplaintService complaintService;
@@ -58,7 +61,7 @@ public class ComplaintController {
     public ResponseEntity<?> createComplaint(@RequestBody Complaint complaint, UriComponentsBuilder ucBuilder) {
         Long id = complaint.getComplaintId();
         if(id != null){
-            return new ResponseEntity<>(new CustomErrorType("Unable to create. A complaint with id " + id + 
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. A complaint with id " + id +
             " already exist."), HttpStatus.CONFLICT);
         }
         complaintService.save(complaint);
@@ -77,10 +80,10 @@ public class ComplaintController {
             currentComplaint.setDescription(complaint.getDescription());
             currentComplaint.setComplaintStatus(complaint.getComplaintStatus());
             complaintService.save(currentComplaint);
-   
+
                return new ResponseEntity<Complaint>(currentComplaint, HttpStatus.OK);
            }
-   
+
            return new ResponseEntity<>(new CustomErrorType("Unable to update. Complaint with id " + complaintId + " not found."),
            HttpStatus.NOT_FOUND);
        }
@@ -104,7 +107,7 @@ public class ComplaintController {
         }
         Complaint complaint = complaintService.get(complaintId);
         if(complaint.getOrder() == null){
-            return new ResponseEntity<>(new CustomErrorType("Complaint with id " + complaintId + " has no order assigned yet."), HttpStatus.NOT_FOUND); 
+            return new ResponseEntity<>(new CustomErrorType("Complaint with id " + complaintId + " has no order assigned yet."), HttpStatus.NOT_FOUND);
         }
         Order order = complaint.getOrder();
         return new ResponseEntity<Order>(order, HttpStatus.OK);
@@ -132,7 +135,7 @@ public class ComplaintController {
 
     //Update a orders
     @PutMapping("/complaints/{complaintid}/orders/{orderid}")
-    public ResponseEntity<?> updateOrders(@PathVariable("complaintid")Long complaintId, 
+    public ResponseEntity<?> updateOrders(@PathVariable("complaintid")Long complaintId,
     @PathVariable("orderid")Long orderId, @RequestBody Order order){
         if(!complaintService.isComplaintExist(complaintId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Complaint with id " + complaintId + " not found."),
@@ -140,7 +143,7 @@ public class ComplaintController {
         }
         if(!orderService.isOrderExist(orderId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Order with id " + orderId + " not found."),
-            HttpStatus.NOT_FOUND); 
+            HttpStatus.NOT_FOUND);
         }
         Order currentOrder = orderService.get(orderId);
         currentOrder.setPurchaseDate(order.getPurchaseDate());
@@ -152,7 +155,7 @@ public class ComplaintController {
 
      //Create the association
      @PostMapping("/complaints/{complaintid}/orders/{orderid}")
-     public ResponseEntity<?> associateOrder(@PathVariable("complaintid")Long complaintId, 
+     public ResponseEntity<?> associateOrder(@PathVariable("complaintid")Long complaintId,
      @PathVariable("orderid")Long orderId){
          if(!complaintService.isComplaintExist(complaintId)){
              return new ResponseEntity<>(new CustomErrorType("Unable to associate. Complaint with id " + complaintId + " not found."),
@@ -160,7 +163,7 @@ public class ComplaintController {
          }
          if(!orderService.isOrderExist(orderId)){
              return new ResponseEntity<>(new CustomErrorType("Unable to associate. Order with id " + orderId + " not found."),
-             HttpStatus.NOT_FOUND); 
+             HttpStatus.NOT_FOUND);
          }
          Complaint complaint = complaintService.get(complaintId);
          if(complaint.getOrder() != null){
@@ -180,7 +183,7 @@ public class ComplaintController {
         }
         Complaint complaint = complaintService.get(complaintId);
         if(complaint.getProduct() == null){
-            return new ResponseEntity<>(new CustomErrorType("Complaint with id " + complaintId + " has no product assigned yet."), HttpStatus.NOT_FOUND); 
+            return new ResponseEntity<>(new CustomErrorType("Complaint with id " + complaintId + " has no product assigned yet."), HttpStatus.NOT_FOUND);
         }
         Product product = complaint.getProduct();
         return new ResponseEntity<Product>(product, HttpStatus.OK);
@@ -208,7 +211,7 @@ public class ComplaintController {
 
     //Update a product
     @PutMapping("/complaints/{complaintid}/products/{productid}")
-    public ResponseEntity<?> updateProduct(@PathVariable("complaintid")Long complaintId, 
+    public ResponseEntity<?> updateProduct(@PathVariable("complaintid")Long complaintId,
     @PathVariable("productid")Long productId, @RequestBody Product product){
         if(!complaintService.isComplaintExist(complaintId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Complaint with id " + complaintId + " not found."),
@@ -216,7 +219,7 @@ public class ComplaintController {
         }
         if(!productService.isProductExist(productId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Product with id " + productId + " not found."),
-            HttpStatus.NOT_FOUND); 
+            HttpStatus.NOT_FOUND);
         }
         Product currentProduct = productService.get(productId);
         currentProduct.setName(product.getName());
@@ -229,7 +232,7 @@ public class ComplaintController {
 
     //Create the association
     @PostMapping("/complaints/{complaintid}/products/{productid}")
-    public ResponseEntity<?> associateProduct(@PathVariable("complaintid")Long complaintId, 
+    public ResponseEntity<?> associateProduct(@PathVariable("complaintid")Long complaintId,
     @PathVariable("productid")Long productId){
         if(!complaintService.isComplaintExist(complaintId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Complaint with id " + complaintId + " not found."),
@@ -237,7 +240,7 @@ public class ComplaintController {
         }
         if(!productService.isProductExist(productId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Product with id " + productId + " not found."),
-            HttpStatus.NOT_FOUND); 
+            HttpStatus.NOT_FOUND);
         }
         Complaint complaint = complaintService.get(complaintId);
         if(complaint.getProduct() != null){

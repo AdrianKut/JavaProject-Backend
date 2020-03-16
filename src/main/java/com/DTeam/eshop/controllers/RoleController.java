@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins="http://localhost:3000")
 public class RoleController {
 
     @Autowired private RoleService roleService;
@@ -42,16 +44,16 @@ public class RoleController {
             Role role = roleService.get(name);
             return new ResponseEntity<Role>(role, HttpStatus.OK);
         }
-		return new ResponseEntity<>(new CustomErrorType("Role with name " + name 
-        + " not found."), HttpStatus.NOT_FOUND);	
+		return new ResponseEntity<>(new CustomErrorType("Role with name " + name
+        + " not found."), HttpStatus.NOT_FOUND);
     }
-    
+
     //Create a role
     @PostMapping("/roles")
 	public ResponseEntity<?> createRole(@RequestBody Role role, UriComponentsBuilder ucBuilder) {
         String name = role.getName();
 		if (roleService.isRoleExist(name)) {
-			return new ResponseEntity<>(new CustomErrorType("Unable to create. A Role with name " + 
+			return new ResponseEntity<>(new CustomErrorType("Unable to create. A Role with name " +
 			name + " already exist."), HttpStatus.CONFLICT);
 		}
 		roleService.save(role);
@@ -63,7 +65,7 @@ public class RoleController {
 
     //Delete a role
     @DeleteMapping("/roles/{name}")
-	public ResponseEntity<?> deleteRole(@PathVariable("name") String name) {	     
+	public ResponseEntity<?> deleteRole(@PathVariable("name") String name) {
         if(roleService.isRoleExist(name)){
             roleService.delete(name);
             return new ResponseEntity<Role>(HttpStatus.NO_CONTENT);

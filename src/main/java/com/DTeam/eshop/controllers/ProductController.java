@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins="http://localhost:3000")
 public class ProductController {
 
     @Autowired private ProductService productService;
@@ -50,11 +52,11 @@ public class ProductController {
      public ResponseEntity<?> createProduct(@RequestBody Product product, UriComponentsBuilder ucBuilder) {
          Long id = product.getProductId();
          if(id != null){
-             return new ResponseEntity<>(new CustomErrorType("Unable to create. A product with id " + id + 
+             return new ResponseEntity<>(new CustomErrorType("Unable to create. A product with id " + id +
              " already exist."), HttpStatus.CONFLICT);
          }
          productService.save(product);
- 
+
          HttpHeaders headers = new HttpHeaders();
          headers.setLocation(ucBuilder.path("/api/products/{id}").buildAndExpand(product.getProductId()).toUri());
          return new ResponseEntity<String>(headers, HttpStatus.CREATED);

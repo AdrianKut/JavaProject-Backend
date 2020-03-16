@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins="http://localhost:3000")
 public class EmployeeController {
 
     @Autowired private EmployeeService employeeService;
@@ -41,7 +43,7 @@ public class EmployeeController {
         }
         return new ResponseEntity<List<Employee>>(employees, HttpStatus.OK);
     }
-    
+
     //Retrieve single employee
     @GetMapping("/employees/{id}")
     public ResponseEntity<?> getEmployee(@PathVariable("id")Long employeeId){
@@ -57,7 +59,7 @@ public class EmployeeController {
     public ResponseEntity<?> createEmployee(@RequestBody Employee employee, UriComponentsBuilder ucBuilder){
         Long id = employee.getEmployeeId();
         if(id != null){
-            return new ResponseEntity<>(new CustomErrorType("Unable to create. A employee with id " + id 
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. A employee with id " + id
             + " already exist."), HttpStatus.CONFLICT);
         }
         employeeService.save(employee);
@@ -105,7 +107,7 @@ public class EmployeeController {
         }
         Employee employee = employeeService.get(employeeId);
         if(employee.getAddress() == null){
-            return new ResponseEntity<>(new CustomErrorType("Employee with id " + employeeId + " has no address assigned yet."), HttpStatus.NOT_FOUND); 
+            return new ResponseEntity<>(new CustomErrorType("Employee with id " + employeeId + " has no address assigned yet."), HttpStatus.NOT_FOUND);
         }
         Address address = employee.getAddress();
         return new ResponseEntity<Address>(address, HttpStatus.OK);
@@ -130,10 +132,10 @@ public class EmployeeController {
         headers.setLocation(ucBuilder.path("/api/addresses/{id}").buildAndExpand(address.getAddressId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
-    
+
     //Update a address
     @PutMapping("/employees/{employeeid}/addresses/{addressid}")
-    public ResponseEntity<?> updateAdress(@PathVariable("employeeid")Long employeeId, 
+    public ResponseEntity<?> updateAdress(@PathVariable("employeeid")Long employeeId,
     @PathVariable("addressid")Long addressId, @RequestBody Address address){
         if(!employeeService.isEmployeeExist(employeeId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Employee with id " + employeeId + " not found."),
@@ -141,7 +143,7 @@ public class EmployeeController {
         }
         if(!addressService.isAddressExist(addressId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Address with id " + addressId + " not found."),
-            HttpStatus.NOT_FOUND); 
+            HttpStatus.NOT_FOUND);
         }
         Address currentAddress = addressService.get(addressId);
         currentAddress.setStreet(address.getStreet());
@@ -152,10 +154,10 @@ public class EmployeeController {
         addressService.save(currentAddress);
         return new ResponseEntity<Address>(currentAddress, HttpStatus.OK);
     }
-    
+
     //Create the association
     @PostMapping("/employees/{employeeid}/addresses/{addressid}")
-    public ResponseEntity<?> associateAdress(@PathVariable("employeeid")Long employeeId, 
+    public ResponseEntity<?> associateAdress(@PathVariable("employeeid")Long employeeId,
     @PathVariable("addressid")Long addressId){
         if(!employeeService.isEmployeeExist(employeeId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Employee with id " + employeeId + " not found."),
@@ -163,7 +165,7 @@ public class EmployeeController {
         }
         if(!addressService.isAddressExist(addressId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Address with id " + addressId + " not found."),
-            HttpStatus.NOT_FOUND); 
+            HttpStatus.NOT_FOUND);
         }
         Employee employee = employeeService.get(employeeId);
         if(employee.getAddress() != null){
@@ -221,7 +223,7 @@ public class EmployeeController {
         }
         if(!userService.isUserExist(email)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. User with email " + email + " not found."),
-            HttpStatus.NOT_FOUND); 
+            HttpStatus.NOT_FOUND);
         }
         User currentUser = userService.get(email);
         currentUser.setPassword(user.getPassword());
@@ -240,7 +242,7 @@ public class EmployeeController {
         }
         if(!userService.isUserExist(email)){
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. User with email " + email + " not found."),
-            HttpStatus.NOT_FOUND); 
+            HttpStatus.NOT_FOUND);
         }
         Employee employee = employeeService.get(employeeId);
         if(employee.getUser() != null){

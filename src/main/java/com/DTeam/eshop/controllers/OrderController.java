@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins="http://localhost:3000")
 public class OrderController {
 
     @Autowired private OrderService orderService;
@@ -61,7 +63,7 @@ public class OrderController {
     public ResponseEntity<?> createOrder(@RequestBody Order order, UriComponentsBuilder ucBuilder) {
         Long id = order.getOrderId();
         if(id != null){
-            return new ResponseEntity<>(new CustomErrorType("Unable to create. A order with id " + id + 
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. A order with id " + id +
             " already exist."), HttpStatus.CONFLICT);
         }
         orderService.save(order);
@@ -107,7 +109,7 @@ public class OrderController {
         }
         Order order = orderService.get(orderId);
         if(order.getAddress() == null){
-            return new ResponseEntity<>(new CustomErrorType("Order with id " + orderId + " has no address assigned yet."), HttpStatus.NOT_FOUND); 
+            return new ResponseEntity<>(new CustomErrorType("Order with id " + orderId + " has no address assigned yet."), HttpStatus.NOT_FOUND);
         }
         Address address = order.getAddress();
         return new ResponseEntity<Address>(address, HttpStatus.OK);
@@ -135,7 +137,7 @@ public class OrderController {
 
     //Update a address
     @PutMapping("/orders/{orderid}/addresses/{addressid}")
-    public ResponseEntity<?> updateAdress(@PathVariable("orderid")Long orderId, 
+    public ResponseEntity<?> updateAdress(@PathVariable("orderid")Long orderId,
     @PathVariable("addressid")Long addressId, @RequestBody Address address){
         if(!orderService.isOrderExist(orderId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Order with id " + orderId + " not found."),
@@ -143,7 +145,7 @@ public class OrderController {
         }
         if(!addressService.isAddressExist(addressId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Address with id " + addressId + " not found."),
-            HttpStatus.NOT_FOUND); 
+            HttpStatus.NOT_FOUND);
         }
         Address currentAddress = addressService.get(addressId);
         currentAddress.setStreet(address.getStreet());
@@ -157,7 +159,7 @@ public class OrderController {
 
     //Create the association
     @PostMapping("/orders/{orderid}/addresses/{addressid}")
-    public ResponseEntity<?> associateAdress(@PathVariable("orderid")Long orderId, 
+    public ResponseEntity<?> associateAdress(@PathVariable("orderid")Long orderId,
     @PathVariable("addressid")Long addressId){
         if(!orderService.isOrderExist(orderId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Order with id " + orderId + " not found."),
@@ -165,7 +167,7 @@ public class OrderController {
         }
         if(!addressService.isAddressExist(addressId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Address with id " + addressId + " not found."),
-            HttpStatus.NOT_FOUND); 
+            HttpStatus.NOT_FOUND);
         }
         Order order = orderService.get(orderId);
         if(order.getAddress() != null){
@@ -185,7 +187,7 @@ public class OrderController {
         }
         Order order = orderService.get(orderId);
         if(order.getCustomer() == null){
-            return new ResponseEntity<>(new CustomErrorType("Order with id " + orderId + " has no customer assigned yet."), HttpStatus.NOT_FOUND); 
+            return new ResponseEntity<>(new CustomErrorType("Order with id " + orderId + " has no customer assigned yet."), HttpStatus.NOT_FOUND);
         }
         Customer customer = order.getCustomer();
         return new ResponseEntity<Customer>(customer, HttpStatus.OK);
@@ -213,7 +215,7 @@ public class OrderController {
 
     //Update a customer
     @PutMapping("/orders/{orderid}/customers/{customerid}")
-    public ResponseEntity<?> updateCustomer(@PathVariable("orderid")Long orderId, 
+    public ResponseEntity<?> updateCustomer(@PathVariable("orderid")Long orderId,
     @PathVariable("customerid")Long customerId, @RequestBody Customer customer){
         if(!orderService.isOrderExist(orderId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Order with id " + orderId + " not found."),
@@ -221,7 +223,7 @@ public class OrderController {
         }
         if(!customerService.isCustomerExist(customerId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Customer with id " + customerId + " not found."),
-            HttpStatus.NOT_FOUND); 
+            HttpStatus.NOT_FOUND);
         }
         Customer currentCustomer = customerService.get(customerId);
         currentCustomer.setName(customer.getName());
@@ -233,7 +235,7 @@ public class OrderController {
 
     //Create the association
     @PostMapping("/orders/{orderid}/customers/{customerid}")
-    public ResponseEntity<?> associateCustomer(@PathVariable("orderid")Long orderId, 
+    public ResponseEntity<?> associateCustomer(@PathVariable("orderid")Long orderId,
     @PathVariable("customerid")Long customerId){
         if(!orderService.isOrderExist(orderId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Order with id " + orderId + " not found."),
@@ -241,7 +243,7 @@ public class OrderController {
         }
         if(!customerService.isCustomerExist(customerId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Customer with id " + customerId + " not found."),
-            HttpStatus.NOT_FOUND); 
+            HttpStatus.NOT_FOUND);
         }
         Order order = orderService.get(orderId);
         if(order.getAddress() != null){

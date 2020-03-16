@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins="http://localhost:3000")
 public class PaymentController {
 
     @Autowired private PaymentService paymentService;
@@ -55,11 +57,11 @@ public class PaymentController {
       public ResponseEntity<?> createPayment(@RequestBody Payment payment, UriComponentsBuilder ucBuilder) {
           Long id = payment.getPaymentId();
           if(id != null){
-              return new ResponseEntity<>(new CustomErrorType("Unable to create. A payment with id " + id + 
+              return new ResponseEntity<>(new CustomErrorType("Unable to create. A payment with id " + id +
               " already exist."), HttpStatus.CONFLICT);
           }
           paymentService.save(payment);
-  
+
           HttpHeaders headers = new HttpHeaders();
           headers.setLocation(ucBuilder.path("/api/payments/{id}").buildAndExpand(payment.getPaymentId()).toUri());
           return new ResponseEntity<String>(headers, HttpStatus.CREATED);
@@ -102,7 +104,7 @@ public class PaymentController {
         }
         Payment payment = paymentService.get(paymentId);
         if(payment.getOrder() == null){
-            return new ResponseEntity<>(new CustomErrorType("Payment with id " + paymentId + " has no order assigned yet."), HttpStatus.NOT_FOUND); 
+            return new ResponseEntity<>(new CustomErrorType("Payment with id " + paymentId + " has no order assigned yet."), HttpStatus.NOT_FOUND);
         }
         Order order = payment.getOrder();
         return new ResponseEntity<Order>(order, HttpStatus.OK);
@@ -130,7 +132,7 @@ public class PaymentController {
 
     //Update a orders
     @PutMapping("/payments/{paymentid}/orders/{orderid}")
-    public ResponseEntity<?> updateOrders(@PathVariable("paymentid")Long paymentId, 
+    public ResponseEntity<?> updateOrders(@PathVariable("paymentid")Long paymentId,
     @PathVariable("orderid")Long orderId, @RequestBody Order order){
         if(!paymentService.isPaymentExist(paymentId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Payment with id " + paymentId + " not found."),
@@ -138,7 +140,7 @@ public class PaymentController {
         }
         if(!orderService.isOrderExist(orderId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Order with id " + orderId + " not found."),
-            HttpStatus.NOT_FOUND); 
+            HttpStatus.NOT_FOUND);
         }
         Order currentOrder = orderService.get(orderId);
         currentOrder.setPurchaseDate(order.getPurchaseDate());
@@ -150,7 +152,7 @@ public class PaymentController {
 
     //Create the association
     @PostMapping("/payments/{paymentid}/orders/{orderid}")
-    public ResponseEntity<?> associateOrder(@PathVariable("paymentid")Long paymentId, 
+    public ResponseEntity<?> associateOrder(@PathVariable("paymentid")Long paymentId,
     @PathVariable("orderid")Long orderId){
         if(!paymentService.isPaymentExist(paymentId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Payment with id " + paymentId + " not found."),
@@ -158,7 +160,7 @@ public class PaymentController {
         }
         if(!orderService.isOrderExist(orderId)){
             return new ResponseEntity<>(new CustomErrorType("Unable to associate. Order with id " + orderId + " not found."),
-            HttpStatus.NOT_FOUND); 
+            HttpStatus.NOT_FOUND);
         }
         Payment payment = paymentService.get(paymentId);
         if(payment.getOrder() != null){

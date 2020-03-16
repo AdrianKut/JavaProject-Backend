@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins="http://localhost:3000")
 public class CustomerController {
 
     @Autowired private CustomerService customerService;
@@ -101,12 +103,12 @@ public class CustomerController {
           }
           Customer customer = customerService.get(customerId);
           if(customer.getAddress() == null){
-              return new ResponseEntity<>(new CustomErrorType("Customer with id " + customerId + " has no address assigned yet."), HttpStatus.NOT_FOUND); 
+              return new ResponseEntity<>(new CustomErrorType("Customer with id " + customerId + " has no address assigned yet."), HttpStatus.NOT_FOUND);
           }
           Address address = customer.getAddress();
           return new ResponseEntity<Address>(address, HttpStatus.OK);
       }
-  
+
       //Create a address
       @PostMapping("/customers/{id}/addresses")
       public ResponseEntity<?> createAdress(@PathVariable("id")Long customerId, @RequestBody Address address, UriComponentsBuilder ucBuilder){
@@ -126,10 +128,10 @@ public class CustomerController {
           headers.setLocation(ucBuilder.path("/api/addresses/{id}").buildAndExpand(address.getAddressId()).toUri());
           return new ResponseEntity<String>(headers, HttpStatus.CREATED);
       }
-      
+
       //Update a address
       @PutMapping("/customers/{customerid}/addresses/{addressid}")
-      public ResponseEntity<?> updateAdress(@PathVariable("customerid")Long customerId, 
+      public ResponseEntity<?> updateAdress(@PathVariable("customerid")Long customerId,
       @PathVariable("addressid")Long addressId, @RequestBody Address address){
           if(!customerService.isCustomerExist(customerId)){
               return new ResponseEntity<>(new CustomErrorType("Unable to update. Customer with id " + customerId + " not found."),
@@ -137,7 +139,7 @@ public class CustomerController {
           }
           if(!addressService.isAddressExist(addressId)){
               return new ResponseEntity<>(new CustomErrorType("Unable to update. Address with id " + addressId + " not found."),
-              HttpStatus.NOT_FOUND); 
+              HttpStatus.NOT_FOUND);
           }
           Address currentAddress = addressService.get(addressId);
           currentAddress.setStreet(address.getStreet());
@@ -148,10 +150,10 @@ public class CustomerController {
           addressService.save(currentAddress);
           return new ResponseEntity<Address>(currentAddress, HttpStatus.OK);
       }
-      
+
       //Create the association
       @PostMapping("/customers/{customerid}/addresses/{addressid}")
-      public ResponseEntity<?> associateAdress(@PathVariable("customerid")Long customerId, 
+      public ResponseEntity<?> associateAdress(@PathVariable("customerid")Long customerId,
       @PathVariable("addressid")Long addressId){
           if(!customerService.isCustomerExist(customerId)){
               return new ResponseEntity<>(new CustomErrorType("Unable to associate. Customer with id " + customerId + " not found."),
@@ -159,7 +161,7 @@ public class CustomerController {
           }
           if(!addressService.isAddressExist(addressId)){
               return new ResponseEntity<>(new CustomErrorType("Unable to associate. Address with id " + addressId + " not found."),
-              HttpStatus.NOT_FOUND); 
+              HttpStatus.NOT_FOUND);
           }
           Customer customer = customerService.get(customerId);
           if(customer.getAddress() != null){
@@ -217,7 +219,7 @@ public class CustomerController {
             }
             if(!userService.isUserExist(email)){
                 return new ResponseEntity<>(new CustomErrorType("Unable to update. User with email " + email + " not found."),
-                HttpStatus.NOT_FOUND); 
+                HttpStatus.NOT_FOUND);
             }
             User currentUser = userService.get(email);
             currentUser.setPassword(user.getPassword());
@@ -236,7 +238,7 @@ public class CustomerController {
             }
             if(!userService.isUserExist(email)){
                 return new ResponseEntity<>(new CustomErrorType("Unable to associate. User with email " + email + " not found."),
-                HttpStatus.NOT_FOUND); 
+                HttpStatus.NOT_FOUND);
             }
             Customer customer = customerService.get(customerId);
             if(customer.getUser() != null){
