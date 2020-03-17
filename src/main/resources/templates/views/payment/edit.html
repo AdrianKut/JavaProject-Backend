@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragments/main_layout}">
+
+    <head>
+        <title>Dodaj płatność</title>
+    </head>
+
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <form th:action="@{|/payment/edit/${id}|}" method="POST" th:object="${payment}">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Data płatności</label>
+                            <input class="form-control" type="datetime-local" th:field="${payment.paymentDate}" required />
+                        </div>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Ilość</label>
+                            <input class="form-control" type="text" th:field="${payment.amount}" required />
+                        </div>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <input class="form-control" type="text" th:field="${payment.paymentStatus}" required />
+                        </div>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Metoda</label>
+                            <input class="form-control" type="text" th:field="${payment.paymentMethod}" required />
+                        </div>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Zapisz</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
