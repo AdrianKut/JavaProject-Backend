@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">     
+    <head>
+        <title>Lista zamówień</title>               
+    </head>
+
+    <body>       
+        <div layout:fragment="content" class="container mt-2">
+            <div class="row">
+                <div class="col-md-4 my-1">
+                    <a href="add" class="btn btn-info" role="button">Dodaj zamówienie</a>
+                </div>
+            </div>
+            <div class="table-responsive mt-2">
+                <table class="table table-bordered table-striped">          
+                    <thead class="thead-dark">
+                        <tr  class="active">
+                            <th>Data zakupu</th> 
+                            <th>Data wysłania</th>
+                            <th>Status</th>
+                            <th>Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table">                       
+                        <tr th:each ="order : ${orderList}">                                     
+                            <td> <b  th:text="${order.purchaseDate}">...</b> </td>
+                            <td> <b  th:text="${order.shipmentDate}">...</b> </td>
+                            <td> <b  th:text="${order.orderStatus}">...</b> </td>                           
+                            <td>
+                                <a class="btn btn-primary my-1" th:href="@{'delete/' + ${order.orderId}}">Usuń</a>
+                                <a class="btn btn-primary my-1" th:href="@{'edit/' + ${order.orderId}}">Edytuj</a>
+                            </td>               
+                        </tr>
+                    </tbody>          
+                </table>    
+            </div>    
+        </div>
+    </body>
+</html>
