@@ -36,13 +36,15 @@
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
                         <div class="form-group">
-                            <div class="form-check" th:each="product : ${productList}">
-                                <input class="form-check-input" type="checkbox" name="product" th:value="${product.productId}">
-                                <label class="form-check-label" th:text="${product.name}">
-                            </div>
+                            <label>produkty</label>
+                            <select class="form-control"  name="product" multiple="multiple">
+                                <option th:each="product : ${productList}"
+                                        th:value="${product.productId}"
+                                        th:text="${product.name}"></option>
+                            </select>
                         </div>                        
                     </div>
-                </div>           
+                </div>          
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <button type="submit" class="btn btn-primary">Zapisz</button>
