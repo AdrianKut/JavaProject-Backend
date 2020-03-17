@@ -35,10 +35,8 @@ public class PaymentController {
     }
 
     @RequestMapping(value = "/payment/add", method = RequestMethod.POST)
-    public String save(@Valid Payment payment, BindingResult bindingResult){
-         if(bindingResult.hasErrors()){
-              return "views/payment/add"; 
-        }
+    public String save(Payment payment){
+         
         paymentService.save(payment);
         return "redirect:/payment/list";
     }
@@ -53,10 +51,8 @@ public class PaymentController {
     
     @RequestMapping(value = "/payment/edit/{id}", method = RequestMethod.POST)
     public String edit(@PathVariable(name = "id") long id, 
-    @Valid Payment payment, BindingResult bindingResult){ 
-        if(bindingResult.hasErrors()){
-            return "views/payment/edit"; 
-      }
+    Payment payment){ 
+       
       payment.setPaymentId(id);
       paymentService.save(payment);
         return "redirect:/payment/list";
