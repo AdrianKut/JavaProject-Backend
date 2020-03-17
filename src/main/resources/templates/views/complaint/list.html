@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">     
+    <head>
+        <title>Lista reklamacji</title>               
+    </head>
+
+    <body>       
+        <div layout:fragment="content" class="container mt-2">
+            <div class="row">
+                <div class="col-md-4 my-1">
+                    <a href="add" class="btn btn-info" role="button">Dodaj reklamację</a>
+                </div>
+            </div>
+            <div class="table-responsive mt-2">
+                <table class="table table-bordered table-striped">          
+                    <thead class="thead-dark">
+                        <tr  class="active">
+                            <th>Data zgłoszenia</th> 
+                            <th>Opis</th>
+                            <th>Status</th>
+                            <th>Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table">                       
+                        <tr th:each ="complaint : ${complaintList}">                                     
+                            <td> <b  th:text="${complaint.notificationDate}">...</b> </td>
+                            <td> <b  th:text="${complaint.description}">...</b> </td>
+                            <td> <b  th:text="${complaint.complaintStatus}">...</b> </td>                          
+                            <td>
+                                <a class="btn btn-primary my-1" th:href="@{'delete/' + ${complaint.complaintId}}">Usuń</a>
+                                <a class="btn btn-primary my-1" th:href="@{'edit/' + ${complaint.complaintId}}">Edytuj</a>
+                            </td>               
+                        </tr>
+                    </tbody>          
+                </table>    
+            </div>    
+        </div>
+    </body>
+</html>
