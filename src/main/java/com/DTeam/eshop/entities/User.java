@@ -25,6 +25,9 @@ public class User {
     @Column(name = "email", nullable = false, length = 35)
     private String email;
 
+    @Column(name = "userID", columnDefinition = "bigserial", insertable = false)
+    private Integer userId;
+
     @Column(name = "password", nullable = false, length = 60)
     private String password;
 

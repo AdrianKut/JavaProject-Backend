@@ -57,8 +57,11 @@ public class UserController {
     @PostMapping("/user/edit/{email}")
     public String edit(@PathVariable(name = "email")String email,
     User user, @RequestParam(name="roles",required = false)ArrayList<Role> roles){
-        user.setEmail(email);
-        userService.save(user);
+        User currentUser = userService.get(email);
+        currentUser.setEnabled(user.getEnabled());
+        currentUser.setPassword(user.getPassword());
+        currentUser.setRoles(roles);
+        userService.save(currentUser);
         return "redirect:/user/list";
     }
 
