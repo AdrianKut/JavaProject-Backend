@@ -42,6 +42,20 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Zamówienie</label>
+                            <select class="form-control" name="order">
+                                <option value="">Wybierz zamówienie</option>
+                                <option th:each="order : ${orderList}"
+                                        th:value="${order.orderId}"
+                                        th:text="${order.purchaseDate}">
+                                </option>                               
+                            </select>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12 text-center">
                         <button type="submit" class="btn btn-primary">Zapisz</button>
                     </div>
