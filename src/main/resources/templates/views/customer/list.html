@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+    <head>
+        <title>Lista klientów</title>
+    </head>
+
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <div class="row">
+                <div class="col-md-4 my-1">
+                    <a href="add" class="btn btn-info" role="button">Dodaj klienta</a>
+                </div>
+            </div>
+            <div class="table-responsive mt-2">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr  class="active">
+                            <th>Imię</th>
+                            <th>Nazwisko</th>
+                            <th>Numer telefonu</th>
+                            <th>Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table">
+                        <tr th:each ="customer : ${customerList}">
+                            <td> <b  th:text="${customer.name}">...</b> </td>
+                            <td> <b  th:text="${customer.surname}">...</b> </td>
+                            <td> <b  th:text="${customer.phoneNumber}">...</b> </td>
+                            <td>
+                                <a class="btn btn-primary my-1" th:href="@{'delete/' + ${customer.customerId}}">Usuń</a>
+                                <a class="btn btn-primary my-1" th:href="@{'edit/' + ${customer.customerId}}">Edytuj</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
