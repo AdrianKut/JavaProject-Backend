@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+    <head>
+        <title>Lista użytkowników</title>
+    </head>
+
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <div class="row">
+                <div class="col-md-4 my-1">
+                    <a href="add" class="btn btn-info" role="button">Dodaj użytkownika</a>
+                </div>
+            </div>
+            <div class="table-responsive mt-2">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr  class="active">
+                            <th>Nazwa</th>
+                            <th>Hasło</th>
+                            <th>Status</th>
+                            <th>Uprawnienia</th>
+                            <th>Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table">
+                        <tr th:each ="user : ${userList}">
+                            <td> <b  th:text="${user.email}">...</b> </td>
+                            <td> <b  th:text="${user.password}">...</b> </td>
+                            <td><b th:if="${user.enabled} == true">Aktywne</b>
+                                <b th:unless="${user.enabled} == true">Nieaktywne</b>
+                            </td>
+                            <td>
+                                <div class="form-check" th:each="role : ${user.roles}">
+                                    <b> <label class="form-check-label"  th:text="${role.name}"></label></b>
+                                </div>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary my-1" th:href="@{'delete/' + ${user.email}}">Usuń</a>
+                                <a class="btn btn-primary my-1" th:href="@{'edit/' + ${user.email}}">Edytuj</a>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
