@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">     
+    <head>
+        <title>Lista płatności</title>               
+    </head>
+
+    <body>       
+        <div layout:fragment="content" class="container mt-2">
+            <div class="row">
+                <div class="col-md-4 my-1">
+                    <a href="add" class="btn btn-info" role="button">Dodaj płatność</a>
+                </div>
+            </div>
+            <div class="table-responsive mt-2">
+                <table class="table table-bordered table-striped">          
+                    <thead class="thead-dark">
+                        <tr  class="active">
+                            <th>Data płatności</th> 
+                            <th>Ilość</th>
+                            <th>Status</th>
+                            <th>Metoda</th> 
+                            <th>Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table">                       
+                        <tr th:each ="payment : ${paymentList}">                                     
+                            <td> <b  th:text="${payment.paymentDate}">...</b> </td>
+                            <td> <b  th:text="${payment.amount}">...</b> </td>
+                            <td> <b  th:text="${payment.paymentStatus}">...</b> </td>
+                            <td> <b  th:text="${payment.paymentMethod}">...</b> </td>                           
+                            <td>
+                                <a class="btn btn-primary my-1" th:href="@{'delete/' + ${payment.paymentId}}">Usuń</a>
+                                <a class="btn btn-primary my-1" th:href="@{'edit/' + ${payment.paymentId}}">Edytuj</a>
+                            </td>               
+                        </tr>
+                    </tbody>          
+                </table>    
+            </div>    
+        </div>
+    </body>
+</html>
