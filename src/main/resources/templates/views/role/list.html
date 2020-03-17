@@ -18,15 +18,11 @@
                     <thead class="thead-dark">
                         <tr  class="active">
                             <th>Nazwa</th>
-                            <th>Akcje</th>
                         </tr>
                     </thead>
                     <tbody id="table">
                         <tr th:each ="role : ${roleList}">
                             <td> <b  th:text="${role.name}">...</b> </td>
-                            <td>
-                                <a class="btn btn-primary my-1" th:href="@{'delete/' + ${role.name}}">Usuń</a>
-                            </td>
                         </tr>
                     </tbody>
                 </table>

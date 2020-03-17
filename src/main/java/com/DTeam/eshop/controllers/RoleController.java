@@ -36,10 +36,4 @@ public class RoleController {
         roleService.save(role);
         return "redirect:/role/list";
     }
-
-    @GetMapping(value = "role/delete/{name}")
-    public String delete(@PathVariable("name")String name){
-        roleService.delete(name);
-        return "redirect:/role/list";
-    }
 }
