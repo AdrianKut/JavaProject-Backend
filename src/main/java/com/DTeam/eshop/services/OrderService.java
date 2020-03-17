@@ -3,6 +3,7 @@ package com.DTeam.eshop.services;
 import java.util.List;
 
 import com.DTeam.eshop.entities.Order;
+import com.DTeam.eshop.entities.Product;
 import com.DTeam.eshop.repositories.OrderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,8 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public void save(Order order){
+    public void save(Order order,List<Product> product){
+        order.setProducts(product);
         orderRepository.save(order);
     }
 
