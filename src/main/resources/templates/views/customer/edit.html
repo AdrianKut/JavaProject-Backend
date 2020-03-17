@@ -39,7 +39,7 @@
                             <label> Adres </label>
                             <select class="form-control" name="addresses">
                                 <option
-                                    th:value="${customer.address} ? ${customer.address.addressID} : ''"
+                                    th:value="${customer.address} ? ${customer.address.addressId} : ''"
                                     th:text="${customer.address} ? ${customer.address.street}+' '+${customer.address.houseNumber} : 'Wybierz adres'">
                                 </option>
                                 <option value="">
@@ -47,13 +47,13 @@
                                 </option>
                                 <option th:each="address : ${addressList}"
                                         th:if="${address.houseNumber != ''}"
-                                        th:value="${address.addressID}"
+                                        th:value="${address.addressId}"
                                         th:text="${address.street}+' '+${address.houseNumber}+'/'+
                                         ${address.houseNumber}+', '+${address.postcode}+' '+${address.city}">
                                 </option>
                                 <option th:each="address : ${addressList}"
                                         th:if="${address.flatNumber == ''}"
-                                        th:value="${address.addressID}"
+                                        th:value="${address.addressId}"
                                         th:text="${address.street}+' '+${address.houseNumber}
                                         +', '+${address.postcode}+' '+${address.city}">
                                 </option>

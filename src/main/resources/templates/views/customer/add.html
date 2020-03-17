@@ -42,13 +42,13 @@
                                 <option value="">Wybierz adres</option>
                                 <option th:each="address : ${addressList}"
                                         th:if="${address.flatNumber != ''}"
-                                        th:value="${address.addressID}"
+                                        th:value="${address.addressId}"
                                         th:text="${address.street}+' '+${address.houseNumber}+'/'+
                                         ${address.flatNumber}+', '+${address.postcode}+' '+${address.city}">
                                 </option>
                                 <option th:each="address : ${addressList}"
                                         th:if="${address.flatNumber == ''}"
-                                        th:value="${address.addressID}"
+                                        th:value="${address.addressId}"
                                         th:text="${address.street}+' '+${address.houseNumber}
                                         +', '+${address.postcode}+' '+${address.city}">
                                 </option>
