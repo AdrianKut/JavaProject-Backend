@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+    <head>
+        <script type="text/javascript" src="/js/search.js"></script>
+        <title>Lista pracowników</title>
+    </head>
+
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <div class="row">
+                <div class="col-md-4 my-1">
+                    <a href="add" class="btn btn-info" role="button">Dodaj pracownika</a>
+                </div>
+                <div class="col-md-4 offset-md-4 my-1">
+                    <input type="search"  placeholder="Szukaj..." class="form-control search-input border-info" id="search"/>
+                </div>
+            </div>
+            <div class="table-responsive mt-2">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr  class="active">
+                            <th>Data zatrudnienia</th>
+                            <th>Imię i nazwisko</th>
+                            <th>Stanowisko</th>
+                            <th>Płaca podstawowa</th>
+                            <th>Płaca dodatkowa</th>
+                            <th>Akcje</th>
+                        </tr>
+
+                    </thead>
+                    <tbody id="table">
+                        <tr th:each ="employee : ${employeeList}">
+                            <td> <b  th:text="${employee.employmentDate}">...</b> </td>
+                            <td> <b  th:text="${employee.name}+' '+${employee.surname}">...</b> </td>
+                            <td> <b  th:text="${employee.position}">...</b>
+                            <td> <b  th:text="${#numbers.formatCurrency(employee.basePay)}">...</b> </td>
+                            <td> <b  th:text="${#numbers.formatCurrency(employee.extraPay)}">...</b> </td>
+                            <td>
+                                <a class="btn btn-danger" th:href="'#modal'+ ${employee.employeeId}" data-toggle="modal">Usuń</a>
+                                <div class="modal fade" th:id="'modal'+ ${employee.employeeId}" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Usuwanie</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Czy na pewno chcesz usunąć?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
+                                                <a class="btn btn-primary my-1" th:href="@{'delete/' + ${employee.employeeId}}">Tak</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="btn btn-primary my-1" th:href="@{'edit/' + ${employee.employeeId}}">Edytuj</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
