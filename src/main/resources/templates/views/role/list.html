@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+    <head>
+        <title>Lista użytkowników</title>
+    </head>
+
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <div class="row">
+                <div class="col-md-4 my-1">
+                    <a href="add" class="btn btn-info" role="button">Dodaj uprawnienie</a>
+                </div>
+            </div>
+            <div class="table-responsive mt-2">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr  class="active">
+                            <th>Nazwa</th>
+                            <th>Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table">
+                        <tr th:each ="role : ${roleList}">
+                            <td> <b  th:text="${role.name}">...</b> </td>
+                            <td>
+                                <a class="btn btn-primary my-1" th:href="@{'delete/' + ${role.name}}">Usuń</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
