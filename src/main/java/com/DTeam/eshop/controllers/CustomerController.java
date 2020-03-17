@@ -64,7 +64,7 @@ public class CustomerController {
         return "views/customer/edit";
     }
 
-    @PostMapping("/customer/edit/{id]")
+    @PostMapping("/customer/edit/{id}")
     public String edit(@PathVariable(name = "id")Long id, Customer customer,
     @RequestParam(name = "users")User user,
     @RequestParam(name = "addresses")Address address){
