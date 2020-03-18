@@ -32,7 +32,8 @@
                     </thead>
                     <tbody id="table">
                         <tr th:each ="employee : ${employeeList}">
-                            <td> <b  th:text="${employee.employmentDate}">...</b> </td>
+                            <td> <b  th:text="${#strings.substring(employee.employmentDate,8,10)} + '-' +  ${#strings.substring(employee.employmentDate,5,7)}
+                                +'-'+ ${#strings.substring(employee.employmentDate,0,4)}">...</b> </td>
                             <td> <b  th:text="${employee.name}+' '+${employee.surname}">...</b> </td>
                             <td> <b  th:text="${employee.position}">...</b>
                             <td> <b  th:text="${#numbers.formatCurrency(employee.basePay)}">...</b> </td>
