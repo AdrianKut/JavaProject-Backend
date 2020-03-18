@@ -37,6 +37,9 @@ public class Product {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
+    @Column(name = "photo", nullable = false, length = 250)
+    private String photo;
+
     @ManyToMany(mappedBy = "products")
     private List<Order> orders;
 
