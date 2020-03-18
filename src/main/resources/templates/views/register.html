@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+    <head>
+        <title>Rejestracja</title>
+    </head>
+    <body>
+        <div layout:fragment="content" class="container fill mt-2">
+            <div class="row">
+                <div class="col-md-6 offset-md-3 text-center">
+                    <div class="alert alert-info alert-dismissible fade show" th:if="${exist}" role="alert">
+                        Istnieje użytkownik z takiem adresem e-email!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 offset-md-3 text-center">
+                <div class="alert alert-success alert-dismissible fade show" th:if="${success}" role="alert">
+                    Rejestracja udana! <a href="/login" class="alert-link">Zaloguj się,</a> aby kontynuować
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <form th:action="@{/register}" method="POST" th:object="${uzytkownik}">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <label class="display-4"> Utwórz konto</label>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <input class="form-control-lg form-control" type="text" id="email" th:field="${uzytkownik.email}" placeholder="Adres email" required/>
+                            <div class="text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="${uzytkownik.email}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <input class="form-control-lg form-control" type="password" id="haslo" th:field="${uzytkownik.haslo}" placeholder="Hasło" required/>
+                            <div class="text text-danger" th:if="${#fields.hasErrors('haslo')}" th:errors="${uzytkownik.haslo}"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 mt-2 text-center">
+                        <button type="submit" class="btn btn-primary">Zarejestruj</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+    <head>
+        <title>Logowanie</title>
+    </head>
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <div class="row">
+                <div class="col-md-6 offset-md-3 text-center">
+                    <div class="alert alert-danger alert-dismissible fade show" th:if="${param.error}" role="alert">
+                        Błędny login lub hasło
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <form th:action="@{/login}" method="POST">
+                 <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <label class="display-4"> Zaloguj się </label>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <input class="form-control-lg  form-control" type="text" id="email" placeholder="Adres email" name="username" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <input class="form-control-lg form-control" type="password" id="password"  placeholder="Hasło" name="password" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 mt-2">
+                        <button type="submit" class="btn btn-block btn-primary">Zaloguj</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
