@@ -34,7 +34,7 @@ public class Order{
     @Column(name = "purchase_date", nullable = false)
     private LocalDateTime purchaseDate;
 
-    @Column(name = "shipment_date", nullable = false)
+    @Column(name = "shipment_date", nullable = true)
     private LocalDateTime shipmentDate;
 
     @Column(name = "order_status", nullable = true, length = 20)
@@ -69,7 +69,7 @@ public class Order{
 
     public Order(){}
 
-    public String getPurchaseDate() {      
+    public String getPurchaseDate() {
         if(purchaseDate !=null){
             return purchaseDate.toString();
         }else{
@@ -77,12 +77,12 @@ public class Order{
         }
     }
 
-    public void setPurchaseDate(String purchaseDate) {       
+    public void setPurchaseDate(String purchaseDate) {
         LocalDateTime dataTime = LocalDateTime.parse(purchaseDate,DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         this.purchaseDate = dataTime;
     }
 
-    public String getShipmentDate() {      
+    public String getShipmentDate() {
         if(shipmentDate !=null){
             return shipmentDate.toString();
         }else{
@@ -90,8 +90,10 @@ public class Order{
         }
     }
 
-    public void setShipmentDate(String shipmentDate) {       
-        LocalDateTime dataTime = LocalDateTime.parse(shipmentDate,DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        this.shipmentDate = dataTime;
+    public void setShipmentDate(String shipmentDate) {
+        if(!shipmentDate.equals("")){
+            LocalDateTime dataTime = LocalDateTime.parse(shipmentDate,DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+            this.shipmentDate = dataTime;
+        }
     }
 }
