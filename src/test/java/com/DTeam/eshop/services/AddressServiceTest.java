@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 public class AddressServiceTest {
 
     @Test
-    public void get() {
+    public void listAll() {
         //given
         AddressService addressService = mock(AddressService.class);
         //when
@@ -34,18 +34,23 @@ public class AddressServiceTest {
     }
 
     @Test
-    public void add() {
+    public void save() {
         //given
         AddressService addressService = mock(AddressService.class);
         //when
 
-        when(addressService.addAddress(Mockito.any(Address.class))).thenReturn(new Address("Miasto", 1, "31-523"));
+        when(addressService.save(Mockito.any(Address.class))).thenReturn(new Address("Miasto", 1, "31-523"));
 
-        Address address = addressService.addAddress(new Address());
+        Address address = addressService.save(new Address());
         //then
         Assert.assertEquals(address.getCity(), "Miasto");
         Assert.assertEquals(address.getHouseNumber().toString(), "" + 1);
         Assert.assertEquals(address.getPostcode(), "31-523");
 
+    }
+    
+    @Test
+    public void get(){
+        
     }
 }
