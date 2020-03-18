@@ -25,6 +25,7 @@
                             <th>Opis</th>
                             <th>Cena</th>
                             <th>Ilość</th>
+                            <th>Zdjęcie</th>
                             <th>Akcje</th>
                         </tr>
                     </thead>
@@ -34,6 +35,7 @@
                             <td> <b  th:text="${product.description}">...</b> </td>
                             <td> <b  th:text="${#numbers.formatCurrency(product.price)}">...</b> </td>
                             <td> <b  th:text="${product.quantity}">...</b> </td>
+                            <td>  <img th:src="${product.photo}" width="120px" height="100px" alt="photo"/> </td>
                             <td>
                                 <a class="btn btn-danger" th:href="'#modal'+ ${product.productId}" data-toggle="modal">Usuń</a>
                                 <div class="modal fade" th:id="'modal'+ ${product.productId}" tabindex="-1">

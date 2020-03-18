@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <label>Nazwa</label>
                             <input class="form-control" type="text" th:field="${product.name}" required />
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -22,7 +22,7 @@
                         <div class="form-group">
                             <label>Opis</label>
                             <input class="form-control" type="text" th:field="${product.description}" required />
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label>Cena</label>
                             <input class="form-control" type="text" th:field="${product.price}" required />
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -38,9 +38,19 @@
                         <div class="form-group">
                             <label>Ilość</label>
                             <input class="form-control" type="text" th:field="${product.quantity}" required />
-                        </div>                        
+                        </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Zdjęcie [Adres URL]</label>
+                            <input class="form-control" type="text" th:field="${product.photo}" required />
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <button type="submit" class="btn btn-primary">Zapisz</button>
