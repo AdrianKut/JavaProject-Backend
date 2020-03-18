@@ -29,7 +29,11 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
-    public Boolean isCustomerExist(Long id){
-        return customerRepository.existsById(id);
+    public Boolean isCustomerExist(String email){
+        return customerRepository.existsByUserEmail(email);
+    }
+
+    public Customer getByEmail(String email){
+        return customerRepository.findByUserEmail(email);
     }
 }
