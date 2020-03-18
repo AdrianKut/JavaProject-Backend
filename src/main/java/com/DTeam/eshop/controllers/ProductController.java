@@ -8,54 +8,52 @@ import com.DTeam.eshop.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "/product/list", method = RequestMethod.GET)
+    @GetMapping("/product/list")
     public String getAll(Model model){
         List<Product> productList = productService.listAll();
         model.addAttribute("productList",productList);
-        return "/views/product/list";
+        return "views/product/list";
     }
 
-    @RequestMapping(value = "/product/add", method = RequestMethod.GET)
+    @GetMapping("/product/add")
     public String save(Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
-        return "/views/product/add";
+        return "views/product/add";
     }
 
-    @RequestMapping(value = "/product/add", method = RequestMethod.POST)
+    @PatchMapping("/product/add")
     public String save(Product product){
-         
         productService.save(product);
         return "redirect:/product/list";
     }
 
-    @RequestMapping(value = "/product/edit/{id}", method = RequestMethod.GET)
+    @GetMapping("/product/edit/{id}")
     public String edit(Model model,@PathVariable(name = "id") long id){
-        
         Product product = productService.get(id);
         model.addAttribute("product", product);
-        return "/views/product/edit";
+        return "views/product/edit";
     }
-    
-    @RequestMapping(value = "/product/edit/{id}", method = RequestMethod.POST)
-    public String edit(@PathVariable(name = "id") long id, 
-    Product product){ 
-       
+
+    @PostMapping("/product/edit/{id}")
+    public String edit(@PathVariable(name = "id") long id,
+    Product product){
         product.setProductId(id);
         productService.save(product);
         return "redirect:/product/list";
     }
 
-    @RequestMapping(value = "/product/delete/{id}", method = RequestMethod.GET)
+    @GetMapping("/product/delete/{id}")
     public String delete(@PathVariable(name = "id") long id){
         productService.delete(id);
         return "redirect:/product/list";

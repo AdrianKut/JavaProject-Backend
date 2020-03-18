@@ -21,9 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CustomerController {
 
-    @Autowired private CustomerService customerService;
-    @Autowired private UserService userService;
-    @Autowired private AddressService addressService;
+    @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private AddressService addressService;
 
     @GetMapping("/customer/list")
     public String getAll(Model model){

@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AddressController {
 
-    @Autowired private AddressService addressService;
+    @Autowired
+    private AddressService addressService;
 
     @GetMapping("/address/list")
     public String getAll(Model model){

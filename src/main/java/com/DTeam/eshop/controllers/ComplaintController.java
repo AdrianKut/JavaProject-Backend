@@ -12,13 +12,14 @@ import com.DTeam.eshop.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ComplaintController {
+
     @Autowired
     private ComplaintService complaintService;
 
@@ -28,14 +29,14 @@ public class ComplaintController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "/complaint/list", method = RequestMethod.GET)
+    @GetMapping("/complaint/list")
     public String getAll(Model model){
         List<Complaint> complaintList = complaintService.listAll();
         model.addAttribute("complaintList",complaintList);
-        return "/views/complaint/list";
+        return "views/complaint/list";
     }
 
-    @RequestMapping(value = "/complaint/add", method = RequestMethod.GET)
+    @GetMapping("/complaint/add")
     public String save(Model model) {
         List<Order> orderList = orderService.listAll();
         List<Product> productList = productService.listAll();
@@ -43,21 +44,20 @@ public class ComplaintController {
         model.addAttribute("complaint", complaint);
         model.addAttribute("orderList", orderList);
         model.addAttribute("productList", productList);
-        return "/views/complaint/add";
+        return "views/complaint/add";
     }
 
-    @RequestMapping(value = "/complaint/add", method = RequestMethod.POST)
+    @PostMapping("/complaint/add")
     public String save(Complaint complaint,
     @RequestParam(name="order")Order order,
     @RequestParam(name="product")Product product){
-        
         complaint.setOrder(order);
         complaint.setProduct(product);
         complaintService.save(complaint);
         return "redirect:/complaint/list";
     }
 
-    @RequestMapping(value = "/complaint/edit/{id}", method = RequestMethod.GET)
+    @GetMapping("/complaint/edit/{id}")
     public String edit(Model model,@PathVariable(name = "id") long id){
         List<Order> orderList = orderService.listAll();
         List<Product> productList = productService.listAll();
@@ -65,15 +65,14 @@ public class ComplaintController {
         model.addAttribute("complaint", complaint);
         model.addAttribute("orderList", orderList);
         model.addAttribute("productList", productList);
-        return "/views/complaint/edit";
+        return "views/complaint/edit";
     }
-    
-    @RequestMapping(value = "/complaint/edit/{id}", method = RequestMethod.POST)
-    public String edit(@PathVariable(name = "id") long id, 
+
+    @PostMapping("/complaint/edit/{id}")
+    public String edit(@PathVariable(name = "id") long id,
     Complaint complaint,
     @RequestParam(name="order")Order order,
-    @RequestParam(name="product")Product product){ 
-       
+    @RequestParam(name="product")Product product){
         complaint.setComplaintId(id);
         complaint.setOrder(order);
         complaint.setProduct(product);
@@ -81,11 +80,9 @@ public class ComplaintController {
         return "redirect:/complaint/list";
     }
 
-    @RequestMapping(value = "/complaint/delete/{id}", method = RequestMethod.GET)
+    @GetMapping("/complaint/delete/{id}")
     public String delete(@PathVariable(name = "id") long id){
         complaintService.delete(id);
         return "redirect:/complaint/list";
     }
-
-
 }

@@ -20,9 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class EmployeeController {
 
-    @Autowired private EmployeeService employeeService;
-    @Autowired private UserService userService;
-    @Autowired private AddressService addressService;
+    @Autowired
+    private EmployeeService employeeService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private AddressService addressService;
 
     @GetMapping("/employee/list")
     public String getAll(Model model){
