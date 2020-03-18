@@ -26,7 +26,7 @@
                     </button>
                 </div>
             </div>
-            <form th:action="@{/register}" method="POST" th:object="${uzytkownik}">
+            <form th:action="@{/register}" method="POST" th:object="${user}">
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
                         <label class="display-4"> Utwórz konto</label>
@@ -35,16 +35,16 @@
                 <div class="row mt-4">
                     <div class="col-md-4 offset-md-4 text-center">
                         <div class="form-group">
-                            <input class="form-control-lg form-control" type="text" id="email" th:field="${uzytkownik.email}" placeholder="Adres email" required/>
-                            <div class="text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="${uzytkownik.email}"></div>
+                            <input class="form-control-lg form-control" type="text" id="email" th:field="${user.email}" placeholder="Adres email" required/>
+                            <div class="text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="${user.email}"></div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
                         <div class="form-group">
-                            <input class="form-control-lg form-control" type="password" id="haslo" th:field="${uzytkownik.haslo}" placeholder="Hasło" required/>
-                            <div class="text text-danger" th:if="${#fields.hasErrors('haslo')}" th:errors="${uzytkownik.haslo}"></div>
+                            <input class="form-control-lg form-control" type="password" id="password" th:field="${user.password}" placeholder="Hasło" required/>
+                            <div class="text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="${user.password}"></div>
                         </div>
                     </div>
                 </div>
