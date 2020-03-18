@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 import lombok.Data;
 
 @Entity
@@ -47,11 +46,19 @@ public class Address {
     @OneToMany(mappedBy = "address")
     private List<Order> orders;
 
-    public Address(){}
-    
-     public Address(String city, Integer houseNumber, String postcode ) {
+    public Address() {
+    }
+
+    public Address(String city, Integer houseNumber, String postcode) {
         this.houseNumber = houseNumber;
         this.city = city;
         this.postcode = postcode;
-    } 
+    }
+
+    public Address(Long adressId, String city, Integer houseNumber, String postcode) {
+        this.addressId = adressId;
+        this.houseNumber = houseNumber;
+        this.city = city;
+        this.postcode = postcode;
+    }
 }
