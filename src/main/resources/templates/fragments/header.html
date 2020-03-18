@@ -13,31 +13,31 @@
                     <a class="nav-link active" href="/"> Strona główna </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin/payment/list"> Płatności </a>
+                    <a class="nav-link active" sec:authorize="hasRole('ROLE_admin')" href="/admin/payment/list"> Płatności </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin/order/list"> Zamówienia </a>
+                    <a class="nav-link active" sec:authorize="hasRole('ROLE_admin')" href="/admin/order/list"> Zamówienia </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin/product/list"> Produkty </a>
+                    <a class="nav-link active" sec:authorize="hasRole('ROLE_admin')" href="/admin/product/list"> Produkty </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin/complaint/list"> Reklamacje </a>
+                    <a class="nav-link active" sec:authorize="hasRole('ROLE_admin')" href="/admin/complaint/list"> Reklamacje </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin/role/list"> Uprawnienia </a>
+                    <a class="nav-link active" sec:authorize="hasRole('ROLE_admin')" href="/admin/role/list"> Uprawnienia </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin/user/list"> Użytkownicy </a>
+                    <a class="nav-link active" sec:authorize="hasRole('ROLE_admin')" href="/admin/user/list"> Użytkownicy </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin/customer/list"> Klienci </a>
+                    <a class="nav-link active" sec:authorize="hasRole('ROLE_admin')" href="/admin/customer/list"> Klienci </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin/employee/list"> Pracownicy </a>
+                    <a class="nav-link active" sec:authorize="hasRole('ROLE_admin')" href="/admin/employee/list"> Pracownicy </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin/address/list"> Adresy </a>
+                    <a class="nav-link active" sec:authorize="hasRole('ROLE_admin')" href="/admin/address/list"> Adresy </a>
                 </li>
             </ul>
         </div>
