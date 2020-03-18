@@ -66,8 +66,6 @@ public class CustomerModuleController {
         addressService.save(address);
         customer.setAddress(address);
         customerService.save(customer);
-        customerService.save(customer);
-
         return "redirect:/customer/profile";
     }
 }
