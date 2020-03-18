@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <label>Data płatności</label>
                             <input class="form-control" type="datetime-local" th:field="${payment.paymentDate}" required />
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -22,23 +22,20 @@
                         <div class="form-group">
                             <label>Ilość</label>
                             <input class="form-control" type="text" th:field="${payment.amount}" required />
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
                         <div class="form-group">
-                            <label>Status</label>
-                            <input class="form-control" type="text" th:field="${payment.paymentStatus}" required />
-                        </div>                        
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-md-4 text-center">
-                        <div class="form-group">
-                            <label>Metoda</label>
-                            <input class="form-control" type="text" th:field="${payment.paymentMethod}" required />
-                        </div>                        
+                            <label>Metoda płatości</label>
+                            <select class="form-control" th:field="${payment.paymentMethod}" required>
+                                <option value="">Wybierz metodę</option>
+                                <option value="Karta kredytowa">Karta kredytowa</option>
+                                <option value="Przelew">Przelew</option>
+                                <option value="Płatność przy obiorze">Płatność przy obiorze</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -50,9 +47,9 @@
                                 <option th:each="order : ${orderList}"
                                         th:value="${order.orderId}"
                                         th:text="${order.purchaseDate}">
-                                </option>                               
+                                </option>
                             </select>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="row">

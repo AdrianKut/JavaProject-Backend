@@ -29,12 +29,9 @@ public class Payment {
 
     @Column(name = "payment_date", nullable = false)
     private LocalDateTime paymentDate;
-    
+
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
-
-    @Column(name = "payment_status", nullable = false, length = 25)
-    private String paymentStatus;
 
     @Column(name = "payment_method", nullable = false, length = 25)
     private String paymentMethod;
@@ -46,7 +43,7 @@ public class Payment {
 
     public Payment(){}
 
-    public String getPaymentDate() {      
+    public String getPaymentDate() {
         if(paymentDate !=null){
             return paymentDate.toString();
         }else{
@@ -54,7 +51,7 @@ public class Payment {
         }
     }
 
-    public void setPaymentDate(String paymentDate) {       
+    public void setPaymentDate(String paymentDate) {
         LocalDateTime dataTime = LocalDateTime.parse(paymentDate,DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         this.paymentDate = dataTime;
     }
