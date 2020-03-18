@@ -17,6 +17,10 @@ public class AddressService {
         return addressRepository.findAll();
     }
 
+    public Address addAddress(Address address){
+        return addressRepository.save(address);
+    }
+    
     public void save(Address address){
         addressRepository.save(address);
     }
