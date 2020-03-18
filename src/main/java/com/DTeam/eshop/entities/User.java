@@ -11,8 +11,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 import lombok.Data;
 
@@ -35,14 +33,11 @@ public class User {
     private Boolean enabled = true;
 
     @OneToOne(mappedBy = "user")
-    @JsonBackReference("employee-user")
     private Employee employee;
 
-    @JsonBackReference("customer-user")
     @OneToOne(mappedBy = "user")
     private Customer customer;
 
-    @JsonIdentityReference
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = {
         @JoinColumn(name = "user_email", referencedColumnName = "email")},
