@@ -1,33 +1,50 @@
 package com.DTeam.eshop.services;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.springframework.boot.test.context.SpringBootTest;
+import com.DTeam.eshop.entities.Address;
 
-@SpringBootTest
+
+import java.util.List;
+import java.util.ArrayList;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
+
+
+import org.hamcrest.Matchers;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 public class AddressServiceTest {
 
-    public AddressServiceTest() {
-    }
-
+     
     @Test
-    public void testListAll() {
-    }
+    public void get(){
+          
+          //given
+          AddressService addressService = mock(AddressService.class);
+          //when
+          when(addressService.listAll()).thenReturn(prepareMocData());   
+          //then
+          Assert.assertThat(addressService.listAll(), Matchers.hasSize(2));
 
-    @Test
-    public void testSave() {
     }
-
-    @Test
-    public void testGet() {
+    
+     private List<Address> prepareMocData() {
+        List<Address> addresses = new ArrayList<>();
+        addresses.add(new Address("Dobrzechow",110));
+        addresses.add(new Address("Strzyzow",380));
+        
+         return addresses;
     }
-
-    @Test
-    public void testDelete() {
-    }
-
-    @Test
-    public void testIsAddressExist() {
-    }
+        
+//    @Test
+//    public void testSave() {
+//    }
+//
+//
+//    @Test
+//    public void testDelete() {
+//    }
+//
+   
 
 }
