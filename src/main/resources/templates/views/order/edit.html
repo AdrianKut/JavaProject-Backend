@@ -14,15 +14,15 @@
                         <div class="form-group">
                             <label>Data zakupu</label>
                             <input class="form-control" type="datetime-local" th:field="${order.purchaseDate}" required />
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
                         <div class="form-group">
                             <label>Data wysłania</label>
-                            <input class="form-control" type="datetime-local" th:field="${order.shipmentDate}" required />
-                        </div>                        
+                            <input class="form-control" type="datetime-local" th:field="${order.shipmentDate}" placeholder="Opcjonalne" />
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -30,9 +30,9 @@
                         <div class="form-group">
                             <label>Status</label>
                             <input class="form-control" type="text" th:field="${order.orderStatus}" required />
-                        </div>                        
+                        </div>
                     </div>
-                </div>    
+                </div>
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
                         <div class="form-group">
@@ -42,9 +42,9 @@
                                         th:value="${product.productId}"
                                         th:text="${product.name}"></option>
                             </select>
-                        </div>                        
+                        </div>
                     </div>
-                </div>          
+                </div>
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <button type="submit" class="btn btn-primary">Zapisz</button>
