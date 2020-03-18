@@ -66,4 +66,19 @@ public class AddressServiceTest {
         Assert.assertEquals(address.getAddressId().longValue(), 1L);
 
     }
+    
+      @Test
+    public void delete() {
+        //given
+        AddressService addressService = mock(AddressService.class);
+
+        //when
+        when(addressService.get(Mockito.anyLong())).thenReturn(new Address(1L, "Miasto", 997, "36-156"));
+
+        //then
+        Address address = addressService.delete(1L);
+        Assert.assertThat(addressService.listAll(), Matchers.hasSize(0));
+    }
+    
+    
 }
