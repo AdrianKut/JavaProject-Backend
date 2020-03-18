@@ -22,15 +22,17 @@
                     <thead class="thead-dark">
                         <tr  class="active">
                             <th>Data płatności</th>
-                            <th>Ilość</th>
+                            <th>Kwota</th>
                             <th>Metoda</th>
                             <th>Akcje</th>
                         </tr>
                     </thead>
                     <tbody id="table">
                         <tr th:each ="payment : ${paymentList}">
-                            <td> <b  th:text="${payment.paymentDate}">...</b> </td>
-                            <td> <b  th:text="${payment.amount}">...</b> </td>
+                            <td> <b  th:text="${#strings.substring(payment.paymentDate,8,10)} + '-' +  ${#strings.substring(payment.paymentDate,5,7)}
+                                +'-'+ ${#strings.substring(payment.paymentDate,0,4)}  + ' ' +${#strings.substring(payment.paymentDate,11,13)}
+                                + ':' +${#strings.substring(payment.paymentDate,14,16)} ">...</b> </td>
+                            <td> <b  th:text="${#numbers.formatCurrency(payment.amount)}">...</b> </td>
                             <td> <b  th:text="${payment.paymentMethod}">...</b> </td>
                             <td>
                                 <a class="btn btn-danger" th:href="'#modal'+ ${payment.paymentId}" data-toggle="modal">Usuń</a>
