@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 import lombok.Data;
 
@@ -47,12 +46,10 @@ public class Employee {
     private String position;
 
     @OneToOne
-    @JsonIdentityReference
     @JoinColumn(name = "user_email", nullable = true, unique = true)
     private User user;
 
     @ManyToOne
-    @JsonIdentityReference
     @JoinColumn(name = "address_id", nullable = true)
     private Address address;
 
