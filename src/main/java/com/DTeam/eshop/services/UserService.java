@@ -6,6 +6,7 @@ import com.DTeam.eshop.entities.User;
 import com.DTeam.eshop.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,6 +19,8 @@ public class UserService {
     }
 
     public void save(User user){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
