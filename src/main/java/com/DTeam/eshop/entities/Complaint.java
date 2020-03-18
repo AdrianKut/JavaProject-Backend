@@ -12,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 import lombok.Data;
 
@@ -36,12 +35,10 @@ public class Complaint {
     private String complaintStatus;
 
     @ManyToOne
-    @JsonIdentityReference
     @JoinColumn(name = "order_id", nullable = true)
     private Order order;
 
     @ManyToOne
-    @JsonIdentityReference
     @JoinColumn(name = "product_id", nullable = true)
     private Product product;
 
