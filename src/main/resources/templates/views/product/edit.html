@@ -27,17 +27,19 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
-                        <div class="form-group">
-                            <label>Cena</label>
-                            <input class="form-control" type="text" th:field="${product.price}" required />
+                        <label>Cena</label>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">zł</div>
+                            <input class=form-control type="number" min="0" step="0.01" th:field="${product.price}" required />
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
                         <div class="form-group">
                             <label>Ilość</label>
-                            <input class="form-control" type="text" th:field="${product.quantity}" required />
+                            <input class="form-control" type="number" step="1" th:field="${product.quantity}" required />
                         </div>
                     </div>
                 </div>
@@ -46,7 +48,7 @@
                     <div class="col-md-4 offset-md-4 text-center">
                         <div class="form-group">
                             <label>Zdjęcie [Adres URL]</label>
-                            <input class="form-control" type="text" th:field="${product.photo}" required />
+                            <input class="form-control" type="url" th:field="${product.photo}" required />
                         </div>
                     </div>
                 </div>

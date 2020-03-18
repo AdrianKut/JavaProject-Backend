@@ -19,9 +19,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
-                        <div class="form-group">
-                            <label>Kwota</label>
-                            <input class="form-control" type="text" th:field="${payment.amount}" required />
+                        <label>Kwota</label>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">zł</div>
+                            <input class=form-control type="number" min="0" step="0.01" th:field="${payment.amount}" required />
                         </div>
                     </div>
                 </div>
