@@ -49,8 +49,9 @@ public class Address {
 
     public Address(){}
     
-     public Address(String city, Integer houseNumber ) {
+     public Address(String city, Integer houseNumber, String postcode ) {
         this.houseNumber = houseNumber;
         this.city = city;
+        this.postcode = postcode;
     } 
 }
