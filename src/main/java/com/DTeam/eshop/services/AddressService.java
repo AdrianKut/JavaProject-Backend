@@ -32,4 +32,8 @@ public class AddressService {
     public Boolean isAddressExist(Long id){
         return addressRepository.existsById(id);
     }
+
+    public Address getByCustomerId(Long id){
+        return addressRepository.findByCustomersCustomerId(id);
+    }
 }
