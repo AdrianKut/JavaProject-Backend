@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+    <head>
+        <title>Profil</title>
+    </head>
+    <body>
+        <div layout:fragment="content" class="container fill mt-2">
+            <form th:action="@{/customer/profile}" method="POST">
+                <div class="row">
+                    <div class="col-md-4 offset-md-1 text-center" th:object="${customer}">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label> Imię </label>
+                                    <input class=form-control type="text" th:field="${customer.customerId}" hidden readonly required/>
+                                    <input class=form-control type="text" id="name" th:field="${customer.name}" required/>
+                                    <div class="text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="${customer.name}"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label> Nazwisko </label>
+                                    <input class=form-control type="text" id="surname" th:field="${customer.surname}" required/>
+                                    <div class="text text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="${customer.surname}"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label> Numer telefonu </label>
+                                    <input class=form-control type="number" id="phoneNumber" th:field="${customer.phoneNumber}" required/>
+                                    <div class="text text-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="${customer.phoneNumber}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 offset-md-2 text-center" th:object="${address}">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label> Ulica </label>
+                                    <input class="form-control" type="text" th:field="${address.addressId}" hidden readonly required/>
+                                    <input class="form-control" type="text" id="street" th:field="${address.street}" placeholder="Opcjonalne"/>
+                                    <div class="text text-danger" th:if="${#fields.hasErrors('street')}" th:errors="${address.street}"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Numer domu </label>
+                                    <input class=form-control type="number" min="1" th:field="${address.houseNumber}" required/>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Numer mieszkania </label>
+                                    <input class=form-control type="number" min="1" th:field="${address.flatNumber}" placeholder="Opcjonalne">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Kod pocztowy </label>
+                                    <input class=form-control type="text" id="postcode" th:field="${address.postcode}" required/>
+                                    <div class="text text-danger" th:if="${#fields.hasErrors('postcode')}" th:errors="${address.postcode}"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Miejscowość </label>
+                                    <input class=form-control type="text" th:field="${address.city}" required/>
+                                    <div class="text text-danger" th:if="${#fields.hasErrors('city')}" th:errors="${address.city}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Zapisz</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
