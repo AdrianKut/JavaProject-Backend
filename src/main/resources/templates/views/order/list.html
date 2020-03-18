@@ -29,8 +29,12 @@
                     </thead>
                     <tbody id="table">
                         <tr th:each ="order : ${orderList}">
-                            <td> <b  th:text="${order.purchaseDate}">...</b> </td>
-                            <td> <b  th:text="${order.shipmentDate}">...</b> </td>
+                            <td> <b  th:text="${#strings.substring(order.purchaseDate,8,10)} + '-' +  ${#strings.substring(order.purchaseDate,5,7)}
+                                +'-'+ ${#strings.substring(order.purchaseDate,0,4)}  + ' ' +${#strings.substring(order.purchaseDate,11,13)}
+                                + ':' +${#strings.substring(order.purchaseDate,14,16)} ">...</b> </td>
+                            <td> <b  th:text="${#strings.substring(order.shipmentDate,8,10)} + '-' +  ${#strings.substring(order.shipmentDate,5,7)}
+                                +'-'+ ${#strings.substring(order.shipmentDate,0,4)}  + ' ' +${#strings.substring(order.shipmentDate,11,13)}
+                                + ':' +${#strings.substring(order.shipmentDate,14,16)} ">...</b> </td>
                             <td> <b  th:text="${order.orderStatus}">...</b> </td>
                             <td>
                                 <a class="btn btn-danger" th:href="'#modal'+ ${order.orderId}" data-toggle="modal">Usuń</a>
