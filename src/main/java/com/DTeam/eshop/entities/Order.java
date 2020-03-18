@@ -16,8 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 import lombok.Data;
 
@@ -41,21 +39,17 @@ public class Order{
     private String orderStatus;
 
     @ManyToOne
-    @JsonIdentityReference
     @JoinColumn(name = "address_id", nullable = true)
     private Address address;
 
     @ManyToOne
-    @JsonIdentityReference
     @JoinColumn(name = "customer_id", nullable = true)
     private Customer customer;
 
     @OneToMany(mappedBy = "order")
-    @JsonBackReference("payment-order")
     private List<Payment> payments;
 
     @ManyToMany
-    @JsonIdentityReference
     @JoinTable(name = "orders_products", joinColumns = {
         @JoinColumn(name = "order_id", referencedColumnName = "order_id")},
         inverseJoinColumns = {
@@ -64,7 +58,6 @@ public class Order{
     private List<Product> products;
 
     @OneToMany(mappedBy = "order")
-    @JsonBackReference("complaint-order")
     private List<Complaint> complaints;
 
     public Order(){}
