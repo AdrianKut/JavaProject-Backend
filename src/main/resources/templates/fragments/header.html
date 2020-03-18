@@ -42,13 +42,16 @@
                 <li class="nav-item">
                     <a class="nav-link active" sec:authorize="hasRole('ROLE_klient')" href="/customer/profile"> Profil </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" sec:authorize="hasRole('ROLE_pracownik')" href="/employee/profile"> Profil </a>
+                </li>
             </ul>
 
             <form class="form-inline" sec:authorize="!isAuthenticated()">
                 <a href="/register" class="mr-2 btn btn-light" role="button">Rejestracja</a>
-                <a href="/login"  class="mr-2 btn btn-success" role="button">Logowanie</a> 
+                <a href="/login"  class="mr-2 btn btn-success" role="button">Logowanie</a>
 
-            </form>	
+            </form>
             <form  sec:authorize="isAuthenticated()" th:action="@{/logout}" method="POST">
                 <button class="btn btn-success" type="submit" >Wyloguj</a>
             </form>
