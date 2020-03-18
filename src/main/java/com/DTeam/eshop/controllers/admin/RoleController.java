@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -33,6 +34,12 @@ public class RoleController {
     @PostMapping("/admin/role/add")
     public String save(Role role){
         roleService.save(role);
+        return "redirect:/admin/role/list";
+    }
+
+    @GetMapping("/admin/role/delete/{name}")
+    public String delete(@PathVariable(name = "name")String name){
+       roleService.delete(name);
         return "redirect:/admin/role/list";
     }
 }

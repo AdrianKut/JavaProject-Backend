@@ -22,11 +22,13 @@
                     <thead class="thead-dark">
                         <tr  class="active">
                             <th>Nazwa</th>
+                            <th>Akcja</th>
                         </tr>
                     </thead>
                     <tbody id="table">
                         <tr th:each ="role : ${roleList}">
                             <td> <b  th:text="${role.name}">...</b> </td>
+                            <td> <a class="btn btn-danger" th:href="@{'delete/' + ${role.name}}">Edytuj</a></td>
                         </tr>
                     </tbody>
                 </table>
