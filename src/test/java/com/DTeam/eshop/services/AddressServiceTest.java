@@ -9,8 +9,13 @@ import org.junit.jupiter.api.Test;
 
 import org.hamcrest.Matchers;
 import org.mockito.Mockito;
+
+import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 
 public class AddressServiceTest {
 
@@ -55,30 +60,47 @@ public class AddressServiceTest {
 
     @Test
     public void get() {
+
+        Long id = 1L;
         //given
         AddressService addressService = mock(AddressService.class);
 
         //when
-        when(addressService.get(Mockito.anyLong())).thenReturn(new Address(1L, "Miasto", 997, "36-156"));
+        when(addressService.get(id)).thenReturn(new Address(1L, "Miasto", 997, "36-156"));
 
         //then
-        Address address = addressService.get(1L);
-        Assert.assertEquals(address.getAddressId().longValue(), 1L);
-
+        Assert.assertEquals(addressService.get(id).getAddressId().longValue(), 1L);
     }
-    
-      @Test
+
+    @Test
     public void delete() {
+
+        Long id = 1L;
+        final Address address = new Address(id, "Miasto", 997, "36-156");
+
         //given
         AddressService addressService = mock(AddressService.class);
 
         //when
-        when(addressService.get(Mockito.anyLong())).thenReturn(new Address(1L, "Miasto", 997, "36-156"));
+        addressService.delete(address.getAddressId());
 
         //then
-        Address address = addressService.delete(1L);
-        Assert.assertThat(addressService.listAll(), Matchers.hasSize(0));
+        verify(addressService, times(1)).delete(1L);
+
     }
-    
-    
+
+    @Test
+    public void isAddressExist() {
+
+        //given
+        AddressService addressService = mock(AddressService.class);
+
+        //when
+        when(addressService.isAddressExist(1L)).thenReturn(true);
+
+        //then
+        final boolean result = addressService.isAddressExist(1L);
+        assertEquals(result, true);
+    }
+
 }
