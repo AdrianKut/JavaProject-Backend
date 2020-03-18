@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragments/main_layout}">
+
+    <head>
+        <title>Dodaj produkt</title>
+    </head>
+
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <form th:action="@{/admin/product/add}" method="POST" th:object="${product}">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Nazwa</label>
+                            <input class="form-control" type="text" th:field="${product.name}" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Opis</label>
+                            <input class="form-control" type="text" th:field="${product.description}" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <label>Cena</label>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">zł</div>
+                            <input class=form-control type="number" min="0" step="0.01" th:field="${product.price}" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Ilość</label>
+                            <input class="form-control" type="number" step="1" th:field="${product.quantity}" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Zdjęcie [Adres URL]</label>
+                            <input class="form-control" type="url" th:field="${product.photo}" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Zapisz</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

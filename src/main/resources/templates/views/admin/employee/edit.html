@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+    <head>
+        <title>Edycja pracownika</title>
+    </head>
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <form th:action="@{|/admin/employee/edit/${id}|}" method="POST" th:object="${employee}">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Imię </label>
+                            <input class="form-control" type="text" th:field="${employee.name}" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Nazwisko </label>
+                            <input class=form-control type="text" th:field="${employee.surname}" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Data zatrudnienia </label>
+                            <input class="form-control" type="date" th:field="${employee.employmentDate}" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Stanowisko </label>
+                            <input class=form-control type="text" th:field="${employee.position}" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Płaca podstawowa </label>
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">zł</div>
+                                <input class=form-control type="number" min="0" step="0.01" th:field="${employee.basePay}" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Płaca dodatkowa </label>
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">zł</div>
+                                <input class=form-control type="number" min="0" step="0.01" th:field="${employee.extraPay}" placeholder="Opcjonalne" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Adres </label>
+                            <select class="form-control" name="addresses">
+                                <option
+                                    th:value="${employee.address} ? ${employee.address.addressId} : ''"
+                                    th:text="${employee.address} ? ${employee.address.street}+' '+${employee.address.houseNumber} : 'Wybierz adres'">
+                                </option>
+                                <option value="">
+                                    Wybierz adres
+                                </option>
+                                <option th:each="address : ${addressList}"
+                                        th:if="${address.houseNumber != ''}"
+                                        th:value="${address.addressId}"
+                                        th:text="${address.street}+' '+${address.houseNumber}+'/'+
+                                        ${address.houseNumber}+', '+${address.postcode}+' '+${address.city}">
+                                </option>
+                                <option th:each="address : ${addressList}"
+                                        th:if="${address.flatNumber == ''}"
+                                        th:value="${address.addressId}"
+                                        th:text="${address.street}+' '+${address.houseNumber}
+                                        +', '+${address.postcode}+' '+${address.city}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Użytkownik </label>
+                            <select class="form-control" name="users">
+                                <option
+                                    th:value="${employee.user} ? ${employee.user.email} : ''"
+                                    th:text="${employee.user} ? ${employee.user.email} : 'Wybierz użytkownika'">
+                                </option>
+                                <option value="">
+                                    Wybierz użytkownika
+                                </option>
+
+                                <option th:each="user : ${userList}"
+                                        th:value="${user.email}"
+                                        th:text="${user.email}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Zapisz</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

@@ -10,5 +10,4 @@ public class IndexController {
     public String showHomePage(Model model){
         return "/index";
     }
-    
 }
