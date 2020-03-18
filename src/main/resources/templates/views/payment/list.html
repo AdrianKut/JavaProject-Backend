@@ -23,7 +23,6 @@
                         <tr  class="active">
                             <th>Data płatności</th>
                             <th>Ilość</th>
-                            <th>Status</th>
                             <th>Metoda</th>
                             <th>Akcje</th>
                         </tr>
@@ -32,7 +31,6 @@
                         <tr th:each ="payment : ${paymentList}">
                             <td> <b  th:text="${payment.paymentDate}">...</b> </td>
                             <td> <b  th:text="${payment.amount}">...</b> </td>
-                            <td> <b  th:text="${payment.paymentStatus}">...</b> </td>
                             <td> <b  th:text="${payment.paymentMethod}">...</b> </td>
                             <td>
                                 <a class="btn btn-danger" th:href="'#modal'+ ${payment.paymentId}" data-toggle="modal">Usuń</a>
