@@ -29,7 +29,11 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    public Boolean isEmployeeExist(Long id){
-        return employeeRepository.existsById(id);
+    public Boolean isEmployeeExist(String email){
+        return employeeRepository.existsByUserEmail(email);
+    }
+
+    public Employee getByEmail(String email){
+        return employeeRepository.findByUserEmail(email);
     }
 }
