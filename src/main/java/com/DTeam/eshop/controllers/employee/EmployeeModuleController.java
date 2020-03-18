@@ -66,6 +66,6 @@ public class EmployeeModuleController {
         addressService.save(address);
         employee.setAddress(address);
         employeeService.save(employee);
-        return "redirect:/customer/profile";
+        return "redirect:/employee/profile";
     }
 }
