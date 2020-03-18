@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <label>Data zgłoszenia</label>
                             <input class="form-control" type="datetime-local" th:field="${complaint.notificationDate}" required />
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -22,15 +22,23 @@
                         <div class="form-group">
                             <label>Opis</label>
                             <input class="form-control" type="text" th:field="${complaint.description}" required />
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
                         <div class="form-group">
-                            <label>Status</label>
-                            <input class="form-control" type="text" th:field="${complaint.complaintStatus}" required />
-                        </div>                        
+                            <label> Status reklamacji</label>
+                            <select class="form-control" th:field="${complaint.complaintStatus}" required>
+                                <option
+                                th:value="${complaint.complaintStatus}">
+                                <option value="">Wybierz status</option>
+                                <option value="Przyjęta">Przyjęta</option>
+                                <option value="W trakcie realizacji">W trakcie realizacji</option>
+                                <option value="Zakończona">Zakończona</option>
+                                <option value="Odrzucona">Odrzucona</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -42,9 +50,9 @@
                                 <option th:each="order : ${orderList}"
                                         th:value="${order.orderId}"
                                         th:text="${order.purchaseDate}">
-                                </option>                               
+                                </option>
                             </select>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -56,11 +64,11 @@
                                 <option th:each="product : ${productList}"
                                         th:value="${product.productId}"
                                         th:text="${product.name}">
-                                </option>                               
+                                </option>
                             </select>
-                        </div>                        
+                        </div>
                     </div>
-                </div> 
+                </div>
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <button type="submit" class="btn btn-primary">Zapisz</button>

@@ -29,7 +29,9 @@
                     </thead>
                     <tbody id="table">
                         <tr th:each ="complaint : ${complaintList}">
-                            <td> <b  th:text="${complaint.notificationDate}">...</b> </td>
+                            <td> <b  th:text="${#strings.substring(complaint.notificationDate,8,10)} + '-' +  ${#strings.substring(complaint.notificationDate,5,7)}
+                                +'-'+ ${#strings.substring(complaint.notificationDate,0,4)}  + ' ' +${#strings.substring(complaint.notificationDate,11,13)}
+                                + ':' +${#strings.substring(complaint.notificationDate,14,16)} ">...</b> </td>
                             <td> <b  th:text="${complaint.description}">...</b> </td>
                             <td> <b  th:text="${complaint.complaintStatus}">...</b> </td>
                             <td>
