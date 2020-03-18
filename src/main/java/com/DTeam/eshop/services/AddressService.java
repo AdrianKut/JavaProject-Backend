@@ -36,4 +36,8 @@ public class AddressService {
     public Address getByCustomerId(Long id){
         return addressRepository.findByCustomersCustomerId(id);
     }
+
+    public Address getByEmployeeId(Long id){
+        return addressRepository.findByEmployeesEmployeeId(id);
+    }
 }
