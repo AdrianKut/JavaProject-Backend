@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -32,7 +31,7 @@ public class ProductController {
         return "views/product/add";
     }
 
-    @PatchMapping("/product/add")
+    @PostMapping("/product/add")
     public String save(Product product){
         productService.save(product);
         return "redirect:/product/list";
