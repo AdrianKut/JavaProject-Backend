@@ -36,6 +36,35 @@
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
                         <div class="form-group">
+                            <label>Klient</label>
+                            <select class="form-control" name="customer">
+                                <option value="">Wybierz klienta</option>
+                                <option th:each="customer : ${customerList}"
+                                        th:value="${customer.customerId}"
+                                        th:text="${customer.name}+' '+${customer.surname}">
+                                </option>                               
+                            </select>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Adres</label>
+                            <select class="form-control" name="address">
+                                <option value="">Wybierz adres</option>
+                                <option th:each="address : ${addressList}"
+                                        th:value="${address.addressId}"
+                                        th:text="${address.street}+' '+${address.houseNumber}+'/'+
+                                        ${address.flatNumber}+', '+${address.postcode}+' '+${address.city}">
+                                </option>                               
+                            </select>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
                             <label>produkty</label>
                             <select class="form-control"  name="product" multiple="multiple">
                                 <option th:each="product : ${productList}"
