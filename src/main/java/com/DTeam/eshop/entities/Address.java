@@ -48,4 +48,9 @@ public class Address {
     private List<Order> orders;
 
     public Address(){}
+    
+     public Address(String city, Integer houseNumber ) {
+        this.houseNumber = houseNumber;
+        this.city = city;
+    } 
 }
