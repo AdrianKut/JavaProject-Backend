@@ -17,20 +17,18 @@ public class AddressService {
         return addressRepository.findAll();
     }
 
-    public Address addAddress(Address address){
+    public Address save(Address address){
         return addressRepository.save(address);
     }
     
-    public void save(Address address){
-        addressRepository.save(address);
-    }
-
     public Address get(Long id){
         return addressRepository.findById(id).get();
     }
 
-    public void delete(Long id){
+    public Address delete(Long id){
+        Address address = get(id);
         addressRepository.deleteById(id);
+        return address;
     }
 
     public Boolean isAddressExist(Long id){
