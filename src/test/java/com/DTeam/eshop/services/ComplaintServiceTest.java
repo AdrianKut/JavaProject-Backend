@@ -47,12 +47,22 @@ public class ComplaintServiceTest {
         return complaints;
     }
 
-//    @Test
-//    public void save() {
-//
-//    }
-//    
-//    
+    @Test
+    public void save() {
+
+        //given
+        ComplaintService complaintService = mock(ComplaintService.class);
+
+        //when
+        when(complaintService.save(Mockito.any(Complaint.class))).thenReturn(new Complaint());
+        Complaint complaint = complaintService.save(new Complaint());
+
+        //then
+        assertEquals(complaint.getDescription(), null);
+        assertEquals(complaint.getComplaintStatus(), null);
+    }
+    
+    
 //    @Test
 //    public void testGet() {
 //    }
