@@ -47,6 +47,17 @@ public class CustomerServiceTest {
 
     @Test
     public void testSave() {
+
+        //given
+        CustomerService customerService = mock(CustomerService.class);
+
+        //when
+        when(customerService.save(Mockito.any(Customer.class))).thenReturn(new Customer());
+        Customer customer = customerService.save(new Customer());
+
+        //then
+        assertEquals(customer.getName(), null);
+        assertEquals(customer.getPhoneNumber(), null);
     }
 
     @Test
