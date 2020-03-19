@@ -30,7 +30,7 @@ public class Payment {
     private LocalDateTime paymentDate;
 
     @Column(name = "amount", nullable = false)
-    private BigDecimal amount;
+    private Double amount;
 
     @Column(name = "payment_method", nullable = false, length = 25)
     private String paymentMethod;

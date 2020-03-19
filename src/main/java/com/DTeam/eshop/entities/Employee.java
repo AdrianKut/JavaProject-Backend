@@ -22,7 +22,7 @@ import lombok.Data;
 @Data
 public class Employee {
 
-    @Id    
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "employee_id", nullable = false)
     private Long employeeId;
@@ -37,10 +37,10 @@ public class Employee {
     private LocalDate employmentDate;
 
     @Column(name = "base_pay", nullable = false)
-    private BigDecimal basePay;
+    private Double basePay;
 
     @Column(name = "extra_pay", nullable = true)
-    private BigDecimal extraPay;
+    private Double extraPay;
 
     @Column(name = "position", nullable = false, length = 25)
     private String position;
