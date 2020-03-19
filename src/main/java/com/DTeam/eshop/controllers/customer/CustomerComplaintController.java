@@ -12,6 +12,7 @@ import com.DTeam.eshop.services.ComplaintService;
 import com.DTeam.eshop.services.CustomerService;
 import com.DTeam.eshop.services.OrderService;
 import com.DTeam.eshop.services.ProductService;
+import com.DTeam.eshop.utilities.EmailSender;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 @Controller
 public class CustomerComplaintController {
@@ -34,6 +37,12 @@ public class CustomerComplaintController {
 
     @Autowired
     private ComplaintService complaintService;
+
+    @Autowired
+    private TemplateEngine templateEngine;
+
+    @Autowired
+    private EmailSender emailSender;
 
     @GetMapping("/customer/complaint")
     public String getComplaint(Model model, Principal principal) {
@@ -63,13 +72,24 @@ public class CustomerComplaintController {
 
     @PostMapping("/customer/complaint/add/{orderId}/{productId}")
     public String add(@PathVariable(name = "orderId")Long orderId,
-        @PathVariable(name = "productId")Long productId, Complaint complaint){
+        @PathVariable(name = "productId")Long productId, Complaint complaint, Principal principal){
         LocalDateTime dateTime = LocalDateTime.now();
         complaint.setNotificationDate(dateTime.toString());
         complaint.setOrder(orderService.get(orderId));
         complaint.setProduct(productService.get(productId));
         complaint.setComplaintStatus("Przyjęta");
         complaintService.save(complaint);
+
+        String email = principal.getName();
+        Product product = productService.get(productId);
+        Context context = new Context();
+        context.setVariable("header", "Dziękujemy za zgłoszenie!");
+        context.setVariable("title", "Witaj, " + email);
+        context.setVariable("description", "Zarejestowaliśmy właśnie zgłoszenie reklamacji produktu \"" + product.getName() +
+        "\". Postaramy się je jak najszybciej rozpatrzyć. Pozdrawiamy :)");
+        String body = templateEngine.process("template", context);
+        emailSender.sendEmail(email, "Zgłoszenie reklamacji", body);
+
         return "redirect:/customer/complaint";
     }
 }
