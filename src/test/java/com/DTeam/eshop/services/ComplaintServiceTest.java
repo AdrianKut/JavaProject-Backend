@@ -91,8 +91,20 @@ public class ComplaintServiceTest {
         //then
         verify(complaintService, times(1)).delete(id);
     }
-//
-//    @Test
-//    public void testIsComplaintExist() {
-//    }
+
+    @Test
+    public void isComplaintExist() {
+
+        Long id = 999L;
+        //given
+        ComplaintService complaintService = mock(ComplaintService.class);
+
+        //when
+        when(complaintService.isComplaintExist(id)).thenReturn(true);
+
+        //then
+        final boolean result = complaintService.isComplaintExist(id);
+        assertEquals(result, true);
+
+    }
 }
