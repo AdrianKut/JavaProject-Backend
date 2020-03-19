@@ -14,6 +14,8 @@ import org.mockito.Mockito;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.junit.Assert.*;
 
 public class ComplaintServiceTest {
@@ -36,9 +38,9 @@ public class ComplaintServiceTest {
     private List<Complaint> prepareMocData() {
 
         List<Complaint> complaints = new ArrayList<>();
-        complaints.add(new Complaint(6L, LocalDateTime.parse("2012-02-22T02:06:58.147"), "Cos nie dziala", "PRZYJETO"));
-        complaints.add(new Complaint(8L, LocalDateTime.parse("2012-02-22T02:06:58.147"), "Caly czas tluklo", "ODRZUCONO"));
-        complaints.add(new Complaint(10L, LocalDateTime.parse("2012-02-22T02:06:58.147"), "Cos nie dziala", "W DRODZE"));
+        complaints.add(new Complaint(6L, LocalDateTime.parse("2020-05-30T02:06:58.198"), "Cos nie dziala", "PRZYJETO"));
+        complaints.add(new Complaint(8L, LocalDateTime.parse("2019-08-15T02:08:54.115"), "Caly czas tluklo", "ODRZUCONO"));
+        complaints.add(new Complaint(10L, LocalDateTime.parse("2018-12-10T02:01:58.147"), "Cos nie dziala", "W DRODZE"));
 
         return complaints;
     }
@@ -61,7 +63,7 @@ public class ComplaintServiceTest {
     @Test
     public void get() {
 
-        Long id = 1L;
+        Long id = 14L;
 
         //given
         ComplaintService complaintService = mock(ComplaintService.class);
@@ -74,11 +76,21 @@ public class ComplaintServiceTest {
         assertEquals(complaintService.get(id).getDescription(), null);
     }
 
+    @Test
+    public void delete() {
 
-//
-//    @Test
-//    public void delete() {
-//    }
+        Long id = 156L;
+        final Complaint customer = new Complaint(id, LocalDateTime.parse("2020-02-22T02:06:58.147"), "Cos nie dziala", "PRZYJETO");
+
+        //given
+        ComplaintService complaintService = mock(ComplaintService.class);
+
+        //when
+        complaintService.delete(customer.getComplaintId());
+
+        //then
+        verify(complaintService, times(1)).delete(id);
+    }
 //
 //    @Test
 //    public void testIsComplaintExist() {
