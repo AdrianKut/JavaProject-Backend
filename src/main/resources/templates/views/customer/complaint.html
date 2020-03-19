@@ -4,39 +4,33 @@
       layout:decorate="~{fragments/main_layout}">
     <head>
         <script type="text/javascript" src="/js/search.js"></script>
-        <title>Koszyk</title>
+        <title>Lista reklamacji</title>
     </head>
-
     <body>
         <div layout:fragment="content" class="container mt-2">
+            <div class="row">
+                <div class="col-md-4 offset-md-4 my-1">
+                    <input type="search"  placeholder="Szukaj..." class="form-control search-input border-info" id="search"/>
+                </div>
+            </div>
             <div class="table-responsive mt-2">
                 <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                         <tr  class="active">
-                            <th>Nazwa</th>
-                            <th>Data zakupu</th>
-                            <th>Opis usterki</th>  
-                            <th>Data zgłoszenia</th> 
-                            <th>Status reklamacji</th>                       
-                            
+                            <th>Data zgłoszenia</th>
+                            <th>Produkt</th>
+                            <th>Opis</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody id="table">
-                        <tr th:each ="order : ${orderList}">
-                            <div class="form-check" th:each="product :${order.products}">
-                                <td>   <b  th:text="${product.name} ">...</b></td>                               
-                            </div>
-                            <td> <b  th:text="${order.purchaseDate}">...</b> </td>
-                            
-                            <div class="form-check" th:each="complaint :${order.complaints}">
-                                <td>   <b  th:text="${complaint.description} ">...</b></td>
-                                <td>   <b  th:text="${complaint.notificationDate} ">...</b></td>
-                                <td>   <b  th:text="${complaint.complaintStatus} ">...</b></td>
-                                
-                            </div>
-                            
-                            
-                            
+                        <tr th:each ="complaint : ${complaintList}">
+                            <td> <b  th:text="${#strings.substring(complaint.notificationDate,8,10)} + '-' +  ${#strings.substring(complaint.notificationDate,5,7)}
+                                +'-'+ ${#strings.substring(complaint.notificationDate,0,4)}  + ' ' +${#strings.substring(complaint.notificationDate,11,13)}
+                                + ':' +${#strings.substring(complaint.notificationDate,14,16)} ">...</b> </td>
+                            <td> <b  th:text="${complaint.product.name}"></b></td>
+                            <td> <b  th:text="${complaint.description}">...</b> </td>
+                            <td> <b  th:text="${complaint.complaintStatus}">...</b> </td>
                         </tr>
                     </tbody>
                 </table>
