@@ -93,7 +93,7 @@ public class CustomerServiceTest {
 
     @Test
     public void isCustomerExist() {
-        
+
         //given
         CustomerService customerService = mock(CustomerService.class);
 
@@ -107,7 +107,30 @@ public class CustomerServiceTest {
 
     @Test
     public void testGetByEmail() {
+        
+        final Customer customer = new Customer(30L, "Adrian", "Surname", "156987456");
+        final User user = new User("email@gmail.com", 1, "password", true);
 
+        //given
+        CustomerService customerService = mock(CustomerService.class);
+        UserService userService = mock(UserService.class);
+
+        //when
+        when(customerService.getByEmail("email@gmail.com")).thenReturn(customer);
+        when(customerService.get(30L)).thenReturn(customer);
+        when(userService.get("email@gmail.com")).thenReturn(user);
+
+        user.setCustomer(customer);
+        customer.setUser(user);
+
+        //then
+        assertEquals(customer.getPhoneNumber(), "156987456");
+        assertEquals(user.getUserId().intValue(), 1);
+
+        assertEquals(user.getCustomer().getUser().getEmail(), "email@gmail.com");
+        assertEquals(user.getEmail(), customer.getUser().getEmail());
+        assertEquals(user.getEmail(), "email@gmail.com");
+        assertEquals(customer.getUser().getEmail(), user.getEmail());
     }
 
 }
