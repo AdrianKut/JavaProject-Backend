@@ -78,10 +78,31 @@ public class CustomerServiceTest {
     @Test
     public void delete() {
 
+        Long id = 1L;
+        final Customer customer = new Customer(id, "Adrian", "Surname", "123456789");
+
+        //given
+        CustomerService customerService = mock(CustomerService.class);
+
+        //when
+        customerService.delete(customer.getCustomerId());
+
+        //then
+        verify(customerService, times(1)).delete(id);
     }
 
     @Test
     public void isCustomerExist() {
+        
+        //given
+        CustomerService customerService = mock(CustomerService.class);
+
+        //when
+        when(customerService.isCustomerExist("adres@gmail.com")).thenReturn(true);
+
+        //then
+        final boolean result = customerService.isCustomerExist("adres@gmail.com");
+        assertEquals(result, true);
     }
 
     @Test
