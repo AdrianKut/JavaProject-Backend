@@ -39,4 +39,11 @@ public class OrderService {
     public List<Order> getByCustomer(Customer customer){
         return orderRepository.findByCustomer(customer);
     }
+
+    public List<Order> getOrderByStatus(){
+        return orderRepository.findByOrderStatusNotLike("Wysłane");
+    }
+    
+
+
 }
