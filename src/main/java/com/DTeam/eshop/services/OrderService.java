@@ -2,6 +2,7 @@ package com.DTeam.eshop.services;
 
 import java.util.List;
 
+import com.DTeam.eshop.entities.Customer;
 import com.DTeam.eshop.entities.Order;
 import com.DTeam.eshop.entities.Product;
 import com.DTeam.eshop.repositories.OrderRepository;
