@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragments/main_layout}">
+
+    <head>
+        <title>Dodaj zamówienie</title>
+    </head>
+
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <form th:action="@{|/employee/order/edit/${id}|}" method="POST" th:object="${order}">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Data zakupu</label>
+                            <input class="form-control" type="datetime-local" th:field="${order.purchaseDate}" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Status zamówienia</label>
+                            <select class="form-control" th:field="${order.orderStatus}" required>
+                                <option th:value="${order.orderStatus}">
+                                <option value="">Wybierz status</option>
+                                <option value="Przyjęte">Przyjęte</option>
+                                <option value="W trakcie realizacji">W trakcie realizacji</option>
+                                <option value="Wysłane">Wysłane</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Zapisz</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
