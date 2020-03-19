@@ -22,18 +22,19 @@ public class CustomerHistoryController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/customer/history")
-    public String history(Model model, Principal principal) {
+    @GetMapping("/customer/order")
+    public String getComplaint(Model model, Principal principal) {
 
         String email = principal.getName();
         if (customerService.isCustomerExist(email)) {
             Customer customer = customerService.getByEmail(email);
             List<Order> orderList = orderService.getByCustomer(customer);
             model.addAttribute("orderList", orderList);
-            return "views/customer/history";
+            return "views/customer/order";
 
         } else{
             return "redirect:/";
         }
     }
+
 }

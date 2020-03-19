@@ -41,11 +41,10 @@ public class CustomerComplaintController {
         String email = principal.getName();
         if (customerService.isCustomerExist(email)) {
             Customer customer = customerService.getByEmail(email);
-            List<Order> orderList = orderService.getByCustomer(customer);
-            model.addAttribute("orderList", orderList);
+            List<Complaint> complaintList = complaintService.getByCustomer(customer);
+            model.addAttribute("complaintList", complaintList);
             return "views/customer/complaint";
-
-        } else{
+        } else {
             return "redirect:/";
         }
     }
