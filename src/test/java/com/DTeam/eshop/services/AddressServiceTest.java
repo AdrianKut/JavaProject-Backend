@@ -2,6 +2,8 @@ package com.DTeam.eshop.services;
 
 import com.DTeam.eshop.entities.Address;
 import com.DTeam.eshop.entities.Customer;
+import com.DTeam.eshop.entities.Employee;
+import java.time.LocalDate;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -137,17 +139,28 @@ public class AddressServiceTest {
     @Test
     public void getByEmployeeId() {
         Long id = 1L;
-        final Address address = new Address(id, "Miasto", 997, "36-156");
-
+        final Address address = new Address(567L, "Miasto", 997, "36-156");
+        final Employee employee = new Employee(32L,"Imie","Nazwisko",LocalDate.parse("2020-01-01"),3200.00,"Kierownik");
         //given
         AddressService addressService = mock(AddressService.class);
         EmployeeService employeeService = mock(EmployeeService.class);
 
         //when
         when(addressService.getByCustomerId(id)).thenReturn(address);
+        when(employeeService.get(id)).thenReturn(employee);
+        when(addressService.get(id)).thenReturn(address);
+
+        employee.setAddress(address);
 
         //then
-        Assert.assertEquals(addressService.getByCustomerId(id).getAddressId().longValue(), 1L);
+        assertEquals(employee.getAddress().getAddressId(), address.getAddressId());
+        assertEquals(employee.getAddress().getAddressId().longValue(), 567L);
+
+        assertEquals(addressService.getByCustomerId(id).getAddressId().longValue(), 567L);
+        assertEquals(employeeService.get(id).getEmployeeId().longValue(), 32L);
+
+        assertEquals(employeeService.get(id).getPosition(), "Kierownik");
+        assertEquals(addressService.get(id).getHouseNumber().toString(), ""+997);
 
     }
 }
