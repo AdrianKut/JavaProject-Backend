@@ -17,16 +17,18 @@ public class ComplaintService {
         return complaintRepository.findAll();
     }
 
-    public void save(Complaint complaint){
-        complaintRepository.save(complaint);
+    public Complaint save(Complaint complaint){
+       return complaintRepository.save(complaint);
     }
 
     public Complaint get(Long id){
         return complaintRepository.findById(id).get();
     }
 
-    public void delete(Long id){
+    public Complaint delete(Long id){
+        Complaint complaint = get(id);
         complaintRepository.deleteById(id);
+       return complaint;
     }
 
     public Boolean isComplaintExist(Long id){
