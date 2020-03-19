@@ -140,7 +140,7 @@ public class AddressServiceTest {
     public void getByEmployeeId() {
         Long id = 1L;
         final Address address = new Address(567L, "Miasto", 997, "36-156");
-        final Employee employee = new Employee(32L,"Imie","Nazwisko",LocalDate.parse("2020-01-01"),3200.00,"Kierownik");
+        final Employee employee = new Employee(32L, "Imie", "Nazwisko", LocalDate.parse("2020-01-01"), 3200.00, "Kierownik");
         //given
         AddressService addressService = mock(AddressService.class);
         EmployeeService employeeService = mock(EmployeeService.class);
@@ -160,7 +160,7 @@ public class AddressServiceTest {
         assertEquals(employeeService.get(id).getEmployeeId().longValue(), 32L);
 
         assertEquals(employeeService.get(id).getPosition(), "Kierownik");
-        assertEquals(addressService.get(id).getHouseNumber().toString(), ""+997);
+        assertEquals(addressService.get(id).getHouseNumber().toString(), "" + 997);
 
     }
 }
