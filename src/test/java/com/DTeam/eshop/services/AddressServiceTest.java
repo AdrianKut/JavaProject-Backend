@@ -7,7 +7,6 @@ import java.time.LocalDate;
 
 import java.util.List;
 import java.util.ArrayList;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import org.hamcrest.Matchers;
@@ -17,13 +16,14 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+
 
 public class AddressServiceTest {
 
     @Test
     public void listAll() {
+
         //given
         AddressService addressService = mock(AddressService.class);
 
@@ -31,8 +31,8 @@ public class AddressServiceTest {
         when(addressService.listAll()).thenReturn(prepareMocData());
 
         //then
-        Assert.assertEquals(addressService.listAll().get(0).getCity(), "Rzeszow");
-        Assert.assertThat(addressService.listAll(), Matchers.hasSize(2));
+        assertEquals(addressService.listAll().get(0).getCity(), "Rzeszow");
+        assertThat(addressService.listAll(), Matchers.hasSize(2));
 
     }
 
@@ -46,8 +46,8 @@ public class AddressServiceTest {
 
     @Test
     public void save() {
-        //given
 
+        //given
         AddressService addressService = mock(AddressService.class);
 
         //when
@@ -55,9 +55,9 @@ public class AddressServiceTest {
         Address address = addressService.save(new Address());
 
         //then
-        Assert.assertEquals(address.getCity(), "Miasto");
-        Assert.assertEquals(address.getHouseNumber().toString(), "" + 32);
-        Assert.assertEquals(address.getPostcode(), "31-523");
+        assertEquals(address.getCity(), "Miasto");
+        assertEquals(address.getHouseNumber().toString(), "" + 32);
+        assertEquals(address.getPostcode(), "31-523");
 
     }
 
@@ -72,8 +72,8 @@ public class AddressServiceTest {
         when(addressService.get(id)).thenReturn(new Address(1L, "Miasto", 997, "36-156"));
 
         //then
-        Assert.assertEquals(addressService.get(id).getAddressId().longValue(), 1L);
-        Assert.assertEquals(addressService.get(id).getCity(), "Miasto");
+        assertEquals(addressService.get(id).getAddressId().longValue(), 1L);
+        assertEquals(addressService.get(id).getCity(), "Miasto");
     }
 
     @Test
@@ -138,9 +138,11 @@ public class AddressServiceTest {
 
     @Test
     public void getByEmployeeId() {
+
         Long id = 1L;
         final Address address = new Address(567L, "Miasto", 997, "36-156");
         final Employee employee = new Employee(32L, "Imie", "Nazwisko", LocalDate.parse("2020-01-01"), 3200.00, "Kierownik");
+
         //given
         AddressService addressService = mock(AddressService.class);
         EmployeeService employeeService = mock(EmployeeService.class);
