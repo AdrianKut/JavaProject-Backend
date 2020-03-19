@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-md-4 my-1">
                     <label> Suma koszyka: </label>
-                    <b  th:text="${amount} + ' zł'"></b>
+                    <b  th:text="${#numbers.formatCurrency(amount)} + ' zł'"></b>
                 </div>
                 <div class="col-md-4 offset-md-4 my-1">
                     <td>  <a class="btn btn-block btn-success" href="#">Kup</a></td>
