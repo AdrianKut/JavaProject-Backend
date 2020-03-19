@@ -7,7 +7,64 @@
     </head>
     <body>
         <div layout:fragment="content" class="container mt-2">
-            Hello world!
-        </div>   
+            <form  th:action="@{search/}" class="row">
+                    <div class="col-md-6 my-2">
+                        <input type="search" name="name" placeholder="Szukaj..." class="form-control search-input border-info"/>
+                    </div>
+                    <div class="col-md-6 my-2">
+                        <button type="submit" class="btn btn-primary">Szukaj</button>
+                    </div>
+
+             </form>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Opis</th>
+                        <th>Cena</th>
+                        <th>Zdjęcie</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product : ${productList}">
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.description}"></td>
+                        <td th:text="${#numbers.formatCurrency(product.price)}"></td>
+                        <td><img th:src="${product.photo}" width="120px" height="100px" alt="photo"/> </td>
+                        <td>
+                            <a class="btn btn-primary my-1" th:href="@{'/shopping-cart/add/' + ${product.productId}}">Koszyk</a>
+                            <a class="btn btn-success my-1" href=#>Kup teraz</a>
+                            <a class="btn btn-warning my-1" href=#>Kup bez rejestracji</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <nav aria-label="Pagination" th:if="${productList.totalPages gt 0}">
+                <ul class="pagination justify-content-center font-weight-bold">
+                    <li class="page-item" th:classappend="${productList.number eq 0} ? 'disabled'">
+                        <a class="page-link"
+                        th:href="@{?page={id}(id=${productList.number lt 2 ? 1 : productList.number})}"
+                        aria-label="Previous" title="Previous Page" data-toggle="tooltip">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:classappend="${i eq productList.number + 1} ? 'active'"
+                        th:each="i : ${#numbers.sequence( 1, productList.totalPages, 1)}">
+                        <a class="page-link" th:href="@{?page={id}(id=${i})}" th:text="${i}"
+                        th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${productList.number + 1 eq productList.totalPages} ? 'disabled'">
+                        <a class="page-link"
+                        th:href="@{?page={id}(id=${productList.number + 2})}"
+                        aria-label="Next" title="Next Page" data-toggle="tooltip">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </body>
  </html>

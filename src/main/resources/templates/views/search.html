@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+    <head>
+        <script type="text/javascript" src="/js/search.js"></script>
+        <title>Strona Główna</title>
+    </head>
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <div class="row">
+                <div class="col-md-4 offset-md-4 my-2">
+                    <input type="search"  placeholder="Szukaj..." class="form-control search-input border-info" id="search"/>
+                </div>
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Opis</th>
+                        <th>Cena</th>
+                        <th>Zdjęcie</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody id="table">
+                    <tr th:each="product : ${productList}">
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.description}"></td>
+                        <td th:text="${#numbers.formatCurrency(product.price)}"></td>
+                        <td><img th:src="${product.photo}" width="120px" height="100px" alt="photo"/> </td>
+                        <td>
+                            <a class="btn btn-primary my-1" th:href="@{'/shopping-cart/add/' + ${product.productId}}">Koszyk</a>
+                            <a class="btn btn-success my-1" href=#>Kup teraz</a>
+                            <a class="btn btn-warning my-1" href=#>Kup bez rejestracji</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+ </html>
