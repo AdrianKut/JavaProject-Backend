@@ -32,27 +32,7 @@
                                 + ':' +${#strings.substring(order.purchaseDate,14,16)} ">...</b> </td>
                             <td> <b  th:text="${order.shipmentDate}">...</b> </td>
                             <td> <b  th:text="${order.orderStatus}">...</b> </td>
-                            <td>
-                                <a class="btn btn-danger" th:href="'#modal'+ ${order.orderId}" data-toggle="modal">Usuń</a>
-                                <div class="modal fade" th:id="'modal'+ ${order.orderId}" tabindex="-1">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Usuwanie</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Czy na pewno chcesz usunąć?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
-                                                <a class="btn btn-primary my-1" th:href="@{'delete/' + ${order.orderId}}">Tak</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <td>           
                                 <a class="btn btn-primary my-1" th:href="@{'edit/' + ${order.orderId}}">Edytuj</a>
                             </td>
                         </tr>
