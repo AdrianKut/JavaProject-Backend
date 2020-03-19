@@ -10,16 +10,45 @@
         <div layout:fragment="content" class="container mt-2">
             <form th:action="@{|/customer/complaint/add/${orderId}/${productId}|}" method="POST" th:object="${complaint}">
                 <div class="row">
-                    <div class="col-md-4 offset-md-4 text-center">
-                        <div class="form-group">
-                            <label>Opis userki</label>
-                            <input class="form-control" type="text" th:field="${complaint.description}" required />
+                    <div class="col-md-4 offset-md-1">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="h5" th:text="${product.name}"> </p>
+                            </div>
                         </div>
+                        <div class="row my-2">
+                            <div class="col-md-12">
+                                <img th:src="${product.photo}" width="120px" height="100px" alt="photo"/>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-12">
+                                <p class="h5" th:text="${#numbers.formatCurrency(product.price)} + ' zł'"> </p>
+                            </div>
+                        </div>
+                        <div class="row my-4">
+                            <div class="col-md-12">
+                                <label class="h3"> Data zakupu:</label>
+                                <p class="h5" th:text="${#strings.substring(order.purchaseDate,8,10)} + '-' +  ${#strings.substring(order.purchaseDate,5,7)}
+                                    +'-'+ ${#strings.substring(order.purchaseDate,0,4)}  + ' ' +${#strings.substring(order.purchaseDate,11,13)}
+                                    + ':' +${#strings.substring(order.purchaseDate,14,16)} ">...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 offset-md-2">
+                        <div class="col-md-12 text-center">
+                            <div class="form-group">
+                                <label class="h5">Opis userki</label>
+                                <input class="form-control" type="text" th:field="${complaint.description}" required />
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary">Zapisz</button>
+                        <button type="submit" class="btn btn-primary">Zgłoś reklamację</button>
                     </div>
                 </div>
             </form>
