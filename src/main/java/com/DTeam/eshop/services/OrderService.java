@@ -24,8 +24,12 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    public void saveEdit(Order order){
+        orderRepository.save(order);
+    }
+
     public Order get(Long id){
-        return orderRepository.findById(id).get();
+    return orderRepository.findById(id).get();
     }
 
     public void delete(Long id){
