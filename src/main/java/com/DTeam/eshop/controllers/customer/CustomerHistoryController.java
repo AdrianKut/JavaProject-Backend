@@ -1,5 +1,3 @@
-CustromerHistoryController
-
 package com.DTeam.eshop.controllers.customer;
 
 import java.security.Principal;
