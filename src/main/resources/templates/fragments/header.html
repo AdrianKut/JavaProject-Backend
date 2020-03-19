@@ -52,8 +52,9 @@
                 <a href="/login"  class="mr-2 btn btn-success" role="button">Logowanie</a>
 
             </form>
+            <a style="color: white;" sec:authorize="isAuthenticated()" th:text="'Witaj, '  +${#authentication.name}"></a>
             <form  sec:authorize="isAuthenticated()" th:action="@{/logout}" method="POST">
-                <button class="btn btn-success" type="submit" >Wyloguj</a>
+                <button class="ml-2 btn btn-success" type="submit" >Wyloguj</a>
             </form>
         </div>
     </nav>
