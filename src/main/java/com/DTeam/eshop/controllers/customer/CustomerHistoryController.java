@@ -15,16 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CustomerHistoryController {
-   
+
     @Autowired
     private CustomerService customerService;
 
     @Autowired
     private OrderService orderService;
-
-
-
-    
 
     @GetMapping("/customer/history")
     public String history(Model model, Principal principal) {
@@ -35,12 +31,9 @@ public class CustomerHistoryController {
             List<Order> orderList = orderService.getByCustomer(customer);
             model.addAttribute("orderList", orderList);
             return "views/customer/history";
-            
+
         } else{
-            return "/index";
+            return "redirect:/";
         }
-              
-        
     }
-    
 }
