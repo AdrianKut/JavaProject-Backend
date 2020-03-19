@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 import lombok.Data;
 
 @Entity
@@ -25,7 +24,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "customer_id", nullable = false)
     private Long customerId;
-    
+
     @Column(name = "name", nullable = false, length = 25)
     private String name;
 
@@ -38,7 +37,7 @@ public class Customer {
     @OneToOne
     @JoinColumn(name = "user_email", nullable = true, unique = true)
     private User user;
-    
+
     @ManyToOne
     @JoinColumn(name = "address_id", nullable = true)
     private Address address;
@@ -46,5 +45,14 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
 
-    public Customer(){}
+    public Customer() {
+    }
+
+    public Customer(Long customerId, String name, String surname, String phoneNumber) {
+        this.customerId = customerId;
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+    }
+
 }
