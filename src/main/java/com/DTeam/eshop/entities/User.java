@@ -11,7 +11,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 import lombok.Data;
 
 @Entity
@@ -41,10 +40,18 @@ public class User {
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = {
         @JoinColumn(name = "user_email", referencedColumnName = "email")},
-        inverseJoinColumns = {
-            @JoinColumn(name = "role_name", referencedColumnName = "name")
-        })
+            inverseJoinColumns = {
+                @JoinColumn(name = "role_name", referencedColumnName = "name")
+            })
     private List<Role> roles;
 
-    public User(){}
+    public User() {
+    }
+
+    public User(String email, Integer userId, String password, Boolean enabled) {
+        this.email = email;
+        this.userId = userId;
+        this.password = password;
+        this.enabled = enabled;
+    }
 }
