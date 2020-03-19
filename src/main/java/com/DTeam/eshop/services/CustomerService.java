@@ -11,29 +11,32 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerService {
 
-    @Autowired private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
-    public List<Customer> listAll(){
+    public List<Customer> listAll() {
         return customerRepository.findAll();
     }
 
-    public void save(Customer customer){
-        customerRepository.save(customer);
+    public Customer save(Customer customer) {
+        return customerRepository.save(customer);
     }
 
-    public Customer get(Long id){
+    public Customer get(Long id) {
         return customerRepository.findById(id).get();
     }
 
-    public void delete(Long id){
+    public Customer delete(Long id) {
+        Customer customer = get(id);
         customerRepository.deleteById(id);
+        return customer;
     }
 
-    public Boolean isCustomerExist(String email){
+    public Boolean isCustomerExist(String email) {
         return customerRepository.existsByUserEmail(email);
     }
 
-    public Customer getByEmail(String email){
+    public Customer getByEmail(String email) {
         return customerRepository.findByUserEmail(email);
     }
 }
