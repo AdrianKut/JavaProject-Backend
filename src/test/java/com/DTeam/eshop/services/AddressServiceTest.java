@@ -1,6 +1,7 @@
 package com.DTeam.eshop.services;
 
 import com.DTeam.eshop.entities.Address;
+import com.DTeam.eshop.entities.Customer;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -70,6 +71,7 @@ public class AddressServiceTest {
 
         //then
         Assert.assertEquals(addressService.get(id).getAddressId().longValue(), 1L);
+        Assert.assertEquals(addressService.get(id).getCity(), "Miasto");
     }
 
     @Test
@@ -85,7 +87,7 @@ public class AddressServiceTest {
         addressService.delete(address.getAddressId());
 
         //then
-        verify(addressService, times(1)).delete(1L);
+        verify(addressService, times(1)).delete(id);
 
     }
 
@@ -103,4 +105,49 @@ public class AddressServiceTest {
         assertEquals(result, true);
     }
 
+    @Test
+    public void getByCustomerId() {
+
+        Long id = 1L;
+        final Address address = new Address(123L, "Miasto", 997, "36-156");
+        final Customer customer = new Customer(70L, "Imie", "Nazwisko", "732737999");
+
+        //given
+        AddressService addressService = mock(AddressService.class);
+        CustomerService customerService = mock(CustomerService.class);
+
+        //when
+        when(addressService.getByCustomerId(id)).thenReturn(address);
+        when(customerService.get(id)).thenReturn(customer);
+        when(addressService.get(id)).thenReturn(address);
+
+        customer.setAddress(address);
+
+        //then
+        assertEquals(customer.getAddress().getAddressId(), address.getAddressId());
+        assertEquals(customer.getAddress().getAddressId().longValue(), 123L);
+
+        assertEquals(addressService.getByCustomerId(id).getAddressId().longValue(), 123L);
+        assertEquals(customerService.get(id).getCustomerId().longValue(), 70L);
+
+        assertEquals(customerService.get(id).getName(), "Imie");
+        assertEquals(addressService.get(id).getCity(), "Miasto");
+    }
+
+    @Test
+    public void getByEmployeeId() {
+        Long id = 1L;
+        final Address address = new Address(id, "Miasto", 997, "36-156");
+
+        //given
+        AddressService addressService = mock(AddressService.class);
+        EmployeeService employeeService = mock(EmployeeService.class);
+
+        //when
+        when(addressService.getByCustomerId(id)).thenReturn(address);
+
+        //then
+        Assert.assertEquals(addressService.getByCustomerId(id).getAddressId().longValue(), 1L);
+
+    }
 }
