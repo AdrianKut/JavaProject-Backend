@@ -59,6 +59,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" sec:authorize="hasRole('ROLE_klient')" href="/customer/complaint"> Reklamacja </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" sec:authorize="hasRole('ROLE_pracownik')" href="/employee/order/list"> Zamówienia </a>
+                </li>
             </ul>
 
             <form class="form-inline" sec:authorize="!isAuthenticated()">
