@@ -54,6 +54,15 @@ public class Employee {
 
     public Employee(){}
 
+    public Employee(Long employeeId, String name, String surname, LocalDate employmentDate, Double basePay, String position) {
+        this.employeeId = employeeId;
+        this.name = name;
+        this.surname = surname;
+        this.employmentDate = employmentDate;
+        this.basePay = basePay;
+        this.position = position;
+    }
+    
     public String getEmploymentDate() {
         if (employmentDate!= null) {
            return employmentDate.toString();
