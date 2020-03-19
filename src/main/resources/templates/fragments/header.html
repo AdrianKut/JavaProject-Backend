@@ -1,14 +1,12 @@
 <header th:fragment="header">
- 
-    <div class="jumbotron"  >
+<!--
+ <div class="jumbotron"  >
         <h1>Tytuł</h1>
         <p>Lepsze jutro</p>
-        
+
     </div>
-    
-    
-  
-    <nav class="navbar  navbar-expand-lg ">
+-->
+    <nav class="navbar navbar-dark bg-primary navbar-expand-lg ">
 
         <a class="navbar-brand" href="/">Sklep</a>
 
@@ -18,7 +16,7 @@
 
         <div class="collapse navbar-collapse" id="mainmenu">
             <ul class="navbar-nav mr-auto">
-               
+
                 <li class="nav-item">
                     <a class="nav-link active"  href="/shopping-cart"> Koszyk </a>
                 </li>
@@ -68,7 +66,9 @@
                 <a href="/login"  class="mr-2 btn btn-success" role="button">Logowanie</a>
 
             </form>
-            <a style="color: red;" sec:authorize="isAuthenticated()" th:text="'Witaj, '  +${#authentication.name}"></a>
+  <!--
+   <a style="color: red;" sec:authorize="isAuthenticated()" th:text="'Witaj, '  +${#authentication.name}"></a>
+  -->        <a style="color: white;" sec:authorize="isAuthenticated()" th:text="'Witaj, '  +${#authentication.name}"></a>
             <form  sec:authorize="isAuthenticated()" th:action="@{/logout}" method="POST">
                 <button class="ml-2 btn btn-success" type="submit" >Wyloguj</a>
             </form>

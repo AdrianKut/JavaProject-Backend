@@ -1,18 +1,18 @@
 body
 {
-/*background-image: url(/images/GLOWNA.jpg);*/ 
- padding-bottom: 70px; 
+/*background-image: url(/images/GLOWNA.jpg);*/
+ padding-bottom: 70px;
 }
-.jumbotron
+/*.jumbotron
 {
-  
+
     background-color: #58FAFF;
    margin-bottom: 10px;
 }
 
 .nav-item
 {
-background-color: #58FAFF;  
+background-color: #58FAFF;
 margin-left: 5px;
 border-bottom-left-radius: 15px;
 border-bottom-right-radius: 15px;
@@ -28,6 +28,7 @@ border-top-right-radius: 15px;
 {
     width: auto;
     height: 200px;
-    
-    
+
+
 }
+*/
