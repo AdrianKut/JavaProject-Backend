@@ -1,0 +1,286 @@
+[33m11401da[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Link shopping cart to navbar
+[33m28cfbf6[m Add shopping cart view
+[33m943da21[m Create shopping cart controller and session class
+[33m7ac3d08[m LoggedIn user is displayed in navbar
+[33m1802fae[m Declare description field as TEXT
+[33m21ade23[m Delete unused imports
+[33m7dea5b3[m Change fields type BigDecimal -> Double
+[33mc90a765[m Unit test isAddressExist() AddressService
+[33m33fc2cc[m Unit test delete() AddressService
+[33m2371247[m Unit test get() AddressService
+[33mc181d29[m Add send email functionality to register controller
+[33mae1c7b0[m Create email template
+[33m5fa0ffd[m Create email sender interface and service
+[33m2f86a20[m Set up an email connection
+[33m384e3c8[m Delete custom error type class
+[33m4ed37f2[m Rename function get(),addAddress() to listAll(), save()
+[33mf6bee79[m Modify delete,save with return value
+[33ma8d5668[m Unit Test add() AddressService
+[33m490f7b0[m Merge branch 'master' of github.com:adrin96/JavaProject-Backend
+[33mcc39923[m Add Java Mail Sender dependency
+[33m9fe19fa[m Modify conctructor - add postcode
+[33mc17aada[m Unit Test get() AddressService
+[33m94a8d5d[m Create new constructor with 2 field city, housenumber
+[33m153bcfa[m Update build.gradle - add junit:4.12
+[33mfd101e2[m Add employee profile to navbar
+[33m03075fb[m Create employee profile view
+[33m759cfa5[m Correct redirect URL
+[33mf09c23e[m Create employee module controller
+[33m3c1db2e[m Add get employee by user email method
+[33m75aed54[m Create get address by employee method
+[33mcc5240a[m Improve customer module controller
+[33m1a0d09d[m Change field name edit -> delete
+[33m7c50584[m Add customer profile to header
+[33m01c2914[m Create customer profile controller and view
+[33m32e4468[m Add get customer by username method
+[33mef41ded[m Add get address by customer method
+[33m9d7172a[m Register button is displayed correctly
+[33mdcc91b9[m Change header
+[33m1d2051b[m Add springsecurity5 to build.gradle
+[33m451ad1a[m Add register controller
+[33mb95bb3c[m Improve register view
+[33m63f94c2[m Password will be encrypted when saving to the database
+[33m1c9813f[m Create views for login and registration
+[33mce7b5a2[m Create login controller
+[33mc6697b1[m Create security class
+[33me88c11e[m Roles can be delete
+[33m06b3f75[m Change header
+[33m39f7bdc[m Move administrator functions to a separate module
+[33mc35ecaf[m Add HTML5 fields validation
+[33m68f9ec2[m Employemnt date is displayed correctly
+[33mdc48825[m Product photo can be added and displayed
+[33md0e09f9[m Add photo field to product entity
+[33m49da4b5[m Purchase and shipment date are displayed correctly
+[33m76596cc[m Order status can be selected from list
+[33m67e1bfa[m Remove json in user entity
+[33m4f73025[m Remove json in role entity
+[33mf9d0e4f[m Remove json in product entity
+[33m66abc97[m Remove json in payment entity
+[33mb9329ff[m Remove json in order entity
+[33meb48d3e[m Remove json in employee entity
+[33m7af2127[m Remove json in customer entity
+[33mc87e383[m Remove json in complaint entity
+[33m04955d3[m Remove json import in entitie address
+[33me2745bf[m Remove json in entitie address
+[33m9618b43[m Improve amount and payment date display
+[33m9fdcd9b[m Payment method can be selected from list
+[33m7247593[m Delete payment status field
+[33m92fb893[m Complaint status can be selected from list
+[33m8253510[m Change edit view in order
+[33m9561ca1[m Change add view in order
+[33md956018[m Add customer and address to order controller
+[33mc66dca4[m Add search and confirm delete functionality to views
+[33mb4deb6b[m Change PATCH to POST mapping
+[33ma7f6c9c[m Shipment date can be null
+[33mce14f78[m Improve controllers methods
+[33m68a550e[m Imporove user list displayed
+[33m70f66de[m Correct edit method in the user controller
+[33m368bf02[m Improve role list view
+[33m3023a08[m Improve customer views
+[33m1aa2bbc[m Add employee views
+[33m72b7da5[m Create employee controller
+[33m8481447[m Delete unused import
+[33m58d0681[m Remove delete role functionality
+[33me7f3575[m Add js search function
+[33m725303e[m Create address views
+[33mff0ab79[m Create address controller
+[33ma9fde50[m Add customer views
+[33m813c439[m Correct edit method
+[33m8fbf1ac[m Create customer controller
+[33m37cbcf7[m Add user views
+[33m969107b[m Add relation fuctionality to the user controller
+[33m39fccdd[m Create user controller
+[33m9126e73[m Create empty AddressServiceTest file
+[33med7e839[m Change select in order edit view
+[33m3c12dec[m Change select in order add view
+[33m0b1fec5[m Change edit view in order
+[33meb3592c[m Change add view in order
+[33m628dd7a[m Change edit view in complaint
+[33mccbb19d[m Change add view in complaint
+[33m816a49e[m Add product and order to complaint controller
+[33m573888b[m Change add view in order
+[33m7833909[m Change save in order services
+[33m51c393c[m Change order controller
+[33m92ee77d[m Create list order in payment view edit
+[33mbd7574e[m Create list order in payment view
+[33mcd0a159[m Add order to save in payment controller
+[33mbafe977[m Create edit view in complaint
+[33mee754ea[m Create add view in complaint
+[33m3911233[m Change header
+[33m0844e1c[m Create list view in complaint
+[33m71f9622[m Create complaint controller
+[33ma19d327[m Create edit view in product
+[33m1defb3e[m Create add view in product
+[33mb640168[m Change header
+[33m16c335c[m Create list view in product
+[33m7960f8b[m Change product controller
+[33m4201a0a[m Create product controller
+[33mc0cd686[m Remove import valid in payment controller
+[33m3bfd07d[m Add navbar items
+[33m5463619[m Crete role views
+[33mf1b3964[m Add controller annotation
+[33mf318962[m Create role controller
+[33me0ea91d[m Change header
+[33mede48ba[m Create list view in order
+[33m9843073[m Create add view in order
+[33m86bf5b8[m Create edit view in order
+[33me6de64b[m Change payment controller
+[33m475ad99[m Create order controller
+[33m8a639a6[m Create edit view in payment
+[33m449df24[m Create add view in payment
+[33mb92d9a1[m Create stylesheet
+[33m1ffeef0[m Add list view in payment
+[33m8813e5c[m Add payment to menu
+[33m20bcf9d[m Change header
+[33m1a6b454[m Change build.gradle
+[33m3766924[m Create main_layout view
+[33m84d1756[m Create header view
+[33mdb29664[m Create footer view
+[33mc1788b2[m Create index view
+[33m1fee72e[m Create index controller
+[33m0921a8e[m Create payment controller
+[33m9c528e9[m Update README.md
+[33m526dee3[m Delete REST Controller
+[33m9f82d39[m Created new file README.md
+[33mca89e49[m Impove comment
+[33mc6c3d13[m Correct function name
+[33m9635d7b[m Create order - product relationship methods
+[33m07e920f[m Add getByOrderId method
+[33m618f464[m Add get products by order id method
+[33ma13e73b[m Add Json annotations
+[33mae6c7d6[m Create user - role relationship methods
+[33m29ee99d[m Add getByUserEmail method
+[33m12adb6d[m Add get roles by user email method
+[33m638e16c[m Add Json annotations
+[33mcf76042[m Create the association in relation order - customer
+[33m67b533f[m Create update a customer method in relation order - customer
+[33m6d9568d[m Create a customer method in relation order - customer
+[33m210bb1f[m Add Json annotations
+[33m6499cfe[m Create get method in relation order - customer
+[33m4027672[m Create the association in relation order - address
+[33m212b48d[m Create update address method in relation order - address
+[33mf9ff1d7[m Create a address method in relation order - address
+[33m7ef1adf[m Add Json annotations
+[33ma2dbb4c[m Create get method in relation order - address
+[33m2e45735[m Delete unused import
+[33md7ca696[m Add values to Json back references
+[33m488cd77[m Create customer - user relationship methods
+[33m9bfd390[m Correct Uri paths
+[33mf6ee82f[m Add Json annotations
+[33mbb64923[m Create customer - address relationship methods
+[33m8926dce[m Create the association in relation  complaint - product
+[33m0507275[m Create update product in relation  complaint - product
+[33m33116df[m Create a produt in relation  complaint - product
+[33mad3b524[m Change Json annotations
+[33m604fbf7[m Create get method in relation  complaint - product
+[33m601263f[m Create Json annotations
+[33m7d04588[m Create the association in relation  complaint - order
+[33meea61e5[m Create update order in relation  complaint - order
+[33m10751a5[m Create a order in relation  complaint - order
+[33mee1f206[m Create get method in relation  complaint - order
+[33m4571475[m Create Json annotations
+[33m1991619[m Create the association in relation  payment - order
+[33me6cc09f[m Create put method in relation  payment - order
+[33md3e472d[m Create post method in relation  payment - order
+[33m3bb4ed7[m Add Json annotations
+[33m6863b8d[m Correct uri path
+[33me2f3edc[m Improve employee controller
+[33m95f4bc4[m Add Json annotations
+[33mdfe4731[m Create employee - user relationship methods
+[33mcf5d919[m Create customer REST controller
+[33m6f6c384[m Create isCustomerExist method
+[33mf8cf7a7[m Delete unused imports
+[33md4be178[m Create employee - address relationship methods
+[33m28778b5[m Add Json annotations
+[33mac1447b[m Delete value keywords
+[33m6774607[m Create address REST controller
+[33m2dc1f57[m Create isAddressExist method
+[33mb01caa5[m If loop checks if id is different from null
+[33m7316fe9[m Improve error messages
+[33m2c61e9d[m Correct methods names
+[33ma8561d8[m Create Employee REST controller
+[33mf8a3cae[m Create isEmployeeExist method
+[33mb65e096[m Change user endpoints
+[33m98d1b2e[m Change role endpoints
+[33m35d1267[m Change product endpoints
+[33m93a51cd[m Change payment endpoints
+[33m2e1a1e4[m Correct Uris
+[33m190ec11[m Change order endpoints
+[33m7db41ee[m Change complaint endpoints
+[33m34e4fa3[m Create complaint REST controller
+[33mb1524e7[m Create product REST controller
+[33m80267ba[m Change name function to getPayments
+[33mc52227c[m Create payment REST controller
+[33m80e2c5d[m Create order REST controller
+[33mb0147d5[m Delete unused import
+[33m23141b1[m Change variable name -> email
+[33mf08d702[m Delete unused methods
+[33m7130214[m Create user REST controller
+[33m646a268[m Create isUserExist method
+[33m52e7505[m Improve role REST controller
+[33mbcc8825[m Create delete all roles method
+[33m0a9b57f[m Create class to display error messages
+[33mf8c81f0[m Create isRoleExist method
+[33md2f8872[m Disable recreate database
+[33m058cbf0[m Create role REST controller
+[33m5e2d45c[m Change return type void -> Role
+[33ma570473[m Change return type void -> Role
+[33mf7e5a41[m Create customer service
+[33m090c268[m Change access modifier public -> private
+[33m99c1d02[m Create address service
+[33mb249bba[m Create user service
+[33m13bdbec[m Create employee service
+[33mb4c6a75[m Create role service
+[33ma0e4a7a[m Create customer repository
+[33md4bbe37[m Create address repository
+[33m0d0c2b1[m Create user repository
+[33mee5712b[m Create employee repository
+[33ma939152[m Create role repository
+[33m9f9a9a7[m Create complaint service
+[33m0ed83b5[m Create product service
+[33mf657e0b[m Create payment service
+[33md6f554a[m Create order service
+[33m3dcb461[m Create complaint repository
+[33me0e1e7a[m Create product repository
+[33ma24bcf9[m Create payment repository
+[33m266fcf5[m Create order repository
+[33m1f5e6e4[m Create @OneToMany relation (products - complaints)
+[33mbe7bcfe[m Create @ManyToOne relation (complaints - products)
+[33m045d0a2[m Create @ManyToOne relation (complaints - orders)
+[33mfbf8de9[m Create @OneToMany relation (orders - complaints)
+[33m41f83d4[m Create @ManyToMany relation (orders - products)
+[33m8d9046a[m Create @ManyToMany relation (products - orders)
+[33mb448010[m Create @ManyToOne relation (payments - orders)
+[33med82908[m Create @OneToMany relation (orders - payments)
+[33m80ebda1[m Create @OneToMany relation (customer - order)
+[33m53d0ad2[m Create @OneToMany relation (address - order)
+[33m570a752[m Create @OneToMany realtion (customer - address)
+[33mea23b8b[m Create @OneToOne relation (user - customer)
+[33m33f4e60[m Create @OneToMany relation (employee - address)
+[33m643f78e[m Create @OneToOne relation (user - employee)
+[33m59c3993[m Create @ManyToMany relation (user - role)
+[33m9e49e21[m Set max length customer name, surname and phone number
+[33m6973bf2[m Set max length adress street, postcode and city
+[33m6cb5087[m Set max length employee name, surname and position
+[33m905e9c0[m Set max length user email and password
+[33mf85a0a8[m Set max length role name
+[33m8b17e99[m Add customer entity
+[33m442da24[m Correct file name
+[33md0250e4[m Add address entity
+[33ma16835a[m Add employee entity
+[33m44afc4c[m Correct field name roles -> name
+[33m0404765[m Add user entity
+[33mcbe7f19[m Add role entity
+[33madf44e5[m Remove lenght in Order
+[33m85fc933[m Remove lenght in Payment
+[33m03df08f[m Remove lenght in Product
+[33mbf15add[m Add Complaint to entities
+[33mee475c0[m Add Product to entities
+[33mc376495[m Change in Order option lenght
+[33m3dbfce3[m Add Payment to entities
+[33m8576072[m Add Order to entities
+[33m3083003[m Change server port
+[33m949b8ea[m Disable Spring Security
+[33m66c9b00[m Add PostgreSQL configuration and UTF-8 encoding
+[33m6623125[m Update .gitignore
+[33m758a2db[m Init new repository
