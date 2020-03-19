@@ -22,7 +22,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testListAll() {
+    public void listAll() {
 
         //given
         CustomerService customerService = mock(CustomerService.class);
@@ -46,7 +46,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testSave() {
+    public void save() {
 
         //given
         CustomerService customerService = mock(CustomerService.class);
@@ -61,17 +61,27 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testGet() {
+    public void get() {
+
+        Long id = 1L;
+        //given
+        CustomerService customerService = mock(CustomerService.class);
+
+        //when
+        when(customerService.get(id)).thenReturn(new Customer());
+
+        //then
+        assertEquals(customerService.get(id).getAddress(), null);
+        assertEquals(customerService.get(id).getOrders(), null);
+    }
+
+    @Test
+    public void delete() {
 
     }
 
     @Test
-    public void testDelete() {
-
-    }
-
-    @Test
-    public void testIsCustomerExist() {
+    public void isCustomerExist() {
     }
 
     @Test
