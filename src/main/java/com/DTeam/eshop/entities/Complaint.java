@@ -44,6 +44,14 @@ public class Complaint {
 
     public Complaint(){}
 
+    public Complaint(Long complaintId, LocalDateTime notificationDate, String description, String complaintStatus) {
+        this.complaintId = complaintId;
+        this.notificationDate = notificationDate;
+        this.description = description;
+        this.complaintStatus = complaintStatus;
+    }
+   
+
     public String getNotificationDate() {      
         if(notificationDate !=null){
             return notificationDate.toString();
