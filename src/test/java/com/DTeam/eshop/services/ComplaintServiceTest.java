@@ -1,8 +1,6 @@
 package com.DTeam.eshop.services;
 
 import com.DTeam.eshop.entities.Complaint;
-import com.DTeam.eshop.entities.Address;
-
 import java.time.LocalDateTime;
 
 import java.util.List;
@@ -96,6 +94,7 @@ public class ComplaintServiceTest {
     public void isComplaintExist() {
 
         Long id = 999L;
+
         //given
         ComplaintService complaintService = mock(ComplaintService.class);
 
