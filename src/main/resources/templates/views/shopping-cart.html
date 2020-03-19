@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+    <head>
+        <script type="text/javascript" src="/js/search.js"></script>
+        <title>Koszyk</title>
+    </head>
+
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <div class="table-responsive mt-2">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr  class="active">
+                            <th>Nazwa</th>
+                            <th>Cena</th>
+                            <th>Zdjęcie</th>
+                            <th>Akcja</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table">
+                        <tr th:each ="product,itrStat : ${productList}">
+                            <td> <b  th:text="${product.name}">...</b> </td>
+                            <td> <b  th:text="${#numbers.formatCurrency(product.price)}">...</b> </td>
+                            <td>  <img th:src="${product.photo}" width="120px" height="100px" alt="photo"/> </td>
+                            <td>  <a class="btn btn-danger" th:href="@{'shopping-cart/delete/' + ${itrStat.index}}">Usuń</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-4 my-1">
+                    <label> Suma koszyka: </label>
+                    <b  th:text="${amount} + ' zł'"></b>
+                </div>
+                <div class="col-md-4 offset-md-4 my-1">
+                    <td>  <a class="btn btn-block btn-success" href="#">Kup</a></td>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
