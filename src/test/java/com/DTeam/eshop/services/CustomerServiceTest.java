@@ -38,6 +38,7 @@ public class CustomerServiceTest {
     }
 
     private List<Customer> prepareMocData() {
+
         List<Customer> customers = new ArrayList<>();
         customers.add(new Customer(50L, "Name", "Yes", "123456789"));
         customers.add(new Customer(40L, "Supername", "No", "987565412"));
@@ -64,6 +65,7 @@ public class CustomerServiceTest {
     public void get() {
 
         Long id = 1L;
+        
         //given
         CustomerService customerService = mock(CustomerService.class);
 
@@ -106,8 +108,8 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testGetByEmail() {
-        
+    public void getByEmail() {
+
         final Customer customer = new Customer(30L, "Adrian", "Surname", "156987456");
         final User user = new User("email@gmail.com", 1, "password", true);
 
