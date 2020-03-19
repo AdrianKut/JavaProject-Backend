@@ -1,10 +1,7 @@
 package com.DTeam.eshop.services;
 
-
 import com.DTeam.eshop.entities.Complaint;
 import com.DTeam.eshop.entities.Address;
-
-
 
 import java.time.LocalDateTime;
 
@@ -14,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import org.hamcrest.Matchers;
 import org.mockito.Mockito;
-
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -61,18 +57,30 @@ public class ComplaintServiceTest {
         assertEquals(complaint.getDescription(), null);
         assertEquals(complaint.getComplaintStatus(), null);
     }
-    
-    
-//    @Test
-//    public void testGet() {
-//    }
+
+    @Test
+    public void get() {
+
+        Long id = 1L;
+
+        //given
+        ComplaintService complaintService = mock(ComplaintService.class);
+
+        //when
+        when(complaintService.get(id)).thenReturn(new Complaint());
+
+        //then
+        assertEquals(complaintService.get(id).getOrder(), null);
+        assertEquals(complaintService.get(id).getDescription(), null);
+    }
+
+
 //
 //    @Test
-//    public void testDelete() {
+//    public void delete() {
 //    }
 //
 //    @Test
 //    public void testIsComplaintExist() {
 //    }
-
 }
