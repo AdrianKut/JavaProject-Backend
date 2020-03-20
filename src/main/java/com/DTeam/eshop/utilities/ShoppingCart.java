@@ -34,4 +34,8 @@ public class ShoppingCart {
         }
         return sum;
     }
+
+    public void clear(){
+        products.clear();
+    }
 }
