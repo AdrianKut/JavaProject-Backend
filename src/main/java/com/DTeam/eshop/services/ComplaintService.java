@@ -39,4 +39,8 @@ public class ComplaintService {
     public List<Complaint> getByCustomer(Customer customer){
         return complaintRepository.findByOrderCustomer(customer);
     }
+
+    public List<Complaint> getComplaintByStatus(){
+        return complaintRepository.findByComplaintStatusOrComplaintStatus("Przyjęta","W trakcie realizacji");
+    }
 }
