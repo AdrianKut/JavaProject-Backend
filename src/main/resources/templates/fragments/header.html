@@ -70,7 +70,7 @@
                 </li>
             </ul>
 
-            <a href="/shopping-cart" type="button" class="btn btn-warning mr-2">
+            <a sec:authorize="!hasRole('ROLE_admin') and !hasRole('ROLE_pracownik')" href="/shopping-cart" type="button" class="btn btn-warning mr-2">
                 Koszyk <span th:text="${session.count}" class="badge badge-light">0</span>
             </a>
 
