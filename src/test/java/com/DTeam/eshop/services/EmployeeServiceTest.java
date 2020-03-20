@@ -1,6 +1,8 @@
 package com.DTeam.eshop.services;
 
 import com.DTeam.eshop.entities.Employee;
+import com.DTeam.eshop.entities.User;
+
 import java.time.LocalDate;
 
 import java.util.List;
@@ -20,6 +22,7 @@ public class EmployeeServiceTest {
 
     //given
     final EmployeeService employeeService = mock(EmployeeService.class);
+    final UserService userService = mock(UserService.class);
 
     @Test
     public void testListAll() {
@@ -105,9 +108,31 @@ public class EmployeeServiceTest {
         final boolean result = employeeService.isEmployeeExist(email);
         assertEquals(result, true);
     }
-    
 
     @Test
     public void testGetByEmail() {
+
+        String email = "adres@o2.pl";
+        Long id = 324L;
+        final User user = new User(email, Integer.SIZE, "1234", true);
+        final Employee employee = new Employee(id, "", "", LocalDate.now(), Double.NaN, "");
+
+        //when
+        when(employeeService.get(id)).thenReturn(employee);
+        when(userService.get(email)).thenReturn(user);
+
+        //user.setEmployee(employee);
+        employee.setUser(user);
+
+        //then
+        assertEquals(employee.getEmployeeId().longValue(), 324L);
+        assertEquals(employee.getUser().getEmail(), email);
+        assertEquals(employee.getName(), "");
+
+        assertEquals(user.getEmail(), email);
+        assertEquals(user.getPassword(), "1234");
+
+        assertEquals(employee.getUser().getEmail(), user.getEmail());
+
     }
 }
