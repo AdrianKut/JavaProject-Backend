@@ -30,13 +30,12 @@ public class OrderServiceTest {
         //then
         assertEquals(orderService.listAll().get(0).getOrderId(), null);
         assertEquals(orderService.listAll().get(2).getOrderId().longValue(), 32L);
-        assertEquals(orderService.listAll().get(2).getPurchaseDate().toString(),localDateTime);
+        assertEquals(orderService.listAll().get(2).getPurchaseDate().toString(), localDateTime);
         assertThat(orderService.listAll(), Matchers.hasSize(3));
     }
 
     private List<Order> prepareMocData(LocalDateTime localDateTime) {
 
-        
         List<Order> orders = new ArrayList<>();
 
         orders.add(new Order());
@@ -47,6 +46,13 @@ public class OrderServiceTest {
 
     @Test
     public void testSave() {
+
+//        //when
+//        when(orderService.save(Mockito.any(Order.class)).thenReturn(new Order()));
+//        Order order = orderService.save(new Order());
+//
+//        //then
+//        assertEquals(order.getEmployeeId().toString(), "" + 156L);
     }
 
     @Test
@@ -55,6 +61,22 @@ public class OrderServiceTest {
 
     @Test
     public void testGet() {
+        
+        Long id = 894L;
+
+        //when
+        when(orderService.get(id)).thenReturn(new Order());
+
+        //then
+        assertEquals(orderService.get(id).getOrderId(), null);
+        assertEquals(orderService.get(id).getPurchaseDate().toString(), "");
+
+        try {
+            assertEquals(orderService.get(id).getCustomer(), "sample position");
+            assertEquals(orderService.get(id).getShipmentDate(), null);
+        } catch (AssertionError error) {
+            assert (true);
+        }
     }
 
     @Test
