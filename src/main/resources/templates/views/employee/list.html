@@ -34,7 +34,8 @@
                             <td> <b  th:text="${order.orderStatus}">...</b> </td>
                             <td>           
                                 <a class="btn btn-primary my-1" th:href="@{'edit/' + ${order.orderId}}">Edytuj</a>
-                            </td>
+                                <a class="btn btn-primary my-1" th:href="@{'detail/' + ${order.orderId}}">Szczegóły</a>
+                            </td>                         
                         </tr>
                     </tbody>
                 </table>
