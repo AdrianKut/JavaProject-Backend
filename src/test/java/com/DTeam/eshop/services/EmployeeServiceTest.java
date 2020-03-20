@@ -83,7 +83,7 @@ public class EmployeeServiceTest {
 
     @Test
     public void testDelete() {
-        
+
         Long id = 189L;
         final Employee employee = new Employee(id, "", "", LocalDate.now(), 1.0, "");
 
@@ -94,11 +94,20 @@ public class EmployeeServiceTest {
         verify(employeeService, times(1)).delete(id);
     }
 
-//    @Test
-//    public void testIsEmployeeExist() {
-//    }
-//
-//    @Test
-//    public void testGetByEmail() {
-//    }
+    @Test
+    public void testIsEmployeeExist() {
+
+        String email = "adres@o2.pl";
+        //when
+        when(employeeService.isEmployeeExist(email)).thenReturn(true);
+
+        //then
+        final boolean result = employeeService.isEmployeeExist(email);
+        assertEquals(result, true);
+    }
+    
+
+    @Test
+    public void testGetByEmail() {
+    }
 }
