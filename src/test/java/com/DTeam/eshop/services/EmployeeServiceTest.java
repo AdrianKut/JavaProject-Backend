@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 public class EmployeeServiceTest {
 
     //given
-    EmployeeService employeeService = mock(EmployeeService.class);
+    final EmployeeService employeeService = mock(EmployeeService.class);
 
     @Test
     public void testListAll() {
@@ -57,10 +57,30 @@ public class EmployeeServiceTest {
         assertEquals(employee.getBasePay().toString(), "" + 456.50);
     }
 
-//    @Test
-//    public void testGet() {
-//    }
-//
+    @Test
+    public void testGet() {
+
+        Long id = 1L;
+
+        //when
+        when(employeeService.get(id)).thenReturn(new Employee());
+
+        //then
+        assertEquals(employeeService.get(id).getEmployeeId(), null);
+        assertEquals(employeeService.get(id).getName(), null);
+        assertEquals(employeeService.get(id).getSurname(), null);
+        assertEquals(employeeService.get(id).getBasePay(), null);
+        assertEquals(employeeService.get(id).getPosition(), null);
+
+        try {
+            assertEquals(employeeService.get(id).getPosition(), "sample position");
+            assertEquals(employeeService.get(id).getEmploymentDate(),null);
+        } catch (AssertionError error) {
+            assert (true);
+        }
+
+    }
+
 //    @Test
 //    public void testDelete() {
 //    }
