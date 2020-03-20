@@ -32,3 +32,9 @@ border-top-right-radius: 15px;
 
 }
 */
+
+.button, .search {
+    padding-left: 2px;
+    padding-right: 0;
+}
+
