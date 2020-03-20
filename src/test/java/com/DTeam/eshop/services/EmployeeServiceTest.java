@@ -20,17 +20,14 @@ import static org.junit.Assert.*;
 
 public class EmployeeServiceTest {
 
-    //given
     final EmployeeService employeeService = mock(EmployeeService.class);
     final UserService userService = mock(UserService.class);
 
     @Test
     public void testListAll() {
 
-        //when
         when(employeeService.listAll()).thenReturn(prepareMocData());
 
-        //then
         assertEquals(employeeService.listAll().get(0).getAddress(), null);
         assertEquals(employeeService.listAll().get(2).getSurname(), "Surname");
         assertEquals(employeeService.listAll().get(2).getBasePay().toString(), "12340.5");
@@ -51,11 +48,9 @@ public class EmployeeServiceTest {
     @Test
     public void testSave() {
 
-        //when
         when(employeeService.save(Mockito.any(Employee.class))).thenReturn(new Employee(156L, "John", "Cena", LocalDate.now(), 456.50, "Test"));
         Employee employee = employeeService.save(new Employee());
 
-        //then
         assertEquals(employee.getEmployeeId().toString(), "" + 156L);
         assertEquals(employee.getBasePay().toString(), "" + 456.50);
     }
@@ -65,10 +60,8 @@ public class EmployeeServiceTest {
 
         Long id = 42L;
 
-        //when
         when(employeeService.get(id)).thenReturn(new Employee());
 
-        //then
         assertEquals(employeeService.get(id).getEmployeeId(), null);
         assertEquals(employeeService.get(id).getName(), null);
         assertEquals(employeeService.get(id).getSurname(), null);
@@ -90,10 +83,8 @@ public class EmployeeServiceTest {
         Long id = 189L;
         final Employee employee = new Employee(id, "", "", LocalDate.now(), 1.0, "");
 
-        //when
         employeeService.delete(employee.getEmployeeId());
 
-        //then
         verify(employeeService, times(1)).delete(id);
     }
 
@@ -101,11 +92,10 @@ public class EmployeeServiceTest {
     public void testIsEmployeeExist() {
 
         String email = "adres@o2.pl";
-        //when
-        when(employeeService.isEmployeeExist(email)).thenReturn(true);
 
-        //then
-        final boolean result = employeeService.isEmployeeExist(email);
+        when(userService.isUserExist(email)).thenReturn(true);
+
+        final boolean result = userService.isUserExist(email);
         assertEquals(result, true);
     }
 
@@ -117,13 +107,11 @@ public class EmployeeServiceTest {
         final User user = new User(email, Integer.SIZE, "1234", true);
         final Employee employee = new Employee(id, "", "", LocalDate.now(), Double.NaN, "");
 
-        //when
         when(employeeService.get(id)).thenReturn(employee);
         when(userService.get(email)).thenReturn(user);
 
         employee.setUser(user);
 
-        //then
         assertEquals(employee.getEmployeeId().longValue(), 324L);
         assertEquals(employee.getUser().getEmail(), email);
         assertEquals(employee.getName(), "");
