@@ -11,8 +11,8 @@
                     <div class="col-md-4 offset-md-3 my-4">
                         <input type="search" name="name" placeholder="Szukaj..." class="form-control search-input border-info"/>
                     </div>
-                    <div class="col-md-3 my-4">
-                        <button type="submit" style="border-radius: 15px;" class="btn btn-primary">Szukaj</button>
+                    <div class="col-md-3 my-2">
+                        <button type="submit" style="border-radius: 15px;" class="btn btn-outline-primary">Szukaj</button>
                     </div>
 
              </form>
@@ -24,9 +24,9 @@
                     <h4 class="card-title"  style="min-height: 3.5rem;" th:text="${product.name}"></h4>
                     <p class="card-text" style="height: 4rem;"  th:text="${product.description}"></p>
                     <p class="h6" th:text="'Cena: ' +${#numbers.formatCurrency(product.price)}"></p>
-                    <a class="btn btn-primary my-1"  style="border-radius: 15px;" th:href="@{'/shopping-cart/add/' + ${product.productId}}">Koszyk</a>
-                    <a class="btn btn-success my-1"  style="border-radius: 15px;" th:href="@{'/customer/buy/' + ${product.productId}}">Kup teraz</a>
-                    <a class="btn btn-info my-1"  style="border-radius: 15px;" th:href="@{'/buy/no-register/' + ${product.productId}}">Kup bez rejestracji</a>
+                    <a class="btn btn-outline-primary my-1"  style="border-radius: 15px;" th:href="@{'/shopping-cart/add/' + ${product.productId}}">Dodaj do koszyka</a>
+                    <a class="btn btn-outline-success my-1"  style="border-radius: 15px;" th:href="@{'/customer/buy/' + ${product.productId}}">Kup teraz</a>
+                    <a class="btn btn-outline-info my-1 col-md-10"  style="border-radius: 15px;" th:href="@{'/buy/no-register/' + ${product.productId}}">Kup bez rejestracji</a>
                     </div>
                 </div>
             </div>
