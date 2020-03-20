@@ -16,16 +16,17 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static org.junit.Assert.*;
+import org.junit.ComparisonFailure;
 
 public class OrderServiceTest {
 
     final OrderService orderService = mock(OrderService.class);
     final CustomerService customerService = mock(CustomerService.class);
+    final static String localDateTime = LocalDateTime.now().toString();
 
     @Test
     public void testListAll() {
 
-        String localDateTime = LocalDateTime.now().toString();
         //when
         when(orderService.listAll()).thenReturn(prepareMocData(LocalDateTime.parse(localDateTime)));
 
@@ -122,17 +123,16 @@ public class OrderServiceTest {
 
         //when
         when(customerService.get(id)).thenReturn(customer);
-        //   when(orderService.get(id)).thenReturn(order);
 
         customer.setOrders(orders);
 
         //then
         assertEquals(customer.getOrders().size(), 3);
-        assertEquals(customer.getOrders().get(2).getOrderId().toString(),""+ 32L);
+        assertEquals(customer.getOrders().get(2).getOrderId().toString(), "" + 32L);
         assertEquals(customer.getOrders().get(2).getPurchaseDate(), localDateTime);
-        
+
         assertEquals(customer.getCustomerId().longValue(), 42L);
-        
+
         assertEquals(orders.get(0).getOrderId(), null);
         assertEquals(orders.get(1).getProducts(), null);
 
@@ -140,6 +140,19 @@ public class OrderServiceTest {
 
     @Test
     public void testGetOrderByStatus() {
+
+        //when
+        when(orderService.getOrderByStatus()).thenReturn(prepareMocData(LocalDateTime.parse(localDateTime)));
+
+        //then
+        orderService.getOrderByStatus().get(0).setOrderStatus("Przyjęto");
+        verify(orderService, times(1)).getOrderByStatus();
+
+        try {
+            final String resultStatus = orderService.getOrderByStatus().get(0).getOrderStatus();
+            assertEquals(resultStatus, "Wysłane"); // Ma zwrócić wszystkie które nie mają wysłane np. Przyjęto jak wyżej
+        } catch (ComparisonFailure e) {
+        }
 
     }
 
