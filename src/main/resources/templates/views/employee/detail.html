@@ -17,8 +17,7 @@
                             <th>Nazwisko</th>
                             <th>Numer telefonu</th>
                             <th>Adres</th>
-                            <th>Nazwa produktu</th>
-                            <th>Zdjęcie</th>
+                            <th>Produkt</th>
                         </tr>
                     </thead>
                     <tbody id="table">
@@ -34,11 +33,12 @@
                                     + ' ' +${order.customer.address.postcode}">
                                 </b>
                             </td>
-                            <div th:each ="product :${order.products}">
-                                <td><b  th:text="${product.name}">...</b></td>
-                                <td><img th:src="${product.photo}" width="120px" height="100px" alt="photo"/> </td>
-                            </div>
-                            
+                            <td class=text-center>
+                                <div th:each ="product :${order.products}">
+                                <b  th:text="${product.name}">...</b>
+                                <img th:src="${product.photo}" width="60px" height="50px" alt="photo"/></div>
+                            </td>
+
                         </tr>
                     </tbody>
                 </table>
