@@ -47,6 +47,22 @@
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
                         <div class="form-group">
+                            <label>Kategoria produktu</label>
+                            <select class="form-control" th:field="${product.category}" required>
+                                <option value="">Wybierz kategorie</option>
+                                <option value="Laptopy i komputery">Laptopy i komputery</option>
+                                <option value="Podzespoły komputerowe">Podzespoły komputerowe</option>
+                                <option value="Urządzenia peryferyjne">Urządzenia peryferyjne</option>
+                                <option value="Oprogramowanie">Oprogramowanie</option>
+                                <option value="Akcesoria">Akcesoria</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
                             <label>Zdjęcie [Adres URL]</label>
                             <input class="form-control" type="url" th:field="${product.photo}" required />
                         </div>
