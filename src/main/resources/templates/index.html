@@ -8,17 +8,17 @@
     <body>
         <div layout:fragment="content" class="container mt-2">
             <form  th:action="@{search/}" class="row">
-                    <div class="col-md-4 offset-md-3 my-4">
+                    <div class="col-md-4 offset-md-4 my-4">
                         <input type="search" name="name" placeholder="Szukaj..." class="form-control search-input border-info"/>
                     </div>
-                    <div class="col-md-3 my-2">
+                    <div class="col-md-3  my-4">
                         <button type="submit" style="border-radius: 15px;" class="btn btn-outline-primary">Szukaj</button>
                     </div>
 
              </form>
 
             <div class="row text-center">
-                <div th:each="product : ${productList}" style="width: 18rem; border: none;"  class="card mx-2 mb-4">
+                <div th:each="product : ${productList}" style="width: 20rem; border: none;"  class="card mx-4 mb-4">
                     <img class="card-img-top img-fluid" style="width:320px; height:240px;" th:src="${product.photo}" alt="Zdjęcie">
                     <div class="card-block">
                     <h4 class="card-title"  style="min-height: 3.5rem;" th:text="${product.name}"></h4>
