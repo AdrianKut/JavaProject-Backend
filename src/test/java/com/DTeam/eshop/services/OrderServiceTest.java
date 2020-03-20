@@ -2,10 +2,13 @@ package com.DTeam.eshop.services;
 
 import com.DTeam.eshop.entities.Customer;
 import com.DTeam.eshop.entities.Order;
+import com.DTeam.eshop.entities.Product;
 import java.time.LocalDateTime;
+import java.time.Month;
 
 import java.util.List;
 import java.util.ArrayList;
+import javax.security.auth.message.callback.PrivateKeyCallback;
 import org.junit.jupiter.api.Test;
 
 import org.hamcrest.Matchers;
@@ -15,6 +18,7 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.any;
 import static org.junit.Assert.*;
 import org.junit.ComparisonFailure;
 
@@ -22,15 +26,15 @@ public class OrderServiceTest {
 
     final OrderService orderService = mock(OrderService.class);
     final CustomerService customerService = mock(CustomerService.class);
+    final ProductService productService = mock(ProductService.class);
+
     final static String localDateTime = LocalDateTime.now().toString();
 
     @Test
     public void testListAll() {
 
-        //when
         when(orderService.listAll()).thenReturn(prepareMocData(LocalDateTime.parse(localDateTime)));
 
-        //then
         assertEquals(orderService.listAll().get(0).getOrderId(), null);
         assertEquals(orderService.listAll().get(2).getOrderId().longValue(), 32L);
         assertEquals(orderService.listAll().get(2).getPurchaseDate().toString(), localDateTime);
@@ -45,27 +49,44 @@ public class OrderServiceTest {
         orders.add(new Order(32L, localDateTime));
         return orders;
     }
-
+    
     @Test
     public void testSave() {
 
-//        //when
-//        when(orderService.save(Mockito.any(Order.class)).thenReturn(new Order()));
-//        Order order = orderService.save(new Order());
+        List<Product> products = new ArrayList<>();
+        products.add(new Product());
+        products.add(new Product());
+        products.add(new Product(32L, "name", "description", 42.0, 42, "photo"));
+
+        Order order = (new Order(32L, LocalDateTime.of(2020, Month.MARCH, 22, 21, 40)));
+
+//        when(orderService.save((orderToSave), products)).thenReturn(new Order(32L, LocalDateTime.of(2020, Month.MARCH, 22, 21, 40)));
 //
-//        //then
-//        assertEquals(order.getEmployeeId().toString(), "" + 156L);
+//        Order order = orderService.save(orderToSave, products);
+        when(orderService.save((order), products)).thenReturn(new Order(32L, LocalDateTime.of(2020, Month.MARCH, 22, 21, 40)));
+       // when(orderService.save((any(Order.class)), products)).thenReturn(order);
+
+      // Order orderSave =  orderService.save(order, products);
+      //  order.setProducts(products);
+      
+     //   verify(orderService, times(1)).save(order, products);
+        
+//        assertEquals(order.getOrderId().longValue(), 32L);
+//        assertEquals(order.getPurchaseDate(), LocalDateTime.of(2020, Month.MARCH, 22, 21, 40).toString());
+//        assertEquals(order.getProducts().size(), 3);
+
+        assertEquals(products.get(2).getName(), "name");
     }
 
     @Test
     public void testSaveEdit() {
 
-        when(orderService.saveEdit(Mockito.any(Order.class))).thenReturn(new Order(12L, LocalDateTime.parse(localDateTime)));
+        when(orderService.saveEdit(any(Order.class))).thenReturn(new Order(12L, LocalDateTime.parse(localDateTime)));
 
         Order order = orderService.saveEdit(new Order());
 
         assertEquals(order.getOrderId().longValue(), 12L);
-        assertEquals(order.getPurchaseDate(),localDateTime);
+        assertEquals(order.getPurchaseDate(), localDateTime);
 
     }
 
@@ -74,10 +95,8 @@ public class OrderServiceTest {
 
         Long id = 894L;
 
-        //when
         when(orderService.get(id)).thenReturn(new Order());
 
-        //then
         assertEquals(orderService.get(id).getOrderId(), null);
         assertEquals(orderService.get(id).getPurchaseDate().toString(), "");
 
@@ -95,10 +114,8 @@ public class OrderServiceTest {
         Long id = 1589L;
         final Order order = new Order(id, LocalDateTime.MAX);
 
-        //when
         orderService.delete(order.getOrderId());
 
-        //then
         verify(orderService, times(1)).delete(id);
     }
 
@@ -107,10 +124,8 @@ public class OrderServiceTest {
 
         Long id = 540L;
 
-        //when
         when(orderService.isOrderExist(id)).thenReturn(true);
 
-        //then
         final boolean result = orderService.isOrderExist(id);
         assertEquals(result, true);
 
@@ -129,12 +144,10 @@ public class OrderServiceTest {
         orders.add(new Order());
         orders.add(new Order(32L, LocalDateTime.parse(localDateTime)));
 
-        //when
         when(customerService.get(id)).thenReturn(customer);
 
         customer.setOrders(orders);
 
-        //then
         assertEquals(customer.getOrders().size(), 3);
         assertEquals(customer.getOrders().get(2).getOrderId().toString(), "" + 32L);
         assertEquals(customer.getOrders().get(2).getPurchaseDate(), localDateTime);
@@ -149,10 +162,8 @@ public class OrderServiceTest {
     @Test
     public void testGetOrderByStatus() {
 
-        //when
         when(orderService.getOrderByStatus()).thenReturn(prepareMocData(LocalDateTime.parse(localDateTime)));
 
-        //then
         orderService.getOrderByStatus().get(0).setOrderStatus("Przyjęto");
         verify(orderService, times(1)).getOrderByStatus();
 

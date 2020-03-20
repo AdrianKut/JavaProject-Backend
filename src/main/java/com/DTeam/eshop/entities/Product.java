@@ -49,7 +49,7 @@ public class Product {
 
     public Product() {
     }
-
+    
     public Product(Long productId, String name, String description, Double price, Integer quantity, String photo) {
         this.productId = productId;
         this.name = name;
