@@ -60,6 +60,12 @@ public class Order{
 
     public Order(){}
 
+    public Order(Long orderId, LocalDateTime purchaseDate) {
+        this.orderId = orderId;
+        this.purchaseDate = purchaseDate;
+    }
+    
+
     public String getPurchaseDate() {
         if(purchaseDate !=null){
             return purchaseDate.toString();
