@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-md-4 my-1">
                     <label> Suma koszyka: </label>
-                    <b  th:text="${#numbers.formatCurrency(amount)} + ' zł'"></b>
+                    <b  th:text="${#numbers.formatCurrency(amount)}"></b>
                 </div>
                 <div th:if="${not #lists.isEmpty(productList)}" class="col-md-4 offset-md-4">
                     <td>  <a class="btn btn-success" href="/customer/shopping-cart/buy">Kup teraz</a></td>
