@@ -1,5 +1,6 @@
 package com.DTeam.eshop.services;
 
+import com.DTeam.eshop.entities.Customer;
 import com.DTeam.eshop.entities.Order;
 import java.time.LocalDateTime;
 
@@ -19,6 +20,7 @@ import static org.junit.Assert.*;
 public class OrderServiceTest {
 
     final OrderService orderService = mock(OrderService.class);
+    final CustomerService customerService = mock(CustomerService.class);
 
     @Test
     public void testListAll() {
@@ -37,7 +39,6 @@ public class OrderServiceTest {
     private List<Order> prepareMocData(LocalDateTime localDateTime) {
 
         List<Order> orders = new ArrayList<>();
-
         orders.add(new Order());
         orders.add(new Order());
         orders.add(new Order(32L, localDateTime));
@@ -108,10 +109,38 @@ public class OrderServiceTest {
 
     @Test
     public void testGetByCustomer() {
+
+        String localDateTime = LocalDateTime.now().toString();
+
+        Long id = 42L;
+        final Customer customer = new Customer(id, "", "", "");
+
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order());
+        orders.add(new Order());
+        orders.add(new Order(32L, LocalDateTime.parse(localDateTime)));
+
+        //when
+        when(customerService.get(id)).thenReturn(customer);
+        //   when(orderService.get(id)).thenReturn(order);
+
+        customer.setOrders(orders);
+
+        //then
+        assertEquals(customer.getOrders().size(), 3);
+        assertEquals(customer.getOrders().get(2).getOrderId().toString(),""+ 32L);
+        assertEquals(customer.getOrders().get(2).getPurchaseDate(), localDateTime);
+        
+        assertEquals(customer.getCustomerId().longValue(), 42L);
+        
+        assertEquals(orders.get(0).getOrderId(), null);
+        assertEquals(orders.get(1).getProducts(), null);
+
     }
 
     @Test
     public void testGetOrderByStatus() {
+
     }
 
 }
