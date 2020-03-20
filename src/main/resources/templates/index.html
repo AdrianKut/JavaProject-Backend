@@ -37,8 +37,8 @@
                         <td><img th:src="${product.photo}" width="120px" height="100px" alt="photo"/> </td>
                         <td>
                             <a class="btn btn-primary my-1" th:href="@{'/shopping-cart/add/' + ${product.productId}}">Koszyk</a>
-                            <a class="btn btn-success my-1" href=#>Kup teraz</a>
-                            <a class="btn btn-warning my-1" href=#>Kup bez rejestracji</a>
+                            <a class="btn btn-success my-1" th:href="@{'/customer/buy/' + ${product.productId}}">Kup teraz</a>
+                            <a class="btn btn-warning my-1" th:href="@{'/buy/no-register/' + ${product.productId}}">Kup bez rejestracji</a>
                         </td>
                     </tr>
                 </tbody>
