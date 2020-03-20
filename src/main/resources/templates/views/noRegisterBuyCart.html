@@ -8,7 +8,7 @@
 
     <body>
         <div layout:fragment="content" class="container mt-2">
-            <form th:action="@{|/buy/no-register/${id}|}" method="POST">
+            <form th:action="@{/shopping-cart/buy/no-register}" method="POST">
                 <div class="row">
                     <div class="col-md-4 offset-md-1 text-center" th:object="${address}">
                         <div class="row">
