@@ -55,7 +55,7 @@ public class PurchaseControler {
     private EmailSender emailSender;
 
     @GetMapping("/shopping-cart/buy/no-register")
-    public String ShoppingCartNoRegister(Model model){
+    public String shoppingCartNoRegister(Model model){
         Address address = new Address();
         Customer customer = new Customer();
         Payment payment = new Payment();
@@ -68,7 +68,7 @@ public class PurchaseControler {
     }
 
     @PostMapping("/shopping-cart/buy/no-register")
-    public String ShoppingCartNoRegister(Customer customer, Address address,
+    public String shoppingCartNoRegister(Customer customer, Address address,
      Payment payment, @RequestParam("email")String email){
         addressService.save(address);
         customer.setAddress(address);
@@ -102,7 +102,7 @@ public class PurchaseControler {
     }
 
     @GetMapping("/buy/no-register/{id}")
-    public String PurchaseNoRegister(Model model, @PathVariable(name = "id")Long id){
+    public String purchaseNoRegister(Model model, @PathVariable(name = "id")Long id){
         Address address = new Address();
         Customer customer = new Customer();
         Payment payment = new Payment();
@@ -115,7 +115,7 @@ public class PurchaseControler {
     }
 
     @PostMapping("/buy/no-register/{id}")
-    public String PurchaseNoRegister(Customer customer, Address address,
+    public String purchaseNoRegister(Customer customer, Address address,
      Payment payment, @RequestParam("email")String email, @PathVariable(name = "id")Long id){
         Product product = productService.get(id);
         product.setQuantity(product.getQuantity()-1);
