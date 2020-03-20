@@ -59,6 +59,14 @@ public class OrderServiceTest {
 
     @Test
     public void testSaveEdit() {
+
+        when(orderService.saveEdit(Mockito.any(Order.class))).thenReturn(new Order(12L, LocalDateTime.parse(localDateTime)));
+
+        Order order = orderService.saveEdit(new Order());
+
+        assertEquals(order.getOrderId().longValue(), 12L);
+        assertEquals(order.getPurchaseDate(),localDateTime);
+
     }
 
     @Test
