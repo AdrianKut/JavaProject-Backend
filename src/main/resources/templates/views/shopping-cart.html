@@ -34,8 +34,9 @@
                     <label> Suma koszyka: </label>
                     <b  th:text="${#numbers.formatCurrency(amount)} + ' zł'"></b>
                 </div>
-                <div class="col-md-4 offset-md-4 my-1">
-                    <td>  <a class="btn btn-block btn-success" href="#">Kup</a></td>
+                <div th:if="${not #lists.isEmpty(productList)}" class="col-md-4 offset-md-4">
+                    <td>  <a class="btn btn-success" href="/customer/shopping-cart/buy">Kup teraz</a></td>
+                    <td>  <a class="btn btn-warning" href="/shopping-cart/buy/no-register">Kup bez rejestracji</a></td>
                 </div>
             </div>
         </div>
