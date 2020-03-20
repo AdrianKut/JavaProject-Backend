@@ -63,7 +63,7 @@ public class EmployeeServiceTest {
     @Test
     public void testGet() {
 
-        Long id = 1L;
+        Long id = 42L;
 
         //when
         when(employeeService.get(id)).thenReturn(new Employee());
@@ -121,7 +121,6 @@ public class EmployeeServiceTest {
         when(employeeService.get(id)).thenReturn(employee);
         when(userService.get(email)).thenReturn(user);
 
-        //user.setEmployee(employee);
         employee.setUser(user);
 
         //then
