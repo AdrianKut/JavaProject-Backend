@@ -20,6 +20,7 @@
                         <th>Nazwa</th>
                         <th>Opis</th>
                         <th>Cena</th>
+                        <th>Ilość</th>
                         <th>Zdjęcie</th>
                         <th>Akcje</th>
                     </tr>
@@ -29,6 +30,7 @@
                         <td th:text="${product.name}"></td>
                         <td th:text="${product.description}"></td>
                         <td th:text="${#numbers.formatCurrency(product.price)}"></td>
+                        <td th:text="${product.quantity} + ' szt.'"></td>
                         <td><img th:src="${product.photo}" width="120px" height="100px" alt="photo"/> </td>
                         <td>
                             <a class="btn btn-primary my-1" th:href="@{'/shopping-cart/add/' + ${product.productId}}">Koszyk</a>
