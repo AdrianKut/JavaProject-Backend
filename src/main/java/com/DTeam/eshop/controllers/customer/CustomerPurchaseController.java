@@ -9,7 +9,6 @@ import com.DTeam.eshop.entities.Customer;
 import com.DTeam.eshop.entities.Order;
 import com.DTeam.eshop.entities.Payment;
 import com.DTeam.eshop.entities.Product;
-import com.DTeam.eshop.services.AddressService;
 import com.DTeam.eshop.services.CustomerService;
 import com.DTeam.eshop.services.OrderService;
 import com.DTeam.eshop.services.PaymentService;
