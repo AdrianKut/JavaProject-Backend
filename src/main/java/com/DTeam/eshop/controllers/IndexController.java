@@ -23,7 +23,7 @@ public class IndexController {
     @GetMapping(value = "/")
     public String showHomePage(HttpServletRequest request, Model model){
         int page = 0; //default page number is 0
-        int size = 10; //default page size is 10
+        int size = 6; //default page size is 10
 
         if (request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
             page = Integer.parseInt(request.getParameter("page")) - 1;
