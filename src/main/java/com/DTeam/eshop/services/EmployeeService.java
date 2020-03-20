@@ -11,29 +11,32 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeService {
 
-    @Autowired private EmployeeRepository employeeRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
-    public List<Employee> listAll(){
+    public List<Employee> listAll() {
         return employeeRepository.findAll();
     }
 
-    public void save(Employee employee){
-        employeeRepository.save(employee);
+    public Employee save(Employee employee) {
+        return employeeRepository.save(employee);
     }
 
-    public Employee get(Long id){
+    public Employee get(Long id) {
         return employeeRepository.findById(id).get();
     }
 
-    public void delete(Long id){
+    public Employee delete(Long id) {
+        Employee employee = get(id);
         employeeRepository.deleteById(id);
+        return employee;
     }
 
-    public Boolean isEmployeeExist(String email){
+    public Boolean isEmployeeExist(String email) {
         return employeeRepository.existsByUserEmail(email);
     }
 
-    public Employee getByEmail(String email){
+    public Employee getByEmail(String email) {
         return employeeRepository.findByUserEmail(email);
     }
 }
