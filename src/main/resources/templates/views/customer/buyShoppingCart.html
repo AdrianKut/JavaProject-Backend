@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragments/main_layout}">
+
+    <head>
+        <title>Zakup</title>
+    </head>
+
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <form th:action="@{/customer/shopping-cart/buy}" method="POST">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Metoda płatości</label>
+                            <select class="form-control" th:field="${payment.paymentMethod}" required>
+                                <option value="">Wybierz metodę</option>
+                                <option value="Karta kredytowa">Karta kredytowa</option>
+                                <option value="Przelew">Przelew</option>
+                                <option value="Płatność przy obiorze">Płatność przy obiorze</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <label> Kwota do zapłaty: </label>
+                        <b  th:text="${#numbers.formatCurrency(amount)} + ' zł'"></b>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Zapłać</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
