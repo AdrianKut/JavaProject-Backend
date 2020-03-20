@@ -1,11 +1,5 @@
 <header th:fragment="header">
-<!--
- <div class="jumbotron"  >
-        <h1>Tytuł</h1>
-        <p>Lepsze jutro</p>
 
-    </div>
--->
     <nav class="navbar navbar-dark bg-primary navbar-expand-lg ">
 
         <a class="navbar-brand" href="/">Sklep</a>
@@ -17,9 +11,6 @@
         <div class="collapse navbar-collapse" id="mainmenu">
             <ul class="navbar-nav mr-auto">
 
-                <li class="nav-item">
-                    <a class="nav-link active"  href="/shopping-cart"> Koszyk </a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link active" sec:authorize="hasRole('ROLE_admin')" href="/admin/payment/list"> Płatności </a>
                 </li>
@@ -48,16 +39,10 @@
                     <a class="nav-link active" sec:authorize="hasRole('ROLE_admin')" href="/admin/address/list"> Adresy </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" sec:authorize="hasRole('ROLE_klient')" href="/customer/profile"> Profil </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" sec:authorize="hasRole('ROLE_pracownik')" href="/employee/profile"> Profil </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active" sec:authorize="hasRole('ROLE_klient')" href="/customer/order"> Historia zakupów </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" sec:authorize="hasRole('ROLE_klient')" href="/customer/complaint"> Reklamacja </a>
+                    <a class="nav-link active" sec:authorize="hasRole('ROLE_klient')" href="/customer/complaint"> Reklamacje </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" sec:authorize="hasRole('ROLE_pracownik')" href="/employee/order/list"> Zamówienia </a>
@@ -66,18 +51,37 @@
                     <a class="nav-link active" sec:authorize="hasRole('ROLE_pracownik')" href="/employee/product-list"> Produkty </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link active" sec:authorize="!hasRole('ROLE_admin') and !hasRole('ROLE_pracownik')" href="/laptops-and-computers"> Laptopy i komputery </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" sec:authorize="!hasRole('ROLE_admin') and !hasRole('ROLE_pracownik')" href="/computer-components"> Podzespoły komputerowe </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" sec:authorize="!hasRole('ROLE_admin') and !hasRole('ROLE_pracownik')" href="/peripheral-devices"> Urządzenia peryferyjne </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" sec:authorize="!hasRole('ROLE_admin') and !hasRole('ROLE_pracownik')" href="/software"> Oprogramowanie </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" sec:authorize="!hasRole('ROLE_admin') and !hasRole('ROLE_pracownik')" href="/accessories"> Akcesoria </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" sec:authorize="hasRole('ROLE_pracownik')" href="/employee/complaint-list"> Reklamacja </a>
                 </li>
             </ul>
 
+            <a href="/shopping-cart" type="button" class="btn btn-warning mr-2">
+                Koszyk <span th:text="${session.count}" class="badge badge-light">0</span>
+            </a>
+
             <form class="form-inline" sec:authorize="!isAuthenticated()">
                 <a href="/register" class="mr-2 btn btn-light" role="button">Rejestracja</a>
                 <a href="/login"  class="mr-2 btn btn-success" role="button">Logowanie</a>
-
             </form>
-  <!--
-   <a style="color: red;" sec:authorize="isAuthenticated()" th:text="'Witaj, '  +${#authentication.name}"></a>
-  -->        <a style="color: white;" sec:authorize="isAuthenticated()" th:text="'Witaj, '  +${#authentication.name}"></a>
+            <a style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_klient')" href="/customer/profile" th:text="${#authentication.name}"></a>
+            <a style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_pracownik')" href="/employee/profile" th:text="${#authentication.name}"></a>
+            <a style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_admin')" th:text="${#authentication.name}"></a>
+
             <form  sec:authorize="isAuthenticated()" th:action="@{/logout}" method="POST">
                 <button class="ml-2 btn btn-success" type="submit" >Wyloguj</a>
             </form>
