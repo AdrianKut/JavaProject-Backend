@@ -38,4 +38,8 @@ public class ShoppingCart {
     public void clear(){
         products.clear();
     }
+
+    public Integer getCount(){
+        return products.size();
+    }
 }
