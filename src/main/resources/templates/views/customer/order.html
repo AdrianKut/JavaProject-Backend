@@ -19,6 +19,7 @@
                     <thead class="thead-dark">
                         <tr  class="active">
                             <th>Data zakupu</th>
+                            <th>Status</th>
                             <th>Produkt</th>
                             <th>Zdjęcie</th>
                             <th>Akcje</th>
@@ -30,6 +31,7 @@
                                 <td> <b  th:text="${#strings.substring(order.purchaseDate,8,10)} + '-' +  ${#strings.substring(order.purchaseDate,5,7)}
                                     +'-'+ ${#strings.substring(order.purchaseDate,0,4)}  + ' ' +${#strings.substring(order.purchaseDate,11,13)}
                                     + ':' +${#strings.substring(order.purchaseDate,14,16)} ">...</b> </td>
+                                <td><b  th:text="${order.orderStatus}">...</b></td>
                                 <td><b  th:text="${product.name}">...</b></td>
                                 <td><img th:src="${product.photo}" width="120px" height="100px" alt="photo"/> </td>
                                 <td class="text-center"><a class="btn btn-danger my-1" th:href="@{'/customer/complaint/add/' + ${order.orderId} +'/'+ ${product.productId} }">Reklamacja</a></td>
