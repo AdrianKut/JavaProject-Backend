@@ -8,12 +8,14 @@
     <body>
         <div layout:fragment="content" class="container mt-2">
             <form  th:action="@{search/}" class="row">
-                    <div class="col-md-4 offset-md-4 my-4">
+                    <div class="col-md-4 offset-md-4 my-4 search">
                         <input type="search" name="name" placeholder="Szukaj..." class="form-control search-input border-info"/>
                     </div>
-                    <div class="col-md-3  my-4">
-                        <button type="submit" style="border-radius: 15px;" class="btn btn-outline-primary">Szukaj</button>
+                    <div class="col-md-3  my-4 button">
+                        <button type="submit"  class="btn btn-primary">Szukaj</button>
                     </div>
+                    
+                   
 
              </form>
 
