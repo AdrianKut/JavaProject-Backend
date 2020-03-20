@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragments/main_layout}">
+
+    <head>
+        <title>Edytuj reklamację</title>
+    </head>
+
+    <body>
+        <div layout:fragment="content" class="container mt-5">
+            <form th:action="@{|/employee/complaint-edit/${id}|}" method="POST" th:object="${complaint}">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Status reklamacji</label>
+                            <select class="form-control" th:field="${complaint.complaintStatus}" required>
+                                <option
+                                th:value="${complaint.complaintStatus}">
+                                <option value="">Wybierz status</option>
+                                <option value="Przyjęta">Przyjęta</option>
+                                <option value="W trakcie realizacji">W trakcie realizacji</option>
+                                <option value="Zakończona">Zakończona</option>
+                                <option value="Odrzucona">Odrzucona</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Zapisz</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
