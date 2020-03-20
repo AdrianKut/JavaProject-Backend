@@ -18,7 +18,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static org.junit.Assert.*;
 
-
 public class AddressServiceTest {
 
     @Test
@@ -74,6 +73,8 @@ public class AddressServiceTest {
         //then
         assertEquals(addressService.get(id).getAddressId().longValue(), 1L);
         assertEquals(addressService.get(id).getCity(), "Miasto");
+        assertEquals(addressService.get(id).getHouseNumber().toString(), "" + 997);
+        assertEquals(addressService.get(id).getPostcode(), "36-156");
     }
 
     @Test
