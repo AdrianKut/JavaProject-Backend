@@ -19,21 +19,23 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public void save(Order order,List<Product> product){
+    public Order save(Order order,List<Product> product){
         order.setProducts(product);
-        orderRepository.save(order);
+        return orderRepository.save(order);
     }
 
-    public void saveEdit(Order order){
-        orderRepository.save(order);
+    public Order saveEdit(Order order){
+        return orderRepository.save(order);
     }
 
     public Order get(Long id){
     return orderRepository.findById(id).get();
     }
 
-    public void delete(Long id){
+    public Order delete(Long id){
+        Order order = get(id);
         orderRepository.deleteById(id);
+        return order;
     }
 
     public Boolean isOrderExist(Long id){
