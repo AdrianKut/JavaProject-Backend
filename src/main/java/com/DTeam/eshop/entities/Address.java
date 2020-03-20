@@ -43,9 +43,6 @@ public class Address {
     @OneToMany(mappedBy = "address")
     private List<Customer> customers;
 
-    @OneToMany(mappedBy = "address")
-    private List<Order> orders;
-
     public Address() {
     }
 
