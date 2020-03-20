@@ -55,14 +55,11 @@
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
                         <div class="form-group">
-                            <label>Adres</label>
-                            <select class="form-control" name="address">
-                                <option value="">Wybierz adres</option>
-                                <option th:each="address : ${addressList}"
-                                        th:value="${address.addressId}"
-                                        th:text="${address.street}+' '+${address.houseNumber}+'/'+
-                                        ${address.flatNumber}+', '+${address.postcode}+' '+${address.city}">
-                                </option>
+                            <label>Produkty</label>
+                            <select class="form-control"  name="product" multiple="multiple">
+                                <option th:each="product : ${productList}"
+                                        th:value="${product.productId}"
+                                        th:text="${product.name}"></option>
                             </select>
                         </div>
                     </div>
@@ -70,11 +67,13 @@
                 <div class="row">
                     <div class="col-md-4 offset-md-4 text-center">
                         <div class="form-group">
-                            <label>produkty</label>
-                            <select class="form-control"  name="product" multiple="multiple">
-                                <option th:each="product : ${productList}"
-                                        th:value="${product.productId}"
-                                        th:text="${product.name}"></option>
+                            <label>Płatność</label>
+                            <select class="form-control" name="payment">
+                                <option value="">Wybierz płatność</option>
+                                <option th:each="payment : ${paymentList}"
+                                        th:value="${payment.paymentId}"
+                                        th:text="${payment.amount}">
+                                </option>
                             </select>
                         </div>
                     </div>

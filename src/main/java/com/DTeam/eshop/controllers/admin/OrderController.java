@@ -3,13 +3,13 @@ package com.DTeam.eshop.controllers.admin;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.DTeam.eshop.entities.Address;
 import com.DTeam.eshop.entities.Customer;
 import com.DTeam.eshop.entities.Order;
+import com.DTeam.eshop.entities.Payment;
 import com.DTeam.eshop.entities.Product;
-import com.DTeam.eshop.services.AddressService;
 import com.DTeam.eshop.services.CustomerService;
 import com.DTeam.eshop.services.OrderService;
+import com.DTeam.eshop.services.PaymentService;
 import com.DTeam.eshop.services.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class OrderController {
     private CustomerService customerService;
 
     @Autowired
-    private AddressService addressService;
+    private PaymentService paymentService;
 
     @GetMapping("/admin/order/list")
     public String getAll(Model model){
@@ -46,12 +46,12 @@ public class OrderController {
     public String save(Model model) {
         List<Product> productList = productService.listAll();
         List<Customer> customerList = customerService.listAll();
-        List<Address> addressList = addressService.listAll();
+        List<Payment> paymentList = paymentService.listAll();
         Order order = new Order();
         model.addAttribute("order", order);
         model.addAttribute("productList", productList);
         model.addAttribute("customerList", customerList);
-        model.addAttribute("addressList", addressList);
+        model.addAttribute("paymentList", paymentList);
         return "views/admin/order/add";
     }
 
@@ -59,10 +59,9 @@ public class OrderController {
     public String save(Order order,
     @RequestParam(name="product",required = false)ArrayList<Product> product,
     @RequestParam(name="customer")Customer customer,
-    @RequestParam(name="address")Address address){
-
+    @RequestParam(name="payment")Payment payment){
+        order.setPayment(payment);
         order.setCustomer(customer);
-        order.setAddress(address);
         orderService.save(order,product);
         return "redirect:/admin/order/list";
     }
@@ -71,25 +70,23 @@ public class OrderController {
     public String edit(Model model,@PathVariable(name = "id") long id){
         List<Product> productList = productService.listAll();
         List<Customer> customerList = customerService.listAll();
-        List<Address> addressList = addressService.listAll();
+        List<Payment> paymentList = paymentService.listAll();
         Order order = orderService.get(id);
         model.addAttribute("order", order);
         model.addAttribute("productList", productList);
         model.addAttribute("customerList", customerList);
-        model.addAttribute("addressList", addressList);
+        model.addAttribute("paymentList", paymentList);
         return "views/admin/order/edit";
     }
 
     @PostMapping("/admin/order/edit/{id}")
-    public String edit(@PathVariable(name = "id") long id,
-    Order order,
+    public String edit(@PathVariable(name = "id") long id, Order order,
     @RequestParam(name="product",required = false)ArrayList<Product> product,
     @RequestParam(name="customer")Customer customer,
-    @RequestParam(name="address")Address address){
-
+    @RequestParam(name="payment")Payment payment){
         order.setOrderId(id);
+        order.setPayment(payment);
         order.setCustomer(customer);
-        order.setAddress(address);
         orderService.save(order,product);
         return "redirect:/admin/order/list";
     }

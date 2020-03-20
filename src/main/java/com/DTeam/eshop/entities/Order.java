@@ -40,14 +40,11 @@ public class Order{
     private String orderStatus;
 
     @ManyToOne
-    @JoinColumn(name = "address_id", nullable = true)
-    private Address address;
-
-    @ManyToOne
     @JoinColumn(name = "customer_id", nullable = true)
     private Customer customer;
 
-    @OneToOne(mappedBy = "order")
+    @OneToOne
+    @JoinColumn(name = "payment_id", nullable = true)
     private Payment payment;
 
     @ManyToMany
