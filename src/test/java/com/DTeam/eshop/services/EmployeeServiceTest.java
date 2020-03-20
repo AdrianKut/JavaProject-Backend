@@ -74,17 +74,26 @@ public class EmployeeServiceTest {
 
         try {
             assertEquals(employeeService.get(id).getPosition(), "sample position");
-            assertEquals(employeeService.get(id).getEmploymentDate(),null);
+            assertEquals(employeeService.get(id).getEmploymentDate(), null);
         } catch (AssertionError error) {
             assert (true);
         }
 
     }
 
-//    @Test
-//    public void testDelete() {
-//    }
-//
+    @Test
+    public void testDelete() {
+        
+        Long id = 189L;
+        final Employee employee = new Employee(id, "", "", LocalDate.now(), 1.0, "");
+
+        //when
+        employeeService.delete(employee.getEmployeeId());
+
+        //then
+        verify(employeeService, times(1)).delete(id);
+    }
+
 //    @Test
 //    public void testIsEmployeeExist() {
 //    }
