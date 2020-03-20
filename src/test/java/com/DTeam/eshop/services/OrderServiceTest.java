@@ -81,7 +81,7 @@ public class OrderServiceTest {
 
     @Test
     public void testDelete() {
-        
+
         Long id = 1589L;
         final Order order = new Order(id, LocalDateTime.MAX);
 
@@ -94,6 +94,16 @@ public class OrderServiceTest {
 
     @Test
     public void testIsOrderExist() {
+
+        Long id = 540L;
+
+        //when
+        when(orderService.isOrderExist(id)).thenReturn(true);
+
+        //then
+        final boolean result = orderService.isOrderExist(id);
+        assertEquals(result, true);
+
     }
 
     @Test
