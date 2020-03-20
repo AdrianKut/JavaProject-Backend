@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragments/main_layout}">
+
+    <head>
+        <title>Zakup</title>
+    </head>
+
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <form th:action="@{/shopping-cart/buy/no-register}" method="POST">
+
+
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Ulica </label>
+                            <input class="form-control" type="text" th:field="${address.street}" placeholder="Opcjonalne"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Numer domu </label>
+                            <input class=form-control type="number" min="1" th:field="${address.houseNumber}" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Numer mieszkania </label>
+                            <input class=form-control type="number" min="1" th:field="${address.flatNumber}" placeholder="Opcjonalne"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Kod pocztowy </label>
+                            <input class=form-control type="text" th:field="${address.postcode}" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label> Miejscowość </label>
+                            <input class=form-control type="text" th:field="${address.city}" required/>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Imię</label>
+                            <input class="form-control" type="text" th:field="${customer.name}" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Nazwisko</label>
+                            <input class="form-control" type="text" th:field="${customer.surname}" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Numer telefonu</label>
+                            <input class="form-control" type="text" th:field="${customer.phoneNumber}" required />
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Metoda płatości</label>
+                            <select class="form-control" th:field="${payment.paymentMethod}" required>
+                                <option value="">Wybierz metodę</option>
+                                <option value="Karta kredytowa">Karta kredytowa</option>
+                                <option value="Przelew">Przelew</option>
+                                <option value="Płatność przy obiorze">Płatność przy obiorze</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <label> Kwota do zapłaty: </label>
+                        <b  th:text="${#numbers.formatCurrency(amount)} + ' zł'"></b>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-4 offset-md-4 text-center">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input class="form-control" type="text" name="email" required />
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Zapisz</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
