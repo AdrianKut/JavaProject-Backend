@@ -11,7 +11,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 import lombok.Data;
 
 @Entity
@@ -48,11 +47,16 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<Complaint> complaints;
 
-    public Product(){}
+    public Product() {
+    }
 
-
-
+    public Product(Long productId, String name, String description, Double price, Integer quantity, String photo) {
+        this.productId = productId;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.photo = photo;
+    }
 
 }
-
-
