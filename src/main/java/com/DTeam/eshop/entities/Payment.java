@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -34,7 +34,7 @@ public class Payment {
     @Column(name = "payment_method", nullable = false, length = 25)
     private String paymentMethod;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "order_id", nullable = true)
     private Order order;
 

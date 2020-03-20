@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -46,8 +47,8 @@ public class Order{
     @JoinColumn(name = "customer_id", nullable = true)
     private Customer customer;
 
-    @OneToMany(mappedBy = "order")
-    private List<Payment> payments;
+    @OneToOne(mappedBy = "order")
+    private Payment payment;
 
     @ManyToMany
     @JoinTable(name = "orders_products", joinColumns = {
