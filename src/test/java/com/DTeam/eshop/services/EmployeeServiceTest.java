@@ -18,14 +18,11 @@ import static org.junit.Assert.*;
 
 public class EmployeeServiceTest {
 
-    public EmployeeServiceTest() {
-    }
+    //given
+    EmployeeService employeeService = mock(EmployeeService.class);
 
     @Test
     public void testListAll() {
-
-        //given
-        EmployeeService employeeService = mock(EmployeeService.class);
 
         //when
         when(employeeService.listAll()).thenReturn(prepareMocData());
@@ -33,11 +30,13 @@ public class EmployeeServiceTest {
         //then
         assertEquals(employeeService.listAll().get(0).getAddress(), null);
         assertEquals(employeeService.listAll().get(2).getSurname(), "Surname");
+        assertEquals(employeeService.listAll().get(2).getBasePay().toString(), "12340.5");
         assertThat(employeeService.listAll(), Matchers.hasSize(3));
 
     }
 
     private List<Employee> prepareMocData() {
+
         List<Employee> employees = new ArrayList<>();
 
         employees.add(new Employee());
@@ -46,10 +45,18 @@ public class EmployeeServiceTest {
         return employees;
     }
 
-//    @Test
-//    public void testSave() {
-//    }
-//
+    @Test
+    public void testSave() {
+
+        //when
+        when(employeeService.save(Mockito.any(Employee.class))).thenReturn(new Employee(156L, "John", "Cena", LocalDate.now(), 456.50, "Test"));
+        Employee employee = employeeService.save(new Employee());
+
+        //then
+        assertEquals(employee.getEmployeeId().toString(), "" + 156L);
+        assertEquals(employee.getBasePay().toString(), "" + 456.50);
+    }
+
 //    @Test
 //    public void testGet() {
 //    }
