@@ -61,7 +61,7 @@ public class OrderServiceTest {
 
     @Test
     public void testGet() {
-        
+
         Long id = 894L;
 
         //when
@@ -81,6 +81,15 @@ public class OrderServiceTest {
 
     @Test
     public void testDelete() {
+        
+        Long id = 1589L;
+        final Order order = new Order(id, LocalDateTime.MAX);
+
+        //when
+        orderService.delete(order.getOrderId());
+
+        //then
+        verify(orderService, times(1)).delete(id);
     }
 
     @Test
