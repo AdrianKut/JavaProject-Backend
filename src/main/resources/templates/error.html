@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+    <head>
+        <title>Błąd</title>
+    </head>
+    <body>
+        <div layout:fragment="content" class="container mt-2">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    Wystąpił błąd! | <span th:text="${message}"></span> | <span th:text="'Error: '+ ${status}" class="text text-danger"></span>
+                </div>
+            </div>
+    </body>
+ </html>
