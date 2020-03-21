@@ -90,6 +90,14 @@ public class UserServiceTest {
 
     @Test
     public void testIsUserExist() {
+
+        when(userService.isUserExist(any())).thenReturn(true);
+
+        final boolean result = userService.isUserExist("");
+        assertEquals(result, true);
+
+        verify(userService, times(1)).isUserExist("");
+
     }
 
 }
