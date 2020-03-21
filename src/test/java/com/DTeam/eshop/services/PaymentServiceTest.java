@@ -62,6 +62,14 @@ public class PaymentServiceTest {
 
     @Test
     public void testGet() {
+        
+        when(paymentService.get(anyLong())).thenReturn(new Payment(324L, LocalDateTime.now(), "Gotówka"));
+        
+        assertEquals(paymentService.get(324L).getPaymentId().longValue(), 324L);
+        assertNotEquals(paymentService.get(324L).getPaymentDate(), LocalDateTime.now());
+        assertEquals(paymentService.get(324L).getPaymentMethod(), "Gotówka");
+        
+        
     }
 
     @Test
