@@ -3,12 +3,9 @@ package com.DTeam.eshop.services;
 import com.DTeam.eshop.entities.User;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Locale;
-import javax.security.auth.message.callback.PrivateKeyCallback;
 import org.junit.jupiter.api.Test;
 
 import org.hamcrest.Matchers;
-import org.mockito.Mockito;
 
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.mock;
@@ -16,7 +13,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.any;
 import static org.junit.Assert.*;
-import org.junit.ComparisonFailure;
 
 public class UserServiceTest {
 
