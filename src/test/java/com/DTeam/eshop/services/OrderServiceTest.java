@@ -159,10 +159,12 @@ public class OrderServiceTest {
 
         orderService.getOrderByStatus().get(0).setOrderStatus("Przyjęto");
         verify(orderService, times(1)).getOrderByStatus();
+        
+        assertEquals(orderService.getOrderByStatus().get(0).getOrderStatus(), "Przyjęto");
 
         try {
             final String resultStatus = orderService.getOrderByStatus().get(0).getOrderStatus();
-            assertEquals(resultStatus, "Wysłane"); // Ma zwrócić wszystkie które nie mają wysłane np. Przyjęto jak wyżej
+            assertEquals(resultStatus, "Wysłane"); // Ma zwrócić wszystkie które mają inny status niż wysłane
         } catch (ComparisonFailure e) {
         }
 
