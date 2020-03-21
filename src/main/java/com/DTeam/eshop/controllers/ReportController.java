@@ -100,7 +100,7 @@ public class ReportController {
         .body(new InputStreamResource(bis));
     }
 
-    @GetMapping("/customer/order/report/{id}")
+    @GetMapping("/customer/report/{id}")
     public ResponseEntity<InputStreamResource> customerOrder(@PathVariable("id")Long id) throws IOException {
         Order order = orderService.get(id);
         ByteArrayInputStream bis = CustomerOrderReportPDF.order(order);

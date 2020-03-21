@@ -38,7 +38,8 @@
                                 <td><b  th:text="${order.orderStatus}">...</b></td>
                                 <td><b  th:text="${product.name}">...</b></td>
                                 <td><img th:src="${product.photo}" width="120px" height="100px" alt="photo"/> </td>
-                                <td class="text-center"><a class="btn btn-danger my-1" th:href="@{'/customer/complaint/add/' + ${order.orderId} +'/'+ ${product.productId} }">Reklamacja</a></td>
+                                <td class="text-center"><a class="btn btn-danger my-1" th:href="@{'/customer/complaint/add/' + ${order.orderId} +'/'+ ${product.productId} }">Reklamacja</a>
+                                <a class="btn btn-success my-1" th:href="@{'/customer/report/' + ${order.orderId} }">Faktura</a></td>
                             </tr>
                         </div>
                     </tbody>
