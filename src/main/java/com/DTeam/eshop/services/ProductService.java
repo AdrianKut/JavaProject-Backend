@@ -48,4 +48,8 @@ public class ProductService {
     public Page<Product> getByCategory(String category, Pageable pageable){
         return productRepository.findByCategory(category, pageable);
     }
+
+    public List<Product> getProductsEnding(){
+        return productRepository.findByQuantityLessThan(5);
+    }
 }
