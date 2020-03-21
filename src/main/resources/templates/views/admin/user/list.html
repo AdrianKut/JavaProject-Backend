@@ -44,7 +44,7 @@
                                 </div>
                             </td>
                             <td>
-                                <a class="btn btn-danger" th:href="'#modal'+ ${user.userId}" data-toggle="modal">Usuń</a>
+                                <a class="btn btn-outline-danger" th:href="'#modal'+ ${user.userId}" data-toggle="modal">Usuń</a>
                                 <div class="modal fade" th:id="'modal'+ ${user.userId}" tabindex="-1">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -64,7 +64,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a class="btn btn-primary my-1" th:href="@{'edit/' + ${user.email}}">Edytuj</a>
+                                <a class="btn btn-outline-primary my-1" th:href="@{'edit/' + ${user.email}}">Edytuj</a>
                             </td>
 
                         </tr>
