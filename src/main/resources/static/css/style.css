@@ -93,3 +93,14 @@ li{
     text-decoration: none;
 }
 
+.bg-logout{
+    background-color: #5679db !important;
+    border: none;
+    outline: 0;
+    color: white;
+
+}
+
+.bg-logout:hover{
+    color:white;
+}
