@@ -1,6 +1,7 @@
 package com.DTeam.eshop.services;
 
 import com.DTeam.eshop.entities.Role;
+import com.DTeam.eshop.entities.User;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import static org.junit.Assert.*;
 public class RoleServiceTest {
 
     final RoleService roleService = mock(RoleService.class);
+    final UserService userService = mock(UserService.class);
 
     @Test
     public void testListAll() {
@@ -94,7 +96,29 @@ public class RoleServiceTest {
     }
 
     @Test
-    public void testGetByroleEmail() {
+    public void testGetByUserEmail() {
+
+        final List<Role> roles = new ArrayList<>();
+        roles.add(new Role("Employee"));
+        roles.add(new Role("Customer"));
+        roles.add(new Role("Admin"));
+
+        final User user = new User("email@gmail.com", 1, "password", true);
+
+        when(roleService.getByUserEmail("email@gmail.com")).thenReturn(roles);
+
+        user.setRoles(roles);
+
+        assertEquals(user.getEmail(), "email@gmail.com");
+        assertEquals(user.getUserId().intValue(), 1);
+
+        assertEquals(roles.get(2).getName(), "Admin");
+
+        assertEquals(user.getRoles().get(0).getName(), "Employee");
+
+        assertEquals(roleService.getByUserEmail("email@gmail.com").get(0).getName(), "Employee");
+
+        verify(roleService, times(1)).getByUserEmail("email@gmail.com");
     }
 
 }
