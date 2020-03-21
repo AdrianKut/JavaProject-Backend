@@ -52,7 +52,6 @@ public class PaymentServiceTest {
 
     @Test
     public void testDelete() {
-        
 
         final Payment payment = new Payment(520L, LocalDateTime.MIN, "Gotowka");
 
@@ -63,6 +62,15 @@ public class PaymentServiceTest {
 
     @Test
     public void testIsPaymentExist() {
+        
+        when(paymentService.isPaymentExist(anyLong())).thenReturn(true);
+
+        final boolean result = paymentService.isPaymentExist(5432L);
+        assertEquals(result, true);
+    }
+
+    @Test
+    public void testGetLastMonth() {
     }
 
 }
