@@ -74,23 +74,14 @@
                 <li><a sec:authorize="!hasRole('ROLE_admin') and !hasRole('ROLE_pracownik')" href="/shopping-cart" id="cart"><i class="fa fa-shopping-cart"></i> Koszyk <span th:text="${session.count}" class="badge">0</span></a></li>
                 <li><a href="/login" id="login"><i class="fa fa-user"></i> Logowanie </a></li>
               </a>
-            <!--<a sec:authorize="!hasRole('ROLE_admin') and !hasRole('ROLE_pracownik')" href="/shopping-cart" type="button" class="btn btn-warning mr-2">
-                Koszyk <span th:text="${session.count}" class="badge badge-light">0</span>
-            </a>-->
-
-
-          <!--  <form class="form-inline" sec:authorize="!isAuthenticated()">
-                <a href="/register" class="mr-2 btn btn-light" role="button">Rejestracja</a>
-                <a href="/login"  class="mr-2 btn btn-success" role="button">Logowanie</a>
-                
-                
-            </form>-->
+            
             <a style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_klient')" href="/customer/profile" th:text="${#authentication.name}"></a>
             <a style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_pracownik')" href="/employee/profile" th:text="${#authentication.name}"></a>
             <a style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_admin')" th:text="${#authentication.name}"></a>
 
             <form  sec:authorize="isAuthenticated()" th:action="@{/logout}" method="POST">
-                <button class="ml-2 btn btn-success" type="submit" >Wyloguj</a>
+                    <button class="ml-2 btn  bg-logout" type="submit" ><i class="fas fa-sign-out-alt"></i>  Wyloguj</a>
+                    
             </form>
         </div>
     </nav>
