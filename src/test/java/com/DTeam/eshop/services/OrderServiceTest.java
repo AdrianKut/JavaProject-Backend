@@ -59,16 +59,15 @@ public class OrderServiceTest {
         products.add(new Product(64L, "name", "description", 42.0, 42, "photo"));
 
         Order order = (new Order(15L, LocalDateTime.of(2020, Month.MARCH, 22, 21, 40)));
-
-        when(orderService.get(anyLong())).thenReturn(new Order());
-        when(productService.get(anyLong())).thenReturn(new Product());
+        
+        when(orderService.save(any(Order.class), anyList())).thenReturn(order);
 
         orderService.save(order, products);
-        order.setProducts(products);
+        orderService.save(order, products);
+        verify(orderService, times(2)).save(order, products);
 
         assertEquals(order.getOrderId().toString(), "" + 15L);
-        assertEquals(order.getProducts().get(2).getPhoto(), "photo");
-        assertEquals(order.getProducts().size(), 3);
+        assertEquals(products.get(2).getDescription(), "description");
     }
 
     @Test
@@ -159,7 +158,7 @@ public class OrderServiceTest {
 
         orderService.getOrderByStatus().get(0).setOrderStatus("Przyjęto");
         verify(orderService, times(1)).getOrderByStatus();
-        
+
         assertEquals(orderService.getOrderByStatus().get(0).getOrderStatus(), "Przyjęto");
 
         try {
