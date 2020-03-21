@@ -60,3 +60,36 @@ body
 .nav-link:hover{
     background-color: #6a91fc !important;
 }
+
+#cart{
+    color:white;
+    text-decoration: none;
+    padding-right: 20px;
+    
+    
+    
+}
+li{
+    list-style: none;
+}
+
+.badge {
+    background-color: white;
+    border-radius: 10px;
+    color: red;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    padding: 3px 8px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+#login{
+    color: white;
+    
+    padding-right: 5px;
+    text-decoration: none;
+}
+
