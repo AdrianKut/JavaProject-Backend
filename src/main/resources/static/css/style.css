@@ -54,7 +54,7 @@ body
     border-radius: 50%;
     cursor: pointer;
     color:white !important;
-    text-decoration:none;
+    text-decoration:none !important;
 }
 
 .nav-link:hover{
@@ -135,7 +135,8 @@ li{
     align-items: center;
     border-radius: 50%;
     color:white;
-    text-decoration:none;
+    cursor: context-menu;
+    text-decoration:none !important;
     }
 
     .search_input2::placeholder{
