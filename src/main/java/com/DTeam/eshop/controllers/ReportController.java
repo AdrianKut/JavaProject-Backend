@@ -3,12 +3,17 @@ package com.DTeam.eshop.controllers;
 import java.util.List;
 
 import java.io.ByteArrayInputStream;
+
+import com.DTeam.eshop.entities.Order;
 import com.DTeam.eshop.entities.Payment;
 import com.DTeam.eshop.entities.Product;
+import com.DTeam.eshop.services.OrderService;
 import com.DTeam.eshop.services.PaymentService;
 import com.DTeam.eshop.services.ProductService;
 import com.DTeam.eshop.utilities.pdfgenerator.DemandReportPDF;
 import com.DTeam.eshop.utilities.pdfgenerator.EaringsReportPDF;
+import com.DTeam.eshop.utilities.pdfgenerator.OrderReportPDF;
+import com.DTeam.eshop.utilities.pdfgenerator.ProductInventoryReportPDF;
 
 import java.io.IOException;
 
@@ -29,12 +34,15 @@ public class ReportController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private OrderService orderService;
+
     @GetMapping("/employee/report/last-month")
     public ResponseEntity<InputStreamResource> earningsReport() throws IOException {
         List<Payment> paymentList = paymentService.getLastMonth();
         ByteArrayInputStream bis = EaringsReportPDF.earningsReport(paymentList);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=raportZysków.pdf");
+        headers.add("Content-Disposition", "inline; filename=raportZyskow.pdf");
 
         return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
         .body(new InputStreamResource(bis));
@@ -45,7 +53,29 @@ public class ReportController {
         List<Product> productList = productService.getProductsEnding();
         ByteArrayInputStream bis = DemandReportPDF.demandReport(productList);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=raportZapotrzeboawania.pdf");
+        headers.add("Content-Disposition", "inline; filename=raportZapotrzebowania.pdf");
+
+        return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
+        .body(new InputStreamResource(bis));
+    }
+
+    @GetMapping("/employee/report/product-inventory")
+    public ResponseEntity<InputStreamResource> productsInventory() throws IOException {
+        List<Product> productList = productService.listAll();
+        ByteArrayInputStream bis = ProductInventoryReportPDF.productInventory(productList);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=stanMagazynowy.pdf");
+
+        return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
+        .body(new InputStreamResource(bis));
+    }
+
+    @GetMapping("/employee/report/order")
+    public ResponseEntity<InputStreamResource> orders() throws IOException {
+        List<Order> orderList = orderService.getOrderByStatus();
+        ByteArrayInputStream bis = OrderReportPDF.order(orderList);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=zamowienia.pdf");
 
         return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
         .body(new InputStreamResource(bis));
