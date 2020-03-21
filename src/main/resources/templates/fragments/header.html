@@ -50,6 +50,18 @@
                 <li class="nav-item">
                     <a class="nav-link active" sec:authorize="hasRole('ROLE_pracownik')" href="/employee/product-list"> Produkty </a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link active dropdown-toggle" sec:authorize="hasRole('ROLE_pracownik')" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Raporty
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="/employee/report/last-month">Zysk miesięczny</a>
+                      <a class="dropdown-item" href="/employee/report/demand-report">Zapotrzebowanie</a>
+                      <a class="dropdown-item" href="/employee/report/product-inventory">Stan magazynowy</a>
+                      <a class="dropdown-item" href="/employee/report/order">Zamówienia</a>
+                      <a class="dropdown-item" href="/employee/report/employee">Pracownicy</a>
+                    </div>
+                  </li>
                 <li class="nav-item">
                     <a class="nav-link active" sec:authorize="!hasRole('ROLE_admin') and !hasRole('ROLE_pracownik')" href="/laptops-and-computers"> Laptopy i komputery </a>
                 </li>
