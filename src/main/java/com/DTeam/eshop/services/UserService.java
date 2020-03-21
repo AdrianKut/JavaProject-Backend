@@ -12,27 +12,30 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    @Autowired private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    public List<User> listAll(){
+    public List<User> listAll() {
         return userRepository.findAll();
     }
 
-    public void save(User user){
+    public User save(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
-    public User get(String email){
+    public User get(String email) {
         return userRepository.findById(email).get();
     }
 
-    public void delete(String email){
+    public User delete(String email) {
+        User user = get(email);
         userRepository.deleteById(email);
+        return user;
     }
 
-    public Boolean isUserExist(String email){
+    public Boolean isUserExist(String email) {
         return userRepository.existsById(email);
     }
 }
