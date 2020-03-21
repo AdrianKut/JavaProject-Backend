@@ -59,7 +59,7 @@ public class OrderServiceTest {
         products.add(new Product(64L, "name", "description", 42.0, 42, "photo"));
 
         Order order = (new Order(15L, LocalDateTime.of(2020, Month.MARCH, 22, 21, 40)));
-        
+
         when(orderService.save(any(Order.class), anyList())).thenReturn(order);
 
         orderService.save(order, products);
