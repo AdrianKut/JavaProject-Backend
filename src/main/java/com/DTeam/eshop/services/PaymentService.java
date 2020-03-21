@@ -28,9 +28,9 @@ public class PaymentService {
     }
 
     public Payment delete(Long id) {
-        Payment order = get(id);
+        Payment payment = get(id);
         paymentRepository.deleteById(id);
-        return order;
+        return payment;
     }
 
     public Boolean isPaymentExist(Long id) {
