@@ -12,29 +12,32 @@ import org.springframework.stereotype.Service;
 @Service
 public class PaymentService {
 
-    @Autowired private PaymentRepository paymentRepository;
+    @Autowired
+    private PaymentRepository paymentRepository;
 
-    public List<Payment> listAll(){
+    public List<Payment> listAll() {
         return paymentRepository.findAll();
     }
 
-    public void save(Payment payment){
-        paymentRepository.save(payment);
+    public Payment save(Payment payment) {
+        return paymentRepository.save(payment);
     }
 
-    public Payment get(Long id){
+    public Payment get(Long id) {
         return paymentRepository.findById(id).get();
     }
 
-    public void delete(Long id){
+    public Payment delete(Long id) {
+        Payment order = get(id);
         paymentRepository.deleteById(id);
+        return order;
     }
 
-    public Boolean isPaymentExist(Long id){
+    public Boolean isPaymentExist(Long id) {
         return paymentRepository.existsById(id);
     }
 
-    public List<Payment> getLastMonth(){
+    public List<Payment> getLastMonth() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime earlier = now.minusMonths(1);
         return paymentRepository.findByPaymentDateAfter(earlier);
