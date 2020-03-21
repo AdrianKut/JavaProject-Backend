@@ -26,7 +26,7 @@ public class Product {
     @Column(name = "name", nullable = false, length = 35)
     private String name;
 
-    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "description", nullable = false, length = 115)
     private String description;
 
     @Column(name = "price", nullable = false)
@@ -49,7 +49,7 @@ public class Product {
 
     public Product() {
     }
-    
+
     public Product(Long productId, String name, String description, Double price, Integer quantity, String photo) {
         this.productId = productId;
         this.name = name;
