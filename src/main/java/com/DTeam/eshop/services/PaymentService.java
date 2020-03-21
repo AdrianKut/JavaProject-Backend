@@ -1,5 +1,6 @@
 package com.DTeam.eshop.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.DTeam.eshop.entities.Payment;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class PaymentService {
 
     @Autowired private PaymentRepository paymentRepository;
-    
+
     public List<Payment> listAll(){
         return paymentRepository.findAll();
     }
@@ -31,5 +32,11 @@ public class PaymentService {
 
     public Boolean isPaymentExist(Long id){
         return paymentRepository.existsById(id);
+    }
+
+    public List<Payment> getLastMonth(){
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime earlier = now.minusMonths(1);
+        return paymentRepository.findByPaymentDateAfter(earlier);
     }
 }
