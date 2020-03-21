@@ -50,6 +50,6 @@ public class ProductService {
     }
 
     public List<Product> getProductsEnding(){
-        return productRepository.findByQuantityLessThan(5);
+        return productRepository.findByQuantityLessThanOrderByQuantityAsc(5);
     }
 }
