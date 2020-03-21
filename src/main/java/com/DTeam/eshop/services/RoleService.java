@@ -11,33 +11,36 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleService {
 
-    @Autowired private RoleRepository roleRepository;
-    
-    public List<Role> listAll(){
+    @Autowired
+    private RoleRepository roleRepository;
+
+    public List<Role> listAll() {
         return roleRepository.findAll();
     }
 
-    public void save(Role role){
-        roleRepository.save(role);
+    public Role save(Role role) {
+        return roleRepository.save(role);
     }
 
-    public Role get(String name){
+    public Role get(String name) {
         return roleRepository.findById(name).get();
     }
 
-    public void delete(String name){
+    public Role delete(String name) {
+        Role role = get(name);
         roleRepository.deleteById(name);
+        return role;
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         roleRepository.deleteAll();
     }
 
-    public Boolean isRoleExist(String name){
+    public Boolean isRoleExist(String name) {
         return roleRepository.existsById(name);
     }
 
-    public List<Role> getByUserEmail(String email){
+    public List<Role> getByUserEmail(String email) {
         return roleRepository.findByUsersEmail(email);
     }
 }
