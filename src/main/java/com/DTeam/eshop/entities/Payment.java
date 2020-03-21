@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 import lombok.Data;
 
 @Entity
@@ -36,18 +35,25 @@ public class Payment {
     @OneToOne(mappedBy = "payment")
     private Order order;
 
-    public Payment(){}
+    public Payment() {
+    }
+
+    public Payment(Long paymentId, LocalDateTime paymentDate, String paymentMethod) {
+        this.paymentId = paymentId;
+        this.paymentDate = paymentDate;
+        this.paymentMethod = paymentMethod;
+    }
 
     public String getPaymentDate() {
-        if(paymentDate !=null){
+        if (paymentDate != null) {
             return paymentDate.toString();
-        }else{
+        } else {
             return "";
         }
     }
 
     public void setPaymentDate(String paymentDate) {
-        LocalDateTime dataTime = LocalDateTime.parse(paymentDate,DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        LocalDateTime dataTime = LocalDateTime.parse(paymentDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         this.paymentDate = dataTime;
     }
 }
