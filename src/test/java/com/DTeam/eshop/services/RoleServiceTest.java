@@ -40,18 +40,26 @@ public class RoleServiceTest {
 
     @Test
     public void testGet() {
+        
+        when(roleService.get(any())).thenReturn(new Role("Amber"));
 
+        Role role = roleService.get(new Role().getName());
+
+        verify(roleService, times(1)).get(any());
+
+        assertEquals(role.getName(), "Amber");
+        
     }
 
     @Test
     public void testDelete() {
-        
+
         final Role role = new Role("");
 
         roleService.delete(role.getName());
 
         verify(roleService, times(1)).delete("");
-        
+
     }
 
     @Test
