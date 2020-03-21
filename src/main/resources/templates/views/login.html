@@ -6,44 +6,57 @@
         <title>Logowanie</title>
     </head>
     <body>
-        <div layout:fragment="content" class="container mt-2">
+        <div layout:fragment="content" class="container mt-2 ">
             <div class="row">
-                <div class="col-md-6 offset-md-3 text-center">
-                    <div class="alert alert-danger alert-dismissible fade show" th:if="${param.error}" role="alert">
-                        Błędny login lub hasło
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <form th:action="@{/login}" method="POST">
-                 <div class="row">
-                    <div class="col-md-4 offset-md-4 mt-5 text-center">
-                        <label class="display-4"> Zaloguj się </label>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-md-4 offset-md-4 text-center">
-                        <div class="form-group">
-                            <input class="form-control-lg  form-control" type="text" id="email" placeholder="Adres email" name="username" required/>
+                <div class="col-md-6 ">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3 text-center">
+                            <div class="alert alert-danger alert-dismissible fade show" th:if="${param.error}" role="alert">
+                                Błędny login lub hasło
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-md-4 text-center">
-                        <div class="form-group">
-                            <input class="form-control-lg form-control" type="password" id="password"  placeholder="Hasło" name="password" required/>
+                    </div>               
+                    <form th:action="@{/login}" method="POST">
+                        <div class=" ">
+                            <div class=" mt-5  text-center">
+                                <label class="display-4"> Zaloguj się </label>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="row mt-4 ">
+                            <div class="text-center ml-5">
+                                <div class="form-group">
+                                    <input class="form-control-lg  form-control" type="text" id="email" placeholder="Adres email" name="username" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="text-center ml-5">
+                                <div class="form-group">
+                                    <input class="form-control-lg form-control" type="password" id="password"  placeholder="Hasło" name="password" required/>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="row">
-                    <div class="col-md-4 offset-md-4 mt-2">
-                        <button type="submit" class="btn btn-block btn-primary">Zaloguj</button>
-                    </div>
+                        <div class="col-md-5">
+                            <div class=" mt-2">
+                                <button type="submit" class="btn btn-block btn-primary">Zaloguj</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+                    <div class="mt-5 ml-4">
+                        <label class="display-4 mt-5"> Nie mam konta </label>
+                        <div class="text-center mb-3">
+                            <label>Nie masz konta? Kliknij załóż konto</label>
+                        </div>
+                            <div>
+                                <a class="btn btn-primary my-1 btn-block" href="/register">Załóż konto</a>
+                            </div>
+                    </div>
+            </div>
         </div>
     </body>
 </html>
