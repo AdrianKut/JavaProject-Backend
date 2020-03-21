@@ -40,7 +40,7 @@
                             <td> <b  th:text="${order.shipmentDate}">...</b> </td>
                             <td> <b  th:text="${order.orderStatus}">...</b> </td>
                             <td>
-                                <a class="btn btn-danger" th:href="'#modal'+ ${order.orderId}" data-toggle="modal">Usuń</a>
+                                <a class="btn btn-outline-danger" th:href="'#modal'+ ${order.orderId}" data-toggle="modal">Usuń</a>
                                 <div class="modal fade" th:id="'modal'+ ${order.orderId}" tabindex="-1">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -60,7 +60,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a class="btn btn-primary my-1" th:href="@{'edit/' + ${order.orderId}}">Edytuj</a>
+                                <a class="btn btn-outline-primary my-1" th:href="@{'edit/' + ${order.orderId}}">Edytuj</a>
                             </td>
                         </tr>
                     </tbody>
