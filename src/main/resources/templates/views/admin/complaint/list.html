@@ -40,7 +40,7 @@
                             <td> <b  th:text="${complaint.description}">...</b> </td>
                             <td> <b  th:text="${complaint.complaintStatus}">...</b> </td>
                             <td>
-                                <a class="btn btn-danger" th:href="'#modal'+ ${complaint.complaintId}" data-toggle="modal">Usuń</a>
+                                <a class="btn btn-outline-danger" th:href="'#modal'+ ${complaint.complaintId}" data-toggle="modal">Usuń</a>
                                 <div class="modal fade" th:id="'modal'+ ${complaint.complaintId}" tabindex="-1">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -60,7 +60,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a class="btn btn-primary my-1" th:href="@{'edit/' + ${complaint.complaintId}}">Edytuj</a>
+                                <a class="btn btn-outline-primary my-1" th:href="@{'edit/' + ${complaint.complaintId}}">Edytuj</a>
                             </td>
                         </tr>
                     </tbody>
