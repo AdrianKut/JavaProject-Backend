@@ -33,7 +33,7 @@
                     <tbody id="table">
                         <tr th:each ="role : ${roleList}">
                             <td> <b  th:text="${role.name}">...</b> </td>
-                            <td> <a class="btn btn-danger" th:href="@{'delete/' + ${role.name}}">Usuń</a></td>
+                            <td> <a class="btn btn-outline-danger" th:href="@{'delete/' + ${role.name}}">Usuń</a></td>
                         </tr>
                     </tbody>
                 </table>
