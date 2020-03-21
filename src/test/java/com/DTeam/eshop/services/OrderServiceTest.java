@@ -49,33 +49,26 @@ public class OrderServiceTest {
         orders.add(new Order(32L, localDateTime));
         return orders;
     }
-    
+
     @Test
     public void testSave() {
 
         List<Product> products = new ArrayList<>();
         products.add(new Product());
         products.add(new Product());
-        products.add(new Product(32L, "name", "description", 42.0, 42, "photo"));
+        products.add(new Product(64L, "name", "description", 42.0, 42, "photo"));
 
-        Order order = (new Order(32L, LocalDateTime.of(2020, Month.MARCH, 22, 21, 40)));
+        Order order = (new Order(15L, LocalDateTime.of(2020, Month.MARCH, 22, 21, 40)));
 
-//        when(orderService.save((orderToSave), products)).thenReturn(new Order(32L, LocalDateTime.of(2020, Month.MARCH, 22, 21, 40)));
-//
-//        Order order = orderService.save(orderToSave, products);
-        when(orderService.save((order), products)).thenReturn(new Order(32L, LocalDateTime.of(2020, Month.MARCH, 22, 21, 40)));
-       // when(orderService.save((any(Order.class)), products)).thenReturn(order);
+        when(orderService.get(anyLong())).thenReturn(new Order());
+        when(productService.get(anyLong())).thenReturn(new Product());
 
-      // Order orderSave =  orderService.save(order, products);
-      //  order.setProducts(products);
-      
-     //   verify(orderService, times(1)).save(order, products);
-        
-//        assertEquals(order.getOrderId().longValue(), 32L);
-//        assertEquals(order.getPurchaseDate(), LocalDateTime.of(2020, Month.MARCH, 22, 21, 40).toString());
-//        assertEquals(order.getProducts().size(), 3);
+        orderService.save(order, products);
+        order.setProducts(products);
 
-        assertEquals(products.get(2).getName(), "name");
+        assertEquals(order.getOrderId().toString(), "" + 15L);
+        assertEquals(order.getProducts().get(2).getPhoto(), "photo");
+        assertEquals(order.getProducts().size(), 3);
     }
 
     @Test
@@ -95,7 +88,7 @@ public class OrderServiceTest {
 
         Long id = 894L;
 
-        when(orderService.get(id)).thenReturn(new Order());
+        when(orderService.get(anyLong())).thenReturn(new Order());
 
         assertEquals(orderService.get(id).getOrderId(), null);
         assertEquals(orderService.get(id).getPurchaseDate().toString(), "");
