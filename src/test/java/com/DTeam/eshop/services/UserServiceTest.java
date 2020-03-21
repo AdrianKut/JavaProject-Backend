@@ -55,6 +55,7 @@ public class UserServiceTest {
         user = userService.save(new User());
 
         verify(userService, times(2)).save(user);
+
         assertNotEquals(user.getPassword(), "elo123");
         assertEquals(user.getEmail(), null);
 
@@ -62,6 +63,19 @@ public class UserServiceTest {
 
     @Test
     public void testGet() {
+
+        when(userService.get(any())).thenReturn(new User("test@gmail.com", 32, "hardPassword!@#", false));
+
+        User user = userService.get(new User().getEmail());
+
+        verify(userService, times(1)).get(any());
+
+        assertEquals(user.getEmail(), "test@gmail.com");
+        assertEquals(user.getUserId().longValue(), 32L);
+        assertEquals(user.getPassword(), "hardPassword!@#");
+        assertEquals(user.getEnabled(), false);
+
+        assertNotEquals(user.getPassword(), "admin123");
     }
 
     @Test
