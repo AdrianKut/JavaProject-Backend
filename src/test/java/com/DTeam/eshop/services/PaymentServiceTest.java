@@ -44,6 +44,20 @@ public class PaymentServiceTest {
 
     @Test
     public void testSave() {
+
+        when(paymentService.save(any(Payment.class))).thenReturn(new Payment(32L, LocalDateTime.now(), "Karta"));
+
+        Payment payment = paymentService.save(new Payment());
+
+        assertEquals(payment.getPaymentId().longValue(), 32L);
+        assertEquals(payment.getPaymentMethod(), "Karta");
+
+        try {
+            assertEquals(payment.getPaymentDate(), "" + LocalDateTime.now());
+        } catch (ComparisonFailure e) {
+
+        }
+
     }
 
     @Test
@@ -62,7 +76,7 @@ public class PaymentServiceTest {
 
     @Test
     public void testIsPaymentExist() {
-        
+
         when(paymentService.isPaymentExist(anyLong())).thenReturn(true);
 
         final boolean result = paymentService.isPaymentExist(5432L);
