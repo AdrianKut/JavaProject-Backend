@@ -52,6 +52,13 @@ public class PaymentServiceTest {
 
     @Test
     public void testDelete() {
+        
+
+        final Payment payment = new Payment(520L, LocalDateTime.MIN, "Gotowka");
+
+        paymentService.delete(payment.getPaymentId());
+
+        verify(paymentService, times(1)).delete(520L);
     }
 
     @Test
