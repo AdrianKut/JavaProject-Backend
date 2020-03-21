@@ -33,7 +33,6 @@
                             <th>Płaca dodatkowa</th>
                             <th>Akcje</th>
                         </tr>
-
                     </thead>
                     <tbody id="table">
                         <tr th:each ="employee : ${employeeList}">
@@ -44,7 +43,7 @@
                             <td> <b  th:text="${#numbers.formatCurrency(employee.basePay)}">...</b> </td>
                             <td> <b  th:text="${#numbers.formatCurrency(employee.extraPay)}">...</b> </td>
                             <td>
-                                <a class="btn btn-danger" th:href="'#modal'+ ${employee.employeeId}" data-toggle="modal">Usuń</a>
+                                <a class="btn btn-outline-danger" th:href="'#modal'+ ${employee.employeeId}" data-toggle="modal">Usuń</a>
                                 <div class="modal fade" th:id="'modal'+ ${employee.employeeId}" tabindex="-1">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -64,7 +63,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a class="btn btn-primary my-1" th:href="@{'edit/' + ${employee.employeeId}}">Edytuj</a>
+                                <a class="btn btn-outline-primary my-1" th:href="@{'edit/' + ${employee.employeeId}}">Edytuj</a>
                             </td>
                         </tr>
                     </tbody>
