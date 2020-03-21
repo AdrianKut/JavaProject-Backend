@@ -21,6 +21,26 @@ public class RoleServiceTest {
 
     @Test
     public void testListAll() {
+
+        when(roleService.listAll()).thenReturn(prepareMocData());
+
+        assertEquals(roleService.listAll().get(0).getName(), null);
+        assertEquals(roleService.listAll().get(2).getName(), "Rola");
+        assertThat(roleService.listAll(), Matchers.hasSize(3));
+
+        verify(roleService, times(3)).listAll();
+
+    }
+
+    private List<Role> prepareMocData() {
+
+        List<Role> roles = new ArrayList<>();
+
+        roles.add(new Role());
+        roles.add(new Role());
+        roles.add(new Role("Rola"));
+
+        return roles;
     }
 
     @Test
@@ -64,7 +84,7 @@ public class RoleServiceTest {
 
     @Test
     public void testIsRoleExist() {
-        
+
         when(roleService.isRoleExist(any())).thenReturn(true);
 
         final boolean result = roleService.isRoleExist("");
