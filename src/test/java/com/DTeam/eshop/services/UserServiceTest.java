@@ -30,8 +30,8 @@ public class UserServiceTest {
         assertEquals(userService.listAll().get(0).getEmail(), null);
         assertEquals(userService.listAll().get(2).getPassword(), "password123");
         assertThat(userService.listAll(), Matchers.hasSize(3));
-        
-        verify(userService,times(3)).listAll();
+
+        verify(userService, times(3)).listAll();
 
     }
 
@@ -48,6 +48,16 @@ public class UserServiceTest {
 
     @Test
     public void testSave() {
+
+        when(userService.save(any(User.class))).thenReturn(new User());
+
+        User user = userService.save(new User());
+        user = userService.save(new User());
+
+        verify(userService, times(2)).save(user);
+        assertNotEquals(user.getPassword(), "elo123");
+        assertEquals(user.getEmail(), null);
+
     }
 
     @Test

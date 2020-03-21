@@ -94,8 +94,8 @@ public class PaymentServiceTest {
         paymentService.getLastMonth().get(0).setPaymentDate("2020-12-12T12:00");
         
         verify(paymentService,times(3)).getLastMonth();
-         
-        assertEquals(paymentService.getLastMonth().get(0).getPaymentDate(), "2020-12-12T12:00");
+          
+       assertEquals(paymentService.getLastMonth().get(0).getPaymentDate(), "2020-12-12T12:00");
 
         String getMonth = LocalDateTime.parse(paymentService.getLastMonth().get(0).getPaymentDate()).getMonth().toString();
         assertEquals(getMonth.toLowerCase(Locale.ITALY), "december");
