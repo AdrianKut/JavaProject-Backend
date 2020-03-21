@@ -1,40 +1,57 @@
 body
 {
-/*background-image: url(/images/GLOWNA.jpg);*/
  padding-bottom: 70px;
 }
-/*.jumbotron
-{
 
-    background-color: #58FAFF;
-   margin-bottom: 10px;
+.bg-primary{
+    background-color: #5679db !important;
+}
+.searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: #6b8ce8;
+    border-radius: 30px;
+    padding: 10px;
 }
 
-.nav-item
-{
-background-color: #58FAFF;
-margin-left: 5px;
-border-bottom-left-radius: 15px;
-border-bottom-right-radius: 15px;
-border-top-left-radius: 15px;
-border-top-right-radius: 15px;
+@media all and (min-width: 720px ) {
+    .search_input{
+        width: 500px !important;
+    }
 }
 
-.nav-item:hover
-{
-    background-color: 91F1F5;
-}
-#title
-{
-    width: auto;
-    height: 200px;
-
-
-}
-*/
-
-.button, .search {
-    padding-left: 2px;
-    padding-right: 0;
+.search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    padding: 0 10px;
+    width: 300px;
+    caret-color:red;
+    cursor: context-menu;
+    line-height: 40px;
+    transition: width 0.4s linear;
 }
 
+.search_input::placeholder{
+    color: aliceblue;
+}
+
+.searchbar:hover > .search_icon{
+    background: white !important;
+    color: #e74c3c !important;
+}
+
+.search_icon{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    color:white !important;
+    text-decoration:none;
+}
