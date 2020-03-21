@@ -28,7 +28,7 @@ body
     outline: 0;
     background: none;
     padding: 0 10px;
-    width: 300px;
+    width: 250px;
     caret-color:red;
     cursor: context-menu;
     line-height: 40px;
@@ -54,7 +54,7 @@ body
     border-radius: 50%;
     cursor: pointer;
     color:white !important;
-    text-decoration:none;
+    text-decoration:none !important;
 }
 
 .nav-link:hover{
@@ -65,10 +65,8 @@ body
     color:white;
     text-decoration: none;
     padding-right: 20px;
-    
-    
-    
 }
+
 li{
     list-style: none;
 }
@@ -88,7 +86,7 @@ li{
 
 #login{
     color: white;
-    
+
     padding-right: 5px;
     text-decoration: none;
 }
@@ -104,3 +102,60 @@ li{
 .bg-logout:hover{
     color:white;
 }
+
+.searchbar2{
+    box-shadow: 5px 5px 4px #888888;
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: #6b8ce8;
+    border-radius: 30px;
+    padding: 10px;
+    }
+
+    .search_input2{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    line-height: 40px;
+    cursor: context-menu;
+    transition: width  0.4s linear;
+    }
+
+    .searchbar2:hover > .search_input2{
+    padding: 0 10px;
+    width: 170px;
+    caret-color:red;
+    transition: width 0.4s linear;
+    }
+
+    .searchbar2:hover > .search_icon2{
+    background: white;
+    color: #e74c3c;
+    }
+
+    .search_icon2{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    cursor: context-menu;
+    text-decoration:none !important;
+    }
+
+    .search_input2::placeholder{
+        color: aliceblue;
+    }
+
+    @media all and (min-width: 720px ) {
+        .searchbar2:hover > .search_input2{
+            width: 400px;
+            }
+    }

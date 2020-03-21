@@ -9,14 +9,19 @@
 
     <body>
         <div layout:fragment="content" class="container mt-2">
-            <div class="row">
-                <div class="col-md-4 my-1">
-                    <a href="add" class="btn btn-outline-info" role="button">Dodaj użytkownika</a>
+            <nav class="navbar navbar-expand-lg">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="add" class="btn btn-outline-info" role="button">Dodaj</a>
+                    </li>
+                </ul>
+                <div class="navbar-right d-flex h-100">
+                    <div class="searchbar2">
+                      <input class="search_input2" type="text" id="search" placeholder="Szukaj...">
+                      <a href="#" class="search_icon2"><i class="fas fa-search"></i></a>
+                    </div>
                 </div>
-                <div class="col-md-4 offset-md-4 my-1">
-                    <input type="search"  placeholder="Szukaj..." class="form-control search-input border-info" id="search"/>
-                </div>
-            </div>
+            </nav>
             <div class="table-responsive mt-2">
                 <table class="table">
                     <thead class="thead-dark">
