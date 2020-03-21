@@ -40,7 +40,7 @@ public class RoleServiceTest {
 
     @Test
     public void testGet() {
-        
+
         when(roleService.get(any())).thenReturn(new Role("Amber"));
 
         Role role = roleService.get(new Role().getName());
@@ -48,7 +48,7 @@ public class RoleServiceTest {
         verify(roleService, times(1)).get(any());
 
         assertEquals(role.getName(), "Amber");
-        
+
     }
 
     @Test
@@ -64,6 +64,13 @@ public class RoleServiceTest {
 
     @Test
     public void testIsRoleExist() {
+        
+        when(roleService.isRoleExist(any())).thenReturn(true);
+
+        final boolean result = roleService.isRoleExist("");
+        assertEquals(result, true);
+
+        verify(roleService, times(1)).isRoleExist("");
     }
 
     @Test
