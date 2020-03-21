@@ -80,6 +80,12 @@ public class UserServiceTest {
 
     @Test
     public void testDelete() {
+
+        final User user = new User("", 1, "", true);
+
+        userService.delete(user.getEmail());
+
+        verify(userService, times(1)).delete("");
     }
 
     @Test
