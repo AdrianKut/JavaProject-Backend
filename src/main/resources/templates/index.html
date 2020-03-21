@@ -7,14 +7,14 @@
     </head>
     <body>
         <div layout:fragment="content" class="container mt-2">
-            <form th:action="@{/search/}" class="row my-4">
-                    <div class="col-md-4 offset-md-4 my-2 search">
-                        <input type="search" name="name" placeholder="Szukaj..." class="form-control search-input border-info"/>
+             <form  id="search"  th:action="@{/search/}" class="container h-100 my-4">
+                <div class="d-flex justify-content-center h-100">
+                    <div class="searchbar">
+                      <input class="search_input" type="text" name="name" placeholder="Szukaj...">
+                      <a onclick="document.getElementById('search').submit()" class="search_icon"><i class="fas fa-search"></i></a>
                     </div>
-                    <div class="col-md-3 button my-2 text-center text-md-left">
-                        <button type="submit"  class="btn btn-primary">Szukaj</button>
-                    </div>
-             </form>
+                  </div>
+            </form>
 
             <div class="row text-center">
                 <div th:each="product : ${productList}" style="width: 20rem; border: none;"  class="card mx-4 mb-4">
