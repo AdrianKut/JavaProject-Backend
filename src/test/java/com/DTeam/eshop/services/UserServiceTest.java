@@ -30,6 +30,8 @@ public class UserServiceTest {
         assertEquals(userService.listAll().get(0).getEmail(), null);
         assertEquals(userService.listAll().get(2).getPassword(), "password123");
         assertThat(userService.listAll(), Matchers.hasSize(3));
+        
+        verify(userService,times(3)).listAll();
 
     }
 
