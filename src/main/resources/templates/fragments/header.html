@@ -68,7 +68,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" sec:authorize="hasRole('ROLE_pracownik')" href="/employee/complaint-list"> Reklamacja </a>
                 </li>
-                
+
             </ul>
             <a class="navbar-right cart" sec:authorize="!isAuthenticated()">
                 <li><a sec:authorize="!hasRole('ROLE_admin') and !hasRole('ROLE_pracownik')" href="/shopping-cart" id="cart"><i class="fa fa-shopping-cart"></i> Koszyk <span th:text="${session.count}" class="badge">0</span></a></li>
@@ -82,8 +82,8 @@
           <!--  <form class="form-inline" sec:authorize="!isAuthenticated()">
                 <a href="/register" class="mr-2 btn btn-light" role="button">Rejestracja</a>
                 <a href="/login"  class="mr-2 btn btn-success" role="button">Logowanie</a>
-                
-                
+
+
             </form>-->
             <a style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_klient')" href="/customer/profile" th:text="${#authentication.name}"></a>
             <a style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_pracownik')" href="/employee/profile" th:text="${#authentication.name}"></a>
