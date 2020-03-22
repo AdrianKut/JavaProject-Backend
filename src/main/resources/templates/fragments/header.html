@@ -90,9 +90,9 @@
                       <a class="dropdown-item" sec:authorize="isAuthenticated() and hasRole('ROLE_pracownik')" href="/employee/profile"> Moje konto</a>
                       <a class="dropdown-item" sec:authorize="hasRole('ROLE_klient')" href="/customer/order">Zakupy</a>
                       <a class="dropdown-item" sec:authorize="hasRole('ROLE_klient')" href="/customer/complaint">Reklamacje</a>
-                      <form id="logout" class="dropdown-item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="POST">
-                        <a class="logout" onclick="document.getElementById('logout').submit()">Wyloguj</button>
-                      </form>
+                        <form id="logout" clas="dropdown-item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="POST">
+                            <a class="logout" onclick="document.getElementById('logout').submit()">Wyloguj</a>
+                        </form>
                     </div>
                 </li>
 
