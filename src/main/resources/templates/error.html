@@ -6,11 +6,12 @@
         <title>Błąd</title>
     </head>
     <body>
-        <div layout:fragment="content" class="container mt-2">
+        <div layout:fragment="content" class="container mt-2" th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
             <div class="row text-center">
                 <div class="col-md-12">
-                    Wystąpił błąd! | <span th:text="${message}"></span> | <span th:text="'Error: '+ ${status}" class="text text-danger"></span>
+                    Wystąpił błąd! | <span th:text="${message}"></span> | <span th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|" class="text text-danger"></span>
                 </div>
             </div>
+        </div>
     </body>
- </html>
+</html>

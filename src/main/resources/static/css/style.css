@@ -98,8 +98,6 @@ li{
     border: none;
     outline: 0;
     color: white;
-    
-
 }
 
 .bg-logout:hover{
@@ -164,5 +162,8 @@ li{
             }
     }
 
-
+.logout
+{
+    cursor: pointer;
+}
 
