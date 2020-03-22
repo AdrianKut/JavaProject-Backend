@@ -138,13 +138,32 @@ public class ProductServiceTest {
         verify(productService, times(1)).getByOrderId(anyLong());
     }
 
-//    @Test
-//    public void testGetByNameOrCategory() {
-//    }
-//
-//      public Page<Product> getByCategory(String category, Pageable pageable){
-//        return productRepository.findByCategory(category, pageable);
-//    }
+    @Test
+    public void testGetByNameOrCategory() {
+
+        List<Product> products = new ArrayList<>();
+
+        products.add(new Product());
+        products.add(new Product());
+        products.add(new Product(189L, "Podkładka", "20x20", 59.99, 10, "brak", "Sprzęt dla graczy"));
+
+        when(productService.getByNameOrCategory(anyString())).thenReturn(products);
+
+        assertEquals(products.get(2).getName(), "Podkładka");
+        assertEquals(products.get(2).getCategory(), "Sprzęt dla graczy");
+
+        assertEquals(productService.getByNameOrCategory("Podkładka").get(2).getName(), "Podkładka");
+        assertEquals(productService.getByNameOrCategory("Podkładka").get(2).getCategory(), "Sprzęt dla graczy");
+
+        assertEquals(productService.getByNameOrCategory("").get(0).getCategory(), null);
+        assertEquals(productService.getByNameOrCategory("").get(1).getCategory(), null);
+
+        productService.getByNameOrCategory("Podzespoły komputerowe");
+        productService.getByNameOrCategory("Monitor");
+
+        verify(productService, times(6)).getByNameOrCategory(any());
+    }
+
     @Test
     public void testGetByCategory() {
 
