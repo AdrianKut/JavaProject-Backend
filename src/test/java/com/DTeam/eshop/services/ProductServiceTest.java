@@ -44,10 +44,20 @@ public class ProductServiceTest {
         return products;
     }
 
-//    @Test
-//    public void testSave() {
-//    }
-//
+    @Test
+    public void testSave() {
+
+        when(productService.save(any(Product.class))).thenReturn(new Product());
+
+        Product product = productService.save(new Product());
+        product = productService.save(new Product());
+
+        verify(productService, times(2)).save(product);
+
+        assertNotEquals(product.getPrice(), 234234.200);
+        assertEquals(product.getProductId(), null);
+    }
+
 //    @Test
 //    public void testGet() {
 //    }
@@ -76,5 +86,4 @@ public class ProductServiceTest {
 //    public void testgetProductsEnding() {
 //
 //    }
-    
 }
