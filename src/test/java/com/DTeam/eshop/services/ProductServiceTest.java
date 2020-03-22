@@ -137,8 +137,22 @@ public class ProductServiceTest {
 //    public void testGetByCategory() {
 //    }
 //
-//    @Test
-//    public void testgetProductsEnding() {
-//
+//     public List<Product> getProductsEnding(){
+//        return productRepository.findByQuantityLessThanOrderByQuantityAsc(5);
 //    }
+    @Test
+    public void testGetProductsEnding() {
+
+        List<Product> products = new ArrayList<>();
+        products.add(new Product());
+        products.add(new Product(10L, "Myszka", "Optyczna z podświetleniem RGB", 651.230, 2, "brak"));
+
+        when(productService.getProductsEnding()).thenReturn(products);
+
+        assertEquals(productService.getProductsEnding().get(0).getOrders(), null);
+        assertEquals(productService.getProductsEnding().get(1).getDescription(), "Optyczna z podświetleniem RGB");
+        assertThat(productService.getProductsEnding(), Matchers.hasSize(2));
+
+        verify(productService, times(3)).getProductsEnding();
+    }
 }
