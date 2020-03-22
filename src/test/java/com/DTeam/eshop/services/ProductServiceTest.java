@@ -1,7 +1,9 @@
 package com.DTeam.eshop.services;
 
 import com.DTeam.eshop.entities.Product;
-import com.DTeam.eshop.entities.User;
+import com.DTeam.eshop.entities.Order;
+import java.time.LocalDateTime;
+import java.time.Month;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import static org.junit.Assert.*;
 public class ProductServiceTest {
 
     final ProductService productService = mock(ProductService.class);
+    final OrderService orderService = mock(OrderService.class);
 
     @Test
     public void testListAll() {
@@ -100,12 +103,32 @@ public class ProductServiceTest {
 
         verify(productService, times(1)).isProductExist(any());
     }
-    
-//
-//    @Test
-//    public void testGetByOrderId() {
-//    }
-//
+
+    @Test
+    public void testGetByOrderId() {
+
+        List<Product> products = new ArrayList<>();
+
+        products.add(new Product());
+        products.add(new Product());
+        products.add(new Product(10L, "Myszka", "Optyczna z podświetleniem RGB", 651.230, 32, "brak"));
+
+        Order order = new Order(15L, LocalDateTime.of(2020, Month.MARCH, 22, 21, 40));
+
+        when(productService.getByOrderId(anyLong())).thenReturn(products);
+
+        order.setProducts(products);
+
+        assertEquals(productService.getByOrderId(10L).get(2).getName().toString(), "Myszka");
+
+        assertEquals(order.getProducts().get(2).getPhoto(), "brak");
+        assertEquals(order.getProducts().get(0).getPrice(), null);
+
+        assertEquals(products.get(2).getPrice().toString(), "" + 651.230);
+
+        verify(productService, times(1)).getByOrderId(anyLong());
+    }
+
 //    @Test
 //    public void testGetByNameOrCategory() {
 //    }
