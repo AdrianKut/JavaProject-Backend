@@ -13,6 +13,7 @@
                         <div class="form-group">
                             <label> Imię </label>
                             <input class="form-control" type="text" th:field="${employee.name}" required/>
+                            <div class="text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="${employee.name}"></div>
                         </div>
                     </div>
                 </div>
@@ -22,6 +23,7 @@
                         <div class="form-group">
                             <label> Nazwisko </label>
                             <input class=form-control type="text" th:field="${employee.surname}" required/>
+                            <div class="text text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="${employee.surname}"></div>
                         </div>
                     </div>
                 </div>
@@ -40,6 +42,7 @@
                         <div class="form-group">
                             <label> Stanowisko </label>
                             <input class=form-control type="text" th:field="${employee.position}" required />
+                            <div class="text text-danger" th:if="${#fields.hasErrors('position')}" th:errors="${employee.position}"></div>
                         </div>
                     </div>
                 </div>

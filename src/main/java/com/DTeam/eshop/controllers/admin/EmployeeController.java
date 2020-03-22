@@ -2,6 +2,8 @@ package com.DTeam.eshop.controllers.admin;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.DTeam.eshop.entities.Address;
 import com.DTeam.eshop.entities.Employee;
 import com.DTeam.eshop.entities.User;
@@ -12,6 +14,7 @@ import com.DTeam.eshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,9 +51,12 @@ public class EmployeeController {
     }
 
     @PostMapping("/admin/employee/add")
-    public String add(Employee employee,
+    public String add(@Valid Employee employee, BindingResult bindingResult,
         @RequestParam(name = "users")User user,
         @RequestParam(name = "addresses")Address address){
+        if(bindingResult.hasErrors()){
+            return "views/admin/employee/add";
+        }
         employee.setUser(user);
         employee.setAddress(address);
         employeeService.save(employee);
@@ -69,9 +75,12 @@ public class EmployeeController {
     }
 
     @PostMapping("/admin/employee/edit/{id}")
-    public String edit(@PathVariable(name = "id")Long id, Employee employee,
+    public String edit(@PathVariable(name = "id")Long id, @Valid Employee employee, BindingResult bindingResult,
         @RequestParam(name = "users")User user,
         @RequestParam(name = "addresses")Address address){
+        if(bindingResult.hasErrors()){
+            return "views/admin/employee/edit";
+        }
         employee.setUser(user);
         employee.setAddress(address);
         employee.setEmployeeId(id);
