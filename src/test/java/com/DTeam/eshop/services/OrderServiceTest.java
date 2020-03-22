@@ -56,7 +56,7 @@ public class OrderServiceTest {
         List<Product> products = new ArrayList<>();
         products.add(new Product());
         products.add(new Product());
-        products.add(new Product(64L, "name", "description", 42.0, 42, "photo"));
+        products.add(new Product(64L, "name", "description", 42.0, 42, "photo","category"));
 
         Order order = (new Order(15L, LocalDateTime.of(2020, Month.MARCH, 22, 21, 40)));
 
