@@ -1,52 +1,80 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.DTeam.eshop.services;
 
-import org.junit.Test;
+import com.DTeam.eshop.entities.Product;
+import com.DTeam.eshop.entities.User;
+
+import java.util.List;
+import java.util.ArrayList;
+import org.junit.jupiter.api.Test;
+
+import org.hamcrest.Matchers;
+
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.any;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author AiXen
- */
 public class ProductServiceTest {
-    
-    public ProductServiceTest() {
-    }
+
+    final ProductService productService = mock(ProductService.class);
 
     @Test
     public void testListAll() {
+
+        when(productService.listAll()).thenReturn(prepareMocData());
+
+        assertEquals(productService.listAll().get(0).getOrders(), null);
+        assertEquals(productService.listAll().get(2).getDescription(), "najlepsza ze wszystkich");
+        assertThat(productService.listAll(), Matchers.hasSize(3));
+
+        verify(productService, times(3)).listAll();
+
     }
 
-    @Test
-    public void testSave() {
+    private List<Product> prepareMocData() {
+
+        List<Product> products = new ArrayList<>();
+
+        products.add(new Product());
+        products.add(new Product());
+        products.add(new Product(32L, "Klawiatura", "najlepsza ze wszystkich", 999.130, 32, "brak"));
+
+        return products;
     }
 
-    @Test
-    public void testGet() {
-    }
-
-    @Test
-    public void testDelete() {
-    }
-
-    @Test
-    public void testIsProductExist() {
-    }
-
-    @Test
-    public void testGetByOrderId() {
-    }
-
-    @Test
-    public void testGetByNameOrCategory() {
-    }
-
-    @Test
-    public void testGetByCategory() {
-    }
+//    @Test
+//    public void testSave() {
+//    }
+//
+//    @Test
+//    public void testGet() {
+//    }
+//
+//    @Test
+//    public void testDelete() {
+//    }
+//
+//    @Test
+//    public void testIsProductExist() {
+//    }
+//
+//    @Test
+//    public void testGetByOrderId() {
+//    }
+//
+//    @Test
+//    public void testGetByNameOrCategory() {
+//    }
+//
+//    @Test
+//    public void testGetByCategory() {
+//    }
+//
+//    @Test
+//    public void testgetProductsEnding() {
+//
+//    }
     
 }
