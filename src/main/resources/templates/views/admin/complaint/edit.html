@@ -22,6 +22,7 @@
                         <div class="form-group">
                             <label>Opis</label>
                             <input class="form-control" type="text" th:field="${complaint.description}" required />
+                            <div class="text text-danger" th:if="${#fields.hasErrors('description')}" th:errors="${complaint.description}"></div>
                         </div>
                     </div>
                 </div>

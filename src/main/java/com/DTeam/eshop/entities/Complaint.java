@@ -11,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
 
@@ -28,10 +30,14 @@ public class Complaint {
     @Column(name = "notification_date", nullable = false)
     private LocalDateTime notificationDate;
 
-    @Column(name = "description", nullable = false, length = 100)
+    @Column(name = "description", nullable = false, length = 200)
+    @NotEmpty(message = "To pole nie może być puste")
+    @Length(max = 200, message = "Możesz wprowadzić maksymalnie 200 znaków")
     private String description;
 
     @Column(name = "complaint_status", nullable = false, length = 20)
+    @NotEmpty(message = "To pole nie może być puste")
+    @Length(max = 20, message = "Możesz wprowadzić maksymalnie 20 znaków")
     private String complaintStatus;
 
     @ManyToOne
@@ -50,9 +56,9 @@ public class Complaint {
         this.description = description;
         this.complaintStatus = complaintStatus;
     }
-   
 
-    public String getNotificationDate() {      
+
+    public String getNotificationDate() {
         if(notificationDate !=null){
             return notificationDate.toString();
         }else{
@@ -60,9 +66,9 @@ public class Complaint {
         }
     }
 
-    public void setNotificationDate(String notificationDate) {       
+    public void setNotificationDate(String notificationDate) {
         LocalDateTime dataTime = LocalDateTime.parse(notificationDate,DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         this.notificationDate = dataTime;
     }
-    
+
 }

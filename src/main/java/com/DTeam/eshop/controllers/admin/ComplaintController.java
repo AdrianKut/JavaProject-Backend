@@ -2,6 +2,8 @@ package com.DTeam.eshop.controllers.admin;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.DTeam.eshop.entities.Complaint;
 import com.DTeam.eshop.entities.Order;
 import com.DTeam.eshop.entities.Product;
@@ -12,6 +14,7 @@ import com.DTeam.eshop.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,9 +51,12 @@ public class ComplaintController {
     }
 
     @PostMapping("/admin/complaint/add")
-    public String save(Complaint complaint,
+    public String save(@Valid Complaint complaint, BindingResult bindingResult,
     @RequestParam(name="order")Order order,
     @RequestParam(name="product")Product product){
+        if(bindingResult.hasErrors()){
+            return "views/admin/complaint/add";
+        }
         complaint.setOrder(order);
         complaint.setProduct(product);
         complaintService.save(complaint);
@@ -70,9 +76,12 @@ public class ComplaintController {
 
     @PostMapping("/admin/complaint/edit/{id}")
     public String edit(@PathVariable(name = "id") long id,
-    Complaint complaint,
+    @Valid Complaint complaint, BindingResult bindingResult,
     @RequestParam(name="order")Order order,
     @RequestParam(name="product")Product product){
+        if(bindingResult.hasErrors()){
+            return "views/admin/complaint/edit";
+        }
         complaint.setComplaintId(id);
         complaint.setOrder(order);
         complaint.setProduct(product);
