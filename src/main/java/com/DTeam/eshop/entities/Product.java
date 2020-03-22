@@ -61,13 +61,13 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long productId, String name, String description, Double price, Integer quantity, String photo) {
+    public Product(Long productId, String name, String description, Double price, Integer quantity, String photo, String category) {
         this.productId = productId;
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
         this.photo = photo;
+        this.category = category;
     }
-
 }
