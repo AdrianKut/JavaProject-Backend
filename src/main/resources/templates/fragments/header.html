@@ -82,18 +82,17 @@
                 </li>
 
             </ul>
-            <a class="navbar-right cart" sec:authorize="!isAuthenticated()">
-                <li><a sec:authorize="!hasRole('ROLE_admin') and !hasRole('ROLE_pracownik')" href="/shopping-cart" id="cart"><i class="fa fa-shopping-cart"></i> Koszyk <span th:text="${session.count}" class="badge">0</span></a></li>
-                <li><a href="/login" id="login"><i class="fa fa-user"></i> Logowanie </a></li>
+            <a class="navbar-right cart">
+                <li class="my-2" sec:authorize="!hasRole('ROLE_admin') and !hasRole('ROLE_pracownik')"><a href="/shopping-cart" id="cart"><i class="fa fa-shopping-cart"></i> Koszyk <span th:text="${session.count}" class="badge">0</span></a></li>
+                <li class="my-2" sec:authorize="!isAuthenticated()"><a href="/login" id="login"><i class="fa fa-user"></i> Logowanie </a></li>
               </a>
 
-            <a class="mr-2" style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_klient')" href="/customer/profile" th:text="${#authentication.name}"></a>
-            <a class="mr-2" style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_pracownik')" href="/employee/profile" th:text="${#authentication.name}"></a>
-            <a class="mr-2" style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_admin')" th:text="${#authentication.name}"></a>
+            <a class="mr-2 my-2" style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_klient')" href="/customer/profile" th:text="${#authentication.name}"></a>
+            <a class="mr-2 my-2" style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_pracownik')" href="/employee/profile" th:text="${#authentication.name}"></a>
+            <a class="mr-2 my-2" style="color: white;" sec:authorize="isAuthenticated() and hasRole('ROLE_admin')" th:text="${#authentication.name}"></a>
 
-            <form  sec:authorize="isAuthenticated()" th:action="@{/logout}" method="POST">
-                    <button class=" btn  bg-logout" type="submit" ><i class="fas fa-sign-out-alt"></i>  Wyloguj</a>
-
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="POST">
+                    <button class="btn  bg-logout" type="submit" ><i class="fas fa-sign-out-alt"></i>  Wyloguj</button>
             </form>
         </div>
     </nav>
