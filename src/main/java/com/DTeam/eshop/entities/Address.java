@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import lombok.Data;
 
@@ -32,6 +33,7 @@ public class Address {
     private Integer flatNumber;
 
     @Column(name = "postcode", nullable = false, length = 6)
+    @Pattern(regexp = "\\d{2}-\\d{3}",message = "Wprowadź prawidłowy kod pocztowy")
     private String postcode;
 
     @Column(name = "city", nullable = false, length = 35)

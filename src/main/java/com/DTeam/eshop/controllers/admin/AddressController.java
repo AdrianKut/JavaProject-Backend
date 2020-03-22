@@ -2,12 +2,15 @@ package com.DTeam.eshop.controllers.admin;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.DTeam.eshop.entities.Address;
 import com.DTeam.eshop.services.AddressService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +36,10 @@ public class AddressController {
     }
 
     @PostMapping("/admin/address/add")
-    public String save(Address address){
+    public String save(@Valid Address address, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "views/admin/address/add";
+        }
         addressService.save(address);
         return "redirect:/admin/address/list";
     }
@@ -46,7 +52,11 @@ public class AddressController {
     }
 
     @PostMapping("/admin/address/edit/{id}")
-    public String edit(@PathVariable(name = "id")Long id, Address address){
+    public String edit(@PathVariable(name = "id")Long id, @Valid Address address, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "views/admin/address/edit";
+        }
+
         address.setAddressId(id);
         addressService.save(address);
         return "redirect:/admin/address/list";

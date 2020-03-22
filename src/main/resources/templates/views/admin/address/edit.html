@@ -40,6 +40,7 @@
                         <div class="form-group">
                             <label> Kod pocztowy </label>
                             <input class=form-control type="text" th:field="${address.postcode}" required/>
+                            <div class="text text-danger" th:if="${#fields.hasErrors('postcode')}" th:errors="${address.postcode}"></div>
                         </div>
                     </div>
                 </div>
