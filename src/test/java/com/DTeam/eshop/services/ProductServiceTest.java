@@ -58,9 +58,27 @@ public class ProductServiceTest {
         assertEquals(product.getProductId(), null);
     }
 
-//    @Test
-//    public void testGet() {
-//    }
+    @Test
+    public void testGet() {
+
+        when(productService.get(anyLong())).thenReturn(new Product(423L, "Monitor", "32'", 2343252.320, 1, "brak"));
+
+        Product product = productService.get(423L);
+
+        verify(productService, times(1)).get(any());
+
+        assertEquals(product.getProductId().longValue(), 423L);
+        assertEquals(product.getName(), "Monitor");
+        assertEquals(product.getDescription(), "32'");
+        assertEquals(product.getPrice().toString(), "" + 2343252.320);
+        assertEquals(product.getPhoto(), "brak");
+
+        assertNotEquals(productService.get(234L).getName(), null);
+
+        verify(productService, times(2)).get(any());
+
+    }
+
 //
 //    @Test
 //    public void testDelete() {
