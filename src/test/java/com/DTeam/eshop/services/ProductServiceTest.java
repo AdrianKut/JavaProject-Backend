@@ -83,16 +83,24 @@ public class ProductServiceTest {
     public void testDelete() {
 
         when(productService.delete(anyLong())).thenReturn(new Product());
-        
+
         productService.delete(new Product().getProductId());
-        
+
         verify(productService, times(1)).delete(any());
 
     }
 
-//    @Test
-//    public void testIsProductExist() {
-//    }
+    @Test
+    public void testIsProductExist() {
+
+        when(productService.isProductExist(any())).thenReturn(true);
+
+        final boolean result = productService.isProductExist(any());
+        assertEquals(result, true);
+
+        verify(productService, times(1)).isProductExist(any());
+    }
+    
 //
 //    @Test
 //    public void testGetByOrderId() {
