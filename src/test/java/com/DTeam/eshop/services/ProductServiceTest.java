@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import org.hamcrest.Matchers;
+import org.hibernate.type.AnyType;
 
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.mock;
@@ -17,6 +18,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.any;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import org.springframework.data.domain.PageRequest;
 
 public class ProductServiceTest {
 
@@ -30,9 +36,10 @@ public class ProductServiceTest {
 
         assertEquals(productService.listAll().get(0).getOrders(), null);
         assertEquals(productService.listAll().get(2).getDescription(), "najlepsza ze wszystkich");
+        assertEquals(productService.listAll().get(2).getCategory(), "Podzespoły komputerowe");
         assertThat(productService.listAll(), Matchers.hasSize(3));
 
-        verify(productService, times(3)).listAll();
+        verify(productService, times(4)).listAll();
 
     }
 
@@ -42,7 +49,7 @@ public class ProductServiceTest {
 
         products.add(new Product());
         products.add(new Product());
-        products.add(new Product(32L, "Klawiatura", "najlepsza ze wszystkich", 999.130, 32, "brak"));
+        products.add(new Product(32L, "Klawiatura", "najlepsza ze wszystkich", 999.130, 32, "brak", "Podzespoły komputerowe"));
 
         return products;
     }
@@ -64,7 +71,7 @@ public class ProductServiceTest {
     @Test
     public void testGet() {
 
-        when(productService.get(anyLong())).thenReturn(new Product(423L, "Monitor", "32'", 2343252.320, 1, "brak"));
+        when(productService.get(anyLong())).thenReturn(new Product(423L, "Monitor", "32'", 2343252.320, 1, "brak", "Monitory i akcesoria"));
 
         Product product = productService.get(423L);
 
@@ -75,6 +82,7 @@ public class ProductServiceTest {
         assertEquals(product.getDescription(), "32'");
         assertEquals(product.getPrice().toString(), "" + 2343252.320);
         assertEquals(product.getPhoto(), "brak");
+        assertEquals(product.getCategory(), "Monitory i akcesoria");
 
         assertNotEquals(productService.get(234L).getName(), null);
 
@@ -111,7 +119,7 @@ public class ProductServiceTest {
 
         products.add(new Product());
         products.add(new Product());
-        products.add(new Product(10L, "Myszka", "Optyczna z podświetleniem RGB", 651.230, 32, "brak"));
+        products.add(new Product(10L, "Myszka", "Optyczna z podświetleniem RGB", 651.230, 32, "brak", "Sprzęt dla gracza"));
 
         Order order = new Order(15L, LocalDateTime.of(2020, Month.MARCH, 22, 21, 40));
 
@@ -122,6 +130,7 @@ public class ProductServiceTest {
         assertEquals(productService.getByOrderId(10L).get(2).getName().toString(), "Myszka");
 
         assertEquals(order.getProducts().get(2).getPhoto(), "brak");
+        assertEquals(order.getProducts().get(2).getCategory(), "Sprzęt dla gracza");
         assertEquals(order.getProducts().get(0).getPrice(), null);
 
         assertEquals(products.get(2).getPrice().toString(), "" + 651.230);
@@ -133,20 +142,35 @@ public class ProductServiceTest {
 //    public void testGetByNameOrCategory() {
 //    }
 //
-//    @Test
-//    public void testGetByCategory() {
+//      public Page<Product> getByCategory(String category, Pageable pageable){
+//        return productRepository.findByCategory(category, pageable);
 //    }
-//
-//     public List<Product> getProductsEnding(){
-//        return productRepository.findByQuantityLessThanOrderByQuantityAsc(5);
-//    }
+    @Test
+    public void testGetByCategory() {
+
+        Page<Product> products = mock(Page.class);
+        products.and(new Product());
+        products.and(new Product(10L, "Myszka", "Optyczna z podświetleniem RGB", 651.230, 2, "brak", "Podzespoły komputerowe"));
+
+        when(productService.getByCategory("", Pageable.unpaged())).thenReturn(products);
+        when(productService.get(anyLong())).thenReturn(new Product());
+
+        productService.getByCategory("Podzespoły komputerowe", PageRequest.of(0, 6));
+        productService.getByCategory("Gry", PageRequest.of(0, 6));
+
+        assertEquals(productService.get(42L).getCategory(), null);
+
+        assertEquals(productService.getByCategory(productService.get(10L).getCategory(), products.getPageable()), null);
+
+        verify(productService, times(3)).getByCategory(any(), any());
+    }
+
     @Test
     public void testGetProductsEnding() {
 
         List<Product> products = new ArrayList<>();
         products.add(new Product());
-        products.add(new Product(10L, "Myszka", "Optyczna z podświetleniem RGB", 651.230, 2, "brak"));
-
+        products.add(new Product(10L, "Myszka", "Optyczna z podświetleniem RGB", 651.230, 2, "brak", ""));
         when(productService.getProductsEnding()).thenReturn(products);
 
         assertEquals(productService.getProductsEnding().get(0).getOrders(), null);
