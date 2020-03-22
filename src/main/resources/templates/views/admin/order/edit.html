@@ -36,6 +36,7 @@
                                 <option value="W trakcie realizacji">W trakcie realizacji</option>
                                 <option value="Wysłane">Wysłane</option>
                             </select>
+                            <div class="text text-danger" th:if="${#fields.hasErrors('orderStatus')}" th:errors="${order.orderStatus}"></div>
                         </div>
                     </div>
                 </div>

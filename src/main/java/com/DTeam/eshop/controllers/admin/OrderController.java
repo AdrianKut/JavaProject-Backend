@@ -3,6 +3,8 @@ package com.DTeam.eshop.controllers.admin;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.DTeam.eshop.entities.Customer;
 import com.DTeam.eshop.entities.Order;
 import com.DTeam.eshop.entities.Payment;
@@ -15,6 +17,7 @@ import com.DTeam.eshop.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,10 +59,13 @@ public class OrderController {
     }
 
     @PostMapping("/admin/order/add")
-    public String save(Order order,
+    public String save(@Valid Order order, BindingResult bindingResult,
     @RequestParam(name="product",required = false)ArrayList<Product> product,
     @RequestParam(name="customer")Customer customer,
     @RequestParam(name="payment")Payment payment){
+        if(bindingResult.hasErrors()){
+            return "views/admin/order/add";
+        }
         order.setPayment(payment);
         order.setCustomer(customer);
         orderService.save(order,product);
@@ -80,10 +86,13 @@ public class OrderController {
     }
 
     @PostMapping("/admin/order/edit/{id}")
-    public String edit(@PathVariable(name = "id") long id, Order order,
+    public String edit(@PathVariable(name = "id") long id, @Valid Order order, BindingResult bindingResult,
     @RequestParam(name="product",required = false)ArrayList<Product> product,
     @RequestParam(name="customer")Customer customer,
     @RequestParam(name="payment")Payment payment){
+        if(bindingResult.hasErrors()){
+            return "views/admin/order/edit";
+        }
         order.setOrderId(id);
         order.setPayment(payment);
         order.setCustomer(customer);

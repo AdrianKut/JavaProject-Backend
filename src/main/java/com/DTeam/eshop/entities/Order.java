@@ -16,7 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
 
@@ -37,6 +39,8 @@ public class Order{
     private LocalDateTime shipmentDate;
 
     @Column(name = "order_status", nullable = true, length = 20)
+    @NotEmpty(message = "To pole nie może być puste")
+    @Length(max = 20, message = "Możesz wprowadzić maksymalnie 20 znaków")
     private String orderStatus;
 
     @ManyToOne
@@ -64,7 +68,7 @@ public class Order{
         this.orderId = orderId;
         this.purchaseDate = purchaseDate;
     }
-    
+
 
     public String getPurchaseDate() {
         if(purchaseDate !=null){
