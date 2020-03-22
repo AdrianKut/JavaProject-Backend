@@ -79,11 +79,17 @@ public class ProductServiceTest {
 
     }
 
-//
-//    @Test
-//    public void testDelete() {
-//    }
-//
+    @Test
+    public void testDelete() {
+
+        when(productService.delete(anyLong())).thenReturn(new Product());
+        
+        productService.delete(new Product().getProductId());
+        
+        verify(productService, times(1)).delete(any());
+
+    }
+
 //    @Test
 //    public void testIsProductExist() {
 //    }
