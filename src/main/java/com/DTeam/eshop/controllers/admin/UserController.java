@@ -3,6 +3,8 @@ package com.DTeam.eshop.controllers.admin;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.DTeam.eshop.entities.User;
 import com.DTeam.eshop.entities.Role;
 import com.DTeam.eshop.services.UserService;
@@ -11,6 +13,7 @@ import com.DTeam.eshop.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,8 +42,11 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/add")
-    public String save(User user,
+    public String save(@Valid User user, BindingResult bindingResult,
      @RequestParam(name="roles",required = false)ArrayList<Role> roles){
+        if(bindingResult.hasErrors()){
+            return "views/admin/user/add";
+        }
         userService.save(user);
         return "redirect:/admin/user/list";
     }
@@ -56,7 +62,10 @@ public class UserController {
 
     @PostMapping("/admin/user/edit/{email}")
     public String edit(@PathVariable(name = "email")String email,
-    User user, @RequestParam(name="roles",required = false)ArrayList<Role> roles){
+    @Valid User user, BindingResult bindingResult, @RequestParam(name="roles",required = false)ArrayList<Role> roles){
+        if(bindingResult.hasErrors()){
+            return "views/admin/user/edit";
+        }
         User currentUser = userService.get(email);
         currentUser.setEnabled(user.getEnabled());
         currentUser.setPassword(user.getPassword());
