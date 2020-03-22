@@ -9,16 +9,13 @@
 
     <body>
         <div layout:fragment="content" class="container mt-2">
+            <div th:if="${#lists.isEmpty(productList)}" class="row text-center mt-4">
+                <div class="col-md-12 display-4">
+                    Twój koszyk jest pusty!
+                </div>
+            </div>
             <div class="table-responsive mt-5">
                 <table class="table">
-                    <!--<thead class="thead-dark">
-                        <tr  class="active">
-                            <th>Nazwa</th>
-                            <th>Cena</th>
-                            <th>Zdjęcie</th>
-                            <th>Akcja</th>
-                        </tr>
-                    </thead>-->
                     <tbody id="table">
                         <tr th:each ="product,itrStat : ${productList}">
                             <td> <b  th:text="${product.name}">...</b> </td>
@@ -29,12 +26,12 @@
                     </tbody>
                 </table>
             </div>
-            <div class="row">
+            <div class="row" th:if="${not #lists.isEmpty(productList)}">
                 <div class="col-md-4 my-1">
                     <label> Suma koszyka: </label>
                     <b  th:text="${#numbers.formatCurrency(amount)}"></b>
                 </div>
-                <div th:if="${not #lists.isEmpty(productList)}" class="col-md-4 offset-md-4">
+                <div class="col-md-4 offset-md-4">
                     <td>  <a class="btn btn-outline-success" href="/customer/shopping-cart/buy">Kup teraz</a></td>
                     <td>  <a class="btn btn-outline-success" href="/shopping-cart/buy/no-register">Kup bez rejestracji</a></td>
                 </div>
