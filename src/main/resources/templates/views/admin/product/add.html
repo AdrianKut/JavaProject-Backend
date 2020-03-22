@@ -14,6 +14,7 @@
                         <div class="form-group">
                             <label>Nazwa</label>
                             <input class="form-control" type="text" th:field="${product.name}" required />
+                            <div class="text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="${product.name}"></div>
                         </div>
                     </div>
                 </div>
@@ -22,6 +23,7 @@
                         <div class="form-group">
                             <label>Opis</label>
                             <input class="form-control" type="text" th:field="${product.description}" required />
+                            <div class="text text-danger" th:if="${#fields.hasErrors('description')}" th:errors="${product.description}"></div>
                         </div>
                     </div>
                 </div>
@@ -56,6 +58,7 @@
                                 <option value="Oprogramowanie">Oprogramowanie</option>
                                 <option value="Akcesoria">Akcesoria</option>
                             </select>
+                            <div class="text text-danger" th:if="${#fields.hasErrors('category')}" th:errors="${product.category}"></div>
                         </div>
                     </div>
                 </div>
@@ -65,6 +68,7 @@
                         <div class="form-group">
                             <label>Zdjęcie [Adres URL]</label>
                             <input class="form-control" type="url" th:field="${product.photo}" required />
+                            <div class="text text-danger" th:if="${#fields.hasErrors('photo')}" th:errors="${product.photo}"></div>
                         </div>
                     </div>
                 </div>

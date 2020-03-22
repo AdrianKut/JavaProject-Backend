@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
 
@@ -24,9 +27,13 @@ public class Product {
     private Long productId;
 
     @Column(name = "name", nullable = false, length = 35)
+    @NotEmpty(message = "To pole nie może być puste")
+    @Length(max = 35, message = "Możesz wprowadzić maksymalnie 35 znaków")
     private String name;
 
     @Column(name = "description", nullable = false, length = 115)
+    @NotEmpty(message = "To pole nie może być puste")
+    @Length(max = 115, message = "Możesz wprowadzić maksymalnie 115 znaków")
     private String description;
 
     @Column(name = "price", nullable = false)
@@ -36,9 +43,13 @@ public class Product {
     private Integer quantity;
 
     @Column(name = "photo", nullable = false, length = 250)
+    @NotEmpty(message = "To pole nie może być puste")
+    @Length(max = 250, message = "Możesz wprowadzić maksymalnie 250 znaków")
     private String photo;
 
     @Column(name = "category", nullable = false, length = 50)
+    @NotEmpty(message = "To pole nie może być puste")
+    @Length(max = 50, message = "Możesz wprowadzić maksymalnie 50 znaków")
     private String category;
 
     @ManyToMany(mappedBy = "products")

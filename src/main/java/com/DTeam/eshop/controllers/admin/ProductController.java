@@ -2,12 +2,15 @@ package com.DTeam.eshop.controllers.admin;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.DTeam.eshop.entities.Product;
 import com.DTeam.eshop.services.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +35,10 @@ public class ProductController {
     }
 
     @PostMapping("/admin/product/add")
-    public String save(Product product){
+    public String save(@Valid Product product, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "views/admin/product/add";
+        }
         productService.save(product);
         return "redirect:/admin/product/list";
     }
@@ -46,7 +52,10 @@ public class ProductController {
 
     @PostMapping("/admin/product/edit/{id}")
     public String edit(@PathVariable(name = "id") long id,
-    Product product){
+    @Valid Product product, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "views/admin/product/edit";
+        }
         product.setProductId(id);
         productService.save(product);
         return "redirect:/admin/product/list";
