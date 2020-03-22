@@ -15,7 +15,7 @@
                                 <div class="form-group">
                                     <label> Imię </label>
                                     <input class=form-control type="text" th:field="${customer.customerId}" hidden readonly required/>
-                                    <input class=form-control type="text" id="name" th:field="${customer.name}" required/>
+                                    <input class=form-control type="text"  id="name" th:field="${customer.name}" required/>
                                     <div class="text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="${customer.name}"></div>
                                 </div>
                             </div>
