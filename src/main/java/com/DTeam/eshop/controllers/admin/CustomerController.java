@@ -2,6 +2,8 @@ package com.DTeam.eshop.controllers.admin;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.DTeam.eshop.entities.Address;
 import com.DTeam.eshop.entities.Customer;
 import com.DTeam.eshop.entities.User;
@@ -12,6 +14,7 @@ import com.DTeam.eshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,9 +52,12 @@ public class CustomerController {
     }
 
     @PostMapping("/admin/customer/add")
-    public String save(Customer customer,
+    public String save(@Valid Customer customer, BindingResult bindingResult,
         @RequestParam(name = "users")User user,
         @RequestParam(name = "addresses")Address address){
+        if(bindingResult.hasErrors()){
+            return "views/admin/customer/add";
+        }
         customer.setUser(user);
         customer.setAddress(address);
         customerService.save(customer);
@@ -70,9 +76,12 @@ public class CustomerController {
     }
 
     @PostMapping("/admin/customer/edit/{id}")
-    public String edit(@PathVariable(name = "id")Long id, Customer customer,
+    public String edit(@PathVariable(name = "id")Long id, @Valid Customer customer, BindingResult bindingResult,
     @RequestParam(name = "users")User user,
     @RequestParam(name = "addresses")Address address){
+        if(bindingResult.hasErrors()){
+            return "views/admin/customer/edit";
+        }
         customer.setCustomerId(id);
         customer.setUser(user);
         customer.setAddress(address);

@@ -14,6 +14,7 @@
                         <div class="form-group">
                             <label>Imię</label>
                             <input class="form-control" type="text" th:field="${customer.name}" required />
+                            <div class="text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="${customer.name}"></div>
                         </div>
                     </div>
                 </div>
@@ -22,6 +23,7 @@
                         <div class="form-group">
                             <label>Nazwisko</label>
                             <input class="form-control" type="text" th:field="${customer.surname}" required />
+                            <div class="text text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="${customer.surname}"></div>
                         </div>
                     </div>
                 </div>
@@ -30,6 +32,7 @@
                         <div class="form-group">
                             <label>Numer telefonu</label>
                             <input class="form-control" type="text" th:field="${customer.phoneNumber}" required />
+                            <div class="text text-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="${customer.phoneNumber}"></div>
                         </div>
                     </div>
                 </div>

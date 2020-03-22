@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
 
@@ -26,12 +29,18 @@ public class Customer {
     private Long customerId;
 
     @Column(name = "name", nullable = false, length = 25)
+    @NotEmpty(message = "To pole nie może być puste")
+    @Length(max = 25, message = "Możesz wprowadzić maksymalnie 25 znaków")
     private String name;
 
     @Column(name = "surname", nullable = false, length = 25)
+    @NotEmpty(message = "To pole nie może być puste")
+    @Length(max = 25, message = "Możesz wprowadzić maksymalnie 25 znaków")
     private String surname;
 
     @Column(name = "phone_number", nullable = false, length = 9)
+    @NotEmpty(message = "To pole nie może być puste")
+    @Length(max = 9, message = "Możesz wprowadzić maksymalnie 9 znaków")
     private String phoneNumber;
 
     @OneToOne
