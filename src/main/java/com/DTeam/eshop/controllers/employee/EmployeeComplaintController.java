@@ -12,12 +12,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/**
+ * Klasa obsługująca Pracownik-Reklamacja
+ * @author User
+ */
 @Controller
 public class EmployeeComplaintController {
 
     @Autowired
     private ComplaintService complaintService;
 
+    /**
+     * Metoda wyswietla Liste Reklamacji
+     * @param model przechowywanie atrybutów modelu
+     * @return widok listy Reklamacji
+     */
     @GetMapping("/employee/complaint-list")
     public String getAll(Model model){
         List<Complaint> complaintList = complaintService.getComplaintByStatus();
@@ -25,6 +34,12 @@ public class EmployeeComplaintController {
         return "views/employee/listComplaint";
     }
 
+    /**
+     * Metoda edycji Reklamacji
+     * @param model przechowywanie atrybutów modelu
+     * @param id przechowuje id Reklamacji
+     * @return widok edycji formularza Reklamacji
+     */
     @GetMapping("/employee/complaint-edit/{id}")
     public String edit(Model model,@PathVariable(name = "id") long id){
         Complaint complaint = complaintService.get(id);
@@ -32,6 +47,12 @@ public class EmployeeComplaintController {
         return "views/employee/editComplaint";
     }
 
+    /**
+     * Metoda edycji Reklamacji
+     * @param id przechowuje id Reklamacji
+     * @param complaint przechowuje Dane Reklamacji
+     * @return widok listy Reklamacji
+     */
     @PostMapping("/employee/complaint-edit/{id}")
     public String edit(@PathVariable(name = "id") long id,
     Complaint complaint){

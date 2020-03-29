@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+/**
+ * Klasa obsługująca Klientów
+ * @author 
+ */
 @Controller
 public class CustomerController {
 
@@ -33,6 +36,11 @@ public class CustomerController {
     @Autowired
     private AddressService addressService;
 
+    /**
+     * Metoda wyświetlania listy Klientów
+     * @param model przechowywanie atrybutów modelu
+     * @return widok listy Klientów
+     */
     @GetMapping("/admin/customer/list")
     public String getAll(Model model){
         List<Customer> customerList = customerService.listAll();
@@ -40,6 +48,11 @@ public class CustomerController {
         return "views/admin/customer/list";
     }
 
+    /**
+     * Metoda dodawania Klienta
+     * @param model przechowywanie atrybutów modelu
+     * @return widok formularza Klienta
+     */
     @GetMapping("/admin/customer/add")
     public String save(Model model){
         List<User> userList = userService.listAll();
@@ -51,6 +64,14 @@ public class CustomerController {
         return "views/admin/customer/add";
     }
 
+    /**
+     * Metoda dodawania Klienta
+     * @param customer przechowuje Id Klienta
+     * @param bindingResult walidacja błędów
+     * @param user przechowuje dane Użytkownika
+     * @param address przechowuje adres Klienta
+     * @return widok listy Klientów
+     */
     @PostMapping("/admin/customer/add")
     public String save(@Valid Customer customer, BindingResult bindingResult,
         @RequestParam(name = "users")User user,
@@ -64,6 +85,12 @@ public class CustomerController {
         return "redirect:/admin/customer/list";
     }
 
+    /**
+     * Metoda edytowania Klienta
+     * @param id przechowuje Id Klienta
+     * @param model przechowywanie atrybutów modelu
+     * @return widok formularza edycji Klienta
+     */
     @GetMapping("/admin/customer/edit/{id}")
     public String edit(@PathVariable(name = "id")Long id, Model model){
         List<User> userList = userService.listAll();
@@ -75,6 +102,15 @@ public class CustomerController {
         return "views/admin/customer/edit";
     }
 
+    /**
+     * Metoda edytowania Klienta
+     * @param id przechowuje Id Klienta
+     * @param customer Przechowuje Dane Klienta
+     * @param bindingResult walidacja Błędów
+     * @param user przechowuje Dane Uzytkownika
+     * @param address przechowuje adres Klienta
+     * @return widok listy Klientów
+     */
     @PostMapping("/admin/customer/edit/{id}")
     public String edit(@PathVariable(name = "id")Long id, @Valid Customer customer, BindingResult bindingResult,
     @RequestParam(name = "users")User user,
@@ -89,6 +125,11 @@ public class CustomerController {
         return "redirect:/admin/customer/list";
     }
 
+    /**
+     * Metoda usuwania Klienta
+     * @param id przechowuje Id Klienta
+     * @return widok list Klientów
+     */
     @GetMapping("/admin/customer/delete/{id}")
     public String delete(@PathVariable(name = "id")Long id){
         customerService.delete(id);

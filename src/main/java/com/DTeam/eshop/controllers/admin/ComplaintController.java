@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Klasa obsługująca Reklamacje
+ * @author 
+ */
 @Controller
 public class ComplaintController {
 
@@ -32,6 +36,11 @@ public class ComplaintController {
     @Autowired
     private ProductService productService;
 
+    /**
+     * Metoda wyświetlająca liste Reklamacji
+     * @param model przechowywanie atrybutów modelu
+     * @return widok listy Reklamacji
+     */
     @GetMapping("/admin/complaint/list")
     public String getAll(Model model){
         List<Complaint> complaintList = complaintService.listAll();
@@ -39,6 +48,11 @@ public class ComplaintController {
         return "views/admin/complaint/list";
     }
 
+    /**
+     * Metoda dodawania Reklamacji
+     * @param model przechowywanie atrybutów modelu
+     * @return widok formularza Reklamacji
+     */
     @GetMapping("/admin/complaint/add")
     public String save(Model model) {
         List<Order> orderList = orderService.listAll();
@@ -50,6 +64,14 @@ public class ComplaintController {
         return "views/admin/complaint/add";
     }
 
+    /**
+     * Metoda dodawania Reklamacji
+     * @param complaint przechowuje dane Reklamacji
+     * @param bindingResult walidacja błędów
+     * @param order przechowuje dane zamównienia
+     * @param product przechowuje danie produktu
+     * @return Widok listy reklamacji
+     */
     @PostMapping("/admin/complaint/add")
     public String save(@Valid Complaint complaint, BindingResult bindingResult,
     @RequestParam(name="order")Order order,
@@ -63,6 +85,12 @@ public class ComplaintController {
         return "redirect:/admin/complaint/list";
     }
 
+    /**
+     * Edycja Reklamacji
+     * @param model przechowywanie atrybutów modelu
+     * @param id przechowuje id Reklamacji
+     * @return widok formularza edycji Reklamacji
+     */
     @GetMapping("/admin/complaint/edit/{id}")
     public String edit(Model model,@PathVariable(name = "id") long id){
         List<Order> orderList = orderService.listAll();
@@ -74,6 +102,15 @@ public class ComplaintController {
         return "views/admin/complaint/edit";
     }
 
+    /**
+     * Edycja Reklamacji
+     * @param id przechowuje id Reklamacji
+     * @param complaint przechowuje Dane Reklamacji
+     * @param bindingResult walidacja błędów
+     * @param order przechowuje dane zamówienia
+     * @param product przechowuje dane produktu 
+     * @return widok listy Reklamacji
+     */
     @PostMapping("/admin/complaint/edit/{id}")
     public String edit(@PathVariable(name = "id") long id,
     @Valid Complaint complaint, BindingResult bindingResult,
@@ -89,6 +126,11 @@ public class ComplaintController {
         return "redirect:/admin/complaint/list";
     }
 
+    /**
+     * Metoda usuwania Reklamacji
+     * @param id przechowuje Id Reklamacji
+     * @return widok listy Reklamacjii
+     */
     @GetMapping("/admin/complaint/delete/{id}")
     public String delete(@PathVariable(name = "id") long id){
         complaintService.delete(id);

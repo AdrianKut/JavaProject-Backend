@@ -17,6 +17,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/**
+ * Klasa obsługująca Profil-Klient
+ * @author 
+ */
 @Controller
 public class CustomerProfileController {
 
@@ -29,6 +33,12 @@ public class CustomerProfileController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Metoda Wyswietla Profil danego Klienta
+     * @param model przechowywanie atrybutów modelu
+     * @param principal przechowuje email Klienta
+     * @return widok Profilu Klienta
+     */
     @GetMapping("/customer/profile")
     public String edit(Model model, Principal principal) {
         String email = principal.getName();
@@ -52,6 +62,15 @@ public class CustomerProfileController {
         }
     }
 
+    /**
+     * Metoda edytuje Profil Klienta
+     * @param customer przechowuje Dane Klienta
+     * @param bindingResult walidacja błędów
+     * @param address przechowuje adres Klienta
+     * @param bindingResult2 walidacja błędów
+     * @param principal przechowuje email Klienta
+     * @return widok Profilu Klienta
+     */
     @PostMapping("/customer/profile")
     public String edit(@Valid Customer customer, BindingResult bindingResult, @Valid Address address,
             BindingResult bindingResult2, Principal principal) {

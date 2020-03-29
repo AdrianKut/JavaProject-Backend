@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+/**
+ * Klasa Obsługująca rejestracje
+ * @author 
+ */
 @Controller
 public class RegisterController {
 
@@ -35,6 +39,11 @@ public class RegisterController {
     @Autowired
     private TemplateEngine templateEngine;
 
+    /**
+     * Metoda rejsetracji użytkownika
+     * @param model przechowywanie atrybutów modelu
+     * @return widok formularza rejestracji
+     */
     @GetMapping("/register")
     public String register(Model model){
      User user = new User();
@@ -42,6 +51,13 @@ public class RegisterController {
      return "views/register";
     }
 
+    /**
+     *  Metoda rejsetracji użytkownika
+     * @param user  przechowuje Dane Użytkownika
+     * @param bindingResult walidacja błędów
+     * @param model przechowywanie atrybutów modelu
+     * @return widok Pomyślny lub walidacja
+     */
     @PostMapping("/register")
     public String register(@Valid User user, BindingResult bindingResult,
             Model model){

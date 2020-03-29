@@ -25,6 +25,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+/**
+ * Klasa obsługująca Zakup-Kleint
+ * @author 
+ */
 @Controller
 public class CustomerPurchaseController {
 
@@ -49,6 +53,12 @@ public class CustomerPurchaseController {
     @Autowired
     private EmailSender emailSender;
 
+    /**
+     * Metoda dodająca Zakup do Koszyka
+     * @param model przechowywanie atrybutów modelu
+     * @param principal przechowuje email Klienta
+     * @return widok Koszyka 
+     */
     @GetMapping("/customer/shopping-cart/buy")
     public String shoppingCart(Model model, Principal principal){
         String email = principal.getName();
@@ -63,6 +73,12 @@ public class CustomerPurchaseController {
         }
     }
 
+    /**
+     * Metoda dodająca Zakup do Koszyka
+     * @param payment przechowuje dane Zamówiena
+     * @param principal przechowuje email Klienta
+     * @return widok listy Produktów
+     */
     @PostMapping("/customer/shopping-cart/buy")
     public String shoppingCart(Payment payment, Principal principal){
         String email = principal.getName();
@@ -95,6 +111,13 @@ public class CustomerPurchaseController {
         return "redirect:/shopping-cart";
     }
 
+    /**
+     * Metoda dodająca Zakup do Zamówień
+     * @param model przechowywanie atrybutów modelu
+     * @param principal przechowuje email Klienta
+     * @param id przechowuje id Klienta
+     * @return widok formularza Zamówienia
+     */
     @GetMapping("/customer/buy/{id}")
     public String buyProduct(Model model, Principal principal,
      @PathVariable(name = "id")Long id){
@@ -110,6 +133,13 @@ public class CustomerPurchaseController {
         }
     }
 
+    /**
+     * Metoda dodająca Zakup do Zamówień
+     * @param payment przechowuje Dane Zamówienia
+     * @param principal przechowuje email Klienta
+     * @param id przechowuje id Klienta
+     * @return widok lisy produktów
+     */
     @PostMapping("/customer/buy/{id}")
     public String buyProduct(Payment payment, Principal principal,
     @PathVariable(name = "id")Long id){

@@ -12,6 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+/**
+ * Klasa obsługująca Koszyk
+ * @author 
+ */
 @Controller
 public class ShoppingCartController {
 
@@ -21,6 +25,11 @@ public class ShoppingCartController {
     @Autowired
     private ShoppingCart shoppingCart;
 
+    /**
+     * Metoda wyświetlająca Koszyk
+     * @param model przechowywanie atrybutów modelu
+     * @return widok koszyka
+     */
     @GetMapping("/shopping-cart")
     public String getFromCart(Model model){
         List<Product> productList = shoppingCart.get();
@@ -30,6 +39,11 @@ public class ShoppingCartController {
         return "/views/shopping-cart";
     }
 
+    /**
+     * Metoda dodająca produkt do Koszyka
+     * @param id przechowuje Id Klienta
+     * @return widok Koszyka
+     */
     @GetMapping("/shopping-cart/add/{id}")
     public String addToCart(@PathVariable(name = "id")Long id){
         Product product = productService.get(id);
@@ -37,6 +51,11 @@ public class ShoppingCartController {
         return "redirect:/";
     }
 
+    /**
+     * Metoda usuwająca produkt z Koszyka
+     * @param id przechowuje Id Klienta
+     * @return widok Koszyka
+     */
     @GetMapping("/shopping-cart/delete/{id}")
     public String deleteFromCart(@PathVariable(name = "id")int id){
         shoppingCart.delete(id);

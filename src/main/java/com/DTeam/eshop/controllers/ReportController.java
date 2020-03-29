@@ -30,6 +30,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.MediaType;
 
+/**
+ * Klasa obsługująca Raporty
+ * @author 
+ */
 @Controller
 public class ReportController {
 
@@ -45,6 +49,11 @@ public class ReportController {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * Metoda tworzy raport zysków
+     * @return raport w formie PDF
+     * @throws IOException obsługa wyjątków
+     */
     @GetMapping("/employee/report/last-month")
     public ResponseEntity<InputStreamResource> earningsReport() throws IOException {
         List<Payment> paymentList = paymentService.getLastMonth();
@@ -56,6 +65,11 @@ public class ReportController {
         .body(new InputStreamResource(bis));
     }
 
+    /**
+     * Metoda tworzy raport zaopatrzenia
+     * @return raport w formie PDF
+     * @throws IOException obsługa wyjątków
+     */
     @GetMapping("/employee/report/demand-report")
     public ResponseEntity<InputStreamResource> productsEnding() throws IOException {
         List<Product> productList = productService.getProductsEnding();
@@ -67,6 +81,11 @@ public class ReportController {
         .body(new InputStreamResource(bis));
     }
 
+    /**
+     * Metoda tworzy raport stanu magazynów
+     * @return raport w formie PDF
+     * @throws IOException obsługa wyjątków
+     */
     @GetMapping("/employee/report/product-inventory")
     public ResponseEntity<InputStreamResource> productsInventory() throws IOException {
         List<Product> productList = productService.listAll();
@@ -78,6 +97,11 @@ public class ReportController {
         .body(new InputStreamResource(bis));
     }
 
+    /**
+     * Metoda tworzy raport zamówień
+     * @return raport w formie PDF
+     * @throws IOException obsługa wyjątków
+     */
     @GetMapping("/employee/report/order")
     public ResponseEntity<InputStreamResource> orders() throws IOException {
         List<Order> orderList = orderService.getOrderByStatus();
@@ -89,6 +113,11 @@ public class ReportController {
         .body(new InputStreamResource(bis));
     }
 
+    /**
+     * Metoda tworzy raport pracowników
+     * @return raport w formie PDF
+     * @throws IOException obsługa wyjątków
+     */
     @GetMapping("/employee/report/employee")
     public ResponseEntity<InputStreamResource> employees() throws IOException {
         List<Employee> employeeList = employeeService.listAll();
@@ -100,6 +129,12 @@ public class ReportController {
         .body(new InputStreamResource(bis));
     }
 
+    /**
+     * Metoda tworzy raport Zakupu
+     * @param id przechowuje id Klienta
+     * @return raport w formie PDF
+     * @throws IOException obsługa wyjątków
+     */
     @GetMapping("/customer/report/{id}")
     public ResponseEntity<InputStreamResource> customerOrder(@PathVariable("id")Long id) throws IOException {
         Order order = orderService.get(id);

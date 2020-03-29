@@ -13,6 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * Klasa obsugująca Zamówienia-klientów
+ * @author 
+ */
 @Controller
 public class CustomerOrderController {
 
@@ -22,6 +26,12 @@ public class CustomerOrderController {
     @Autowired
     private OrderService orderService;
 
+    /**
+     * Metoda wyświetlająca Zamówienia danego Klienta
+     * @param model przechowywanie atrybutów modelu
+     * @param principal przechowuje email Klienta
+     * @return widok listy Zamówien Klienta
+     */
     @GetMapping("/customer/order")
     public String getComplaint(Model model, Principal principal) {
 

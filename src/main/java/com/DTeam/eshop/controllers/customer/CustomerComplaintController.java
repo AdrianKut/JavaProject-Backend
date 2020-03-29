@@ -23,6 +23,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+/**
+ * Klasa obsugująca Skargi-klientów
+ * @author 
+ */
 @Controller
 public class CustomerComplaintController {
 
@@ -44,6 +48,12 @@ public class CustomerComplaintController {
     @Autowired
     private EmailSender emailSender;
 
+    /**
+     *Metoda Wyświetla skargi Danego Klienta
+     * @param model przechowywanie atrybutów modelu
+     * @param principal pchechowuje emile Klienta
+     * @return widok listy Skarg Danego Klienta
+     */
     @GetMapping("/customer/complaint")
     public String getComplaint(Model model, Principal principal) {
 
@@ -58,6 +68,13 @@ public class CustomerComplaintController {
         }
     }
 
+    /**
+     * Metoda dodająca skarde do danego Klienta
+     * @param orderId przechowuje ID Zamówienia
+     * @param productId przechowuje Id Produktu
+     * @param model przechowywanie atrybutów modelu
+     * @return widok forlmularza Skargi
+     */
     @GetMapping("/customer/complaint/add/{orderId}/{productId}")
     public String add(@PathVariable(name = "orderId")Long orderId,
         @PathVariable(name = "productId")Long productId, Model model){
@@ -70,6 +87,14 @@ public class CustomerComplaintController {
         return "views/customer/addcomplaint";
     }
 
+    /**
+     * Metoda dodająca skarde do danego Klienta
+     * @param orderId przechowuje Id Zamówienia
+     * @param productId przechowuje Id Produktu
+     * @param complaint przechowuje Dane Skargi
+     * @param principal przechowuje email Klienta
+     * @return  widok listy Skarg Danego Klienta
+     */
     @PostMapping("/customer/complaint/add/{orderId}/{productId}")
     public String add(@PathVariable(name = "orderId")Long orderId,
         @PathVariable(name = "productId")Long productId, Complaint complaint, Principal principal){

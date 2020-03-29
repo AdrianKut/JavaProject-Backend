@@ -13,12 +13,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.PageRequest;
 
+/**
+ * Klasa dzieląca Produkty na
+ * kategorie
+ * @author 
+ */
 @Controller
 public class ProductCategoryController {
 
     @Autowired
     private ProductService productService;
 
+    /**
+     * Metoda dzieląca Produkty na
+     * kategorie "Laptopy i Komputery"
+     * @param model przechowywanie atrybutów modelu
+     * @param request zapytanie HTTP
+     * @return widok ofert sklepu
+     */
     @GetMapping("/laptops-and-computers")
     public String getLaptopsAndComputers(Model model, HttpServletRequest request){
         int page = 0;
@@ -36,6 +48,13 @@ public class ProductCategoryController {
         return "views/category";
     }
 
+    /**
+     * Metoda dzieląca Produkty na
+     * kategorie "Podzespoły komputerowe"
+     * @param model przechowywanie atrybutów modelu
+     * @param request zapytanie HTTP
+     * @return widok ofert sklepu
+     */
     @GetMapping("/computer-components")
     public String getComputerComponents(Model model, HttpServletRequest request){
         int page = 0;
@@ -53,6 +72,13 @@ public class ProductCategoryController {
         return "views/category";
     }
 
+    /**
+     * Metoda dzieląca Produkty na
+     * kategorie "Urządzenia peryferyjne "
+     * @param model przechowywanie atrybutów modelu
+     * @param request zapytanie HTTP
+     * @return widok ofert sklepu
+     */
     @GetMapping("/peripheral-devices")
     public String getPeripheralDevices(Model model, HttpServletRequest request){
         int page = 0;
@@ -70,6 +96,13 @@ public class ProductCategoryController {
         return "views/category";
     }
 
+    /**
+     ** Metoda dzieląca Produkty na
+     * kategorie "Oprogramowanie "
+     * @param model przechowywanie atrybutów modelu
+     * @param request zapytanie HTTP
+     * @return widok ofert sklepu
+     */
     @GetMapping("/software")
     public String getSoftware(Model model, HttpServletRequest request){
         int page = 0;
@@ -87,6 +120,13 @@ public class ProductCategoryController {
         return "views/category";
     }
 
+    /**
+     ** Metoda dzieląca Produkty na
+     * kategorie "Akcesoria "
+     * @param model przechowywanie atrybutów modelu
+     * @param request zapytanie HTTP
+     * @return widok ofert sklepu
+     */
     @GetMapping("/accessories")
     public String getAccessories(Model model, HttpServletRequest request){
         int page = 0;
@@ -104,6 +144,12 @@ public class ProductCategoryController {
         return "views/category";
     }
 
+    /**
+     * Metoda wyszukuje ze sklepu wybranej frazy
+     * @param name nazwa wyszukiwanej frazy
+     * @param model przechowywanie atrybutów modelu
+     * @return widok ofert sklepu
+     */
     @GetMapping("/search")
     public String showHomePage(@RequestParam(name = "name",defaultValue = "")String name, Model model){
         List<Product> productList = productService.getByNameOrCategory(name);

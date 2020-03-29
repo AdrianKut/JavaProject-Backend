@@ -23,6 +23,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Klasa obsługująca Zamówiena
+ * @author 
+ */
 @Controller
 public class OrderController {
 
@@ -38,6 +42,11 @@ public class OrderController {
     @Autowired
     private PaymentService paymentService;
 
+    /**
+     * Metoda wyświetlająca liste Zamówień
+     * @param model przechowywanie atrybutów modelu
+     * @return widok list Zamówień
+     */
     @GetMapping("/admin/order/list")
     public String getAll(Model model){
         List<Order> orderList = orderService.listAll();
@@ -45,6 +54,11 @@ public class OrderController {
         return "views/admin/order/list";
     }
 
+    /**
+     * Metoda dodająca Zamówienie
+     * @param model przechowywanie atrybutów modelu
+     * @return widok formularza Zamówienia
+     */
     @GetMapping("/admin/order/add")
     public String save(Model model) {
         List<Product> productList = productService.listAll();
@@ -58,6 +72,15 @@ public class OrderController {
         return "views/admin/order/add";
     }
 
+    /**
+     * Metoda dodająca Zamówienie
+     * @param order przechowuje Dane Zamówienia
+     * @param bindingResult walidacja błędów
+     * @param product przechowuje Dane Produktów
+     * @param customer Przechowuje Dane Klienta
+     * @param payment Przechowuje Dane Sprzedaży
+     * @return widok list Zamówień
+     */
     @PostMapping("/admin/order/add")
     public String save(@Valid Order order, BindingResult bindingResult,
     @RequestParam(name="product",required = false)ArrayList<Product> product,
@@ -72,6 +95,12 @@ public class OrderController {
         return "redirect:/admin/order/list";
     }
 
+    /**
+     * Metoda edycji Zamówienia
+     * @param model przechowywanie atrybutów modelu
+     * @param id przechowuje Id Zamówienia
+     * @return widok edycji Zamówienia
+     */
     @GetMapping("/admin/order/edit/{id}")
     public String edit(Model model,@PathVariable(name = "id") long id){
         List<Product> productList = productService.listAll();
@@ -85,6 +114,16 @@ public class OrderController {
         return "views/admin/order/edit";
     }
 
+    /**
+     * Metoda edycji Zamówienia
+     * @param id przechowuje Id Zamówienia
+     * @param order przechowuje Dane Zamówienia
+     * @param bindingResult walidacja błędów
+     * @param product przechowuje Dane Produktów
+     * @param customer przechowuje Dane Klienta
+     * @param payment przechowuje Dane Sprzedaży
+     * @return widok list Zamówień
+     */
     @PostMapping("/admin/order/edit/{id}")
     public String edit(@PathVariable(name = "id") long id, @Valid Order order, BindingResult bindingResult,
     @RequestParam(name="product",required = false)ArrayList<Product> product,
@@ -100,6 +139,11 @@ public class OrderController {
         return "redirect:/admin/order/list";
     }
 
+    /**
+     * Metoda usuwająca Zamówienie 
+     * @param id przechowuje Id Zamówienia
+     * @return widok list Zamówień
+     */
     @GetMapping("/admin/order/delete/{id}")
     public String delete(@PathVariable(name = "id") long id){
         orderService.delete(id);

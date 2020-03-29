@@ -17,6 +17,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/**
+ * Klasa obsługuje Pracownik-Profil
+ * @author User
+ */
 @Controller
 public class EmployeeProfileController {
 
@@ -29,6 +33,12 @@ public class EmployeeProfileController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Metoda Edycji profilu Pracownika
+     * @param model przechowywanie atrybutów modelu
+     * @param principal przechowuje email Klienta
+     * @return widok formularza edycji profilu
+     */
     @GetMapping("/employee/profile")
     public String edit(Model model, Principal principal) {
         String email = principal.getName();
@@ -52,6 +62,15 @@ public class EmployeeProfileController {
         }
     }
 
+    /**
+     * Metoda Edycji profilu Pracownika
+     * @param employee przechowuje Dane Pracownika
+     * @param bindingResult walidacja błędów
+     * @param address przechowuje adres Pracownika
+     * @param bindingResult2 walidacja błędów
+     * @param principal przechowuje email Pracownika
+     * @return widok formularza edycji profilu
+     */
     @PostMapping("/employee/profile")
     public String edit(@Valid Employee employee, BindingResult bindingResult, @Valid Address address,
             BindingResult bindingResult2, Principal principal) {

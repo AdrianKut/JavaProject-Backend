@@ -12,6 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * Klasa Wyświetlająca Strone
+ * główną 
+ * @author 
+ */
 @Controller
 public class IndexController {
 
@@ -21,6 +26,13 @@ public class IndexController {
     @Autowired
     private ShoppingCart shoppingCart;
 
+    /**
+     * Metoda Wyświetlająca oferte sklepu 
+     * @param request obsługa żądań HTTP
+     * @param model przechowanie atrybutu modelu
+     * @param session
+     * @return zwraca widok strony
+     */
     @GetMapping(value = "/")
     public String showHomePage(HttpServletRequest request, Model model, HttpSession session){
         int page = 0;
